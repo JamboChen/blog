@@ -345,6 +345,8 @@ $\implies$ 在同一個 $X_h$ 上 $(1)\subset(3)\underset{m=1}{\subseteq}(2)$ �
 
 ## 信賴區帶
 
+我們之前討論的是給定一個 $X_h$，他所對應的 $Y_h$ 可能的範圍。但如果我們現在想要知道整條回歸線的範圍，也就是信賴區帶，那麼我們就沒辦法用之前的方法了。
+
 **Remark**: 對於任意給定的 $X_h=X_{h,0},X_{h,1},\cdots$，$CI(\beta_0+\beta_1X_{h,j})$ 是 $\beta_0+\beta_1X_{h,j}$ 的 $1-\alpha$ conf. int. $\forall j$。
 
 令 $A_{h,j}\triangleq\beta_0+\beta_1X_{h,j}\in CI(\beta_0+\beta_1X_{h,j})\implies P(A_{h,j})=1-\alpha, \forall j$
@@ -353,4 +355,95 @@ $\implies$ 在同一個 $X_h$ 上 $(1)\subset(3)\underset{m=1}{\subseteq}(2)$ �
 
 並不會，通常 $P(A_{h,0}\cap A_{h,1})<1-\alpha$。如果 $A_{h,0}\perp A_{h,1}$，那麼 $P(A_{h,0}\cap A_{h,1})=(1-\alpha)^2<1-\alpha$。
 
-如果我們關注 $\beta_0+\beta_1X, \forall X\in \R \iff$ 找到 $M_\alpha$ 使得 $P(\beta_0+\beta_1X\in [\hat{Y}_x\plusmn S\set{\hat{Y}_x\cdot M_\alpha}], \forall X)=1-\alpha$
+所以我們需要找到一個新的數字 $M_\alpha$ s.t. $P(\beta_0+\beta_1X\in [\hat{Y}_h\plusmn M_\alpha S\set{\hat{Y}_h}],\forall X\in\R)=1-\alpha$。
+
+---
+
+**Note**:
+
+$$
+\forall X \quad\hat{Y}_x=b_0+b_1X\sim N(\beta_0+\beta_1X, \sigma^2\set{\hat{Y}_x}) \quad \text{with } \sigma^2\set{\hat{Y}_x}=\sigma^2\cdot\left(\frac{1}{n}+\frac{(X-\bar{X})^2}{\sum(X_i-\bar{X})^2}\right)
+$$
+
+並且
+
+$$
+\begin{align*}
+  &b_0+b_1X=\bar{Y}-b_1\bar{X}+b_1X=\bar{Y}+b_1(X-\bar{X})\\
+  &\beta_0+\beta_1X=E[\bar{Y}]-\beta_1\bar{X}+\beta_1X=E[\bar{Y}]+\beta_1(X-\bar{X})
+\end{align*}
+$$
+
+i.e.
+
+$$
+\begin{align*}
+  b_0+b_1X&=\bar{Y}+b_1(X-\bar{X})\quad \text{with } \bar{Y}\perp b_1\quad\because \sum k_i\cdot\frac{1}{n}=0\\
+  \beta_0+\beta_1X&=E[\bar{Y}]+\beta_1(X-\bar{X})\quad \text{with } \bar{Y}\sim N(\beta_0+\beta_1\bar{X}, \sigma^2/n)
+\end{align*}
+$$
+
+$$
+\text{with }\bar{Y}\perp b_1\quad\because \sum k_i\cdot\frac{1}{n}=0
+$$
+
+$$
+\text{and }\bar{Y}\sim N(\beta_0+\beta_1\bar{X}, \sigma^2/n)\qquad b_1\sim N(\beta_1, \frac{\sigma^2}{\sum(X_i-\bar{X})^2})
+$$
+
+$$
+\begin{align*}
+  \implies& \left| \frac{\hat{Y}_x-(\beta_0+\beta_1X)}{S\set{\hat{Y}_x}} \right| \le M_\alpha \quad \forall X\in\R\\
+  \iff &\left[\frac{\bar{Y}-E\bar{Y}+(b_1-\beta_1)(X-\bar{X})}{S\set{\hat{Y}_x}} \right]^2 \le M^2_\alpha \quad \forall X\in\R\\
+  \iff& \sup_X \left[\frac{\bar{Y}-E\bar{Y}+(b_1-\beta_1)(X-\bar{X})}{S\set{\hat{Y}_x}} \right]^2 \le M^2_\alpha\\
+  \iff& \sup_X \left[\frac{\bar{Y}-E\bar{Y}+(b_1-\beta_1)(X-\bar{X})}{MSE\cdot(\frac{1}{n}+\frac{(X-\bar{X})^2}{\sum(X_i-\bar{X})^2})} \right]^2 \le M^2_\alpha\\
+  \iff&\frac{1}{MSE}\sup_t \left[\frac{\bar{Y}-E\bar{Y}+(b_1-\beta_1)t}{\frac{1}{n}+\frac{t^2}{\sum(X_i-\bar{X})^2}} \right]^2 \le M^2_\alpha \quad \text{with } t\triangleq X-\bar{X}
+\end{align*}
+$$
+
+Note:
+
+$$
+\max_{t\in\R}\frac{(a+b\cdot t)^2}{(c+d\cdot t)^2}=\frac{a^2}{c}+\frac{b^2}{d}
+$$
+
+$$
+\begin{align*}
+  \implies &\frac{1}{MSE}\sup_t \left[\frac{\bar{Y}-E\bar{Y}+(b_1-\beta_1)t}{\frac{1}{n}+\frac{t^2}{\sum(X_i-\bar{X})^2}} \right]^2\\
+  =&\frac{\bar{Y}-E\bar{Y}}{\text{MSE}/n}+\frac{(b_1-\beta_1)^2}{\text{MSE}/\sum(X_i-\bar{X})^2}\\
+  =&\frac{\bar{Y}-E\bar{Y}}{\sigma^2\cdot\text{MSE}/n\sigma^2}+\frac{(b_1-\beta_1)^2}{\sigma^2\cdot\text{MSE}/\sigma^2\sum(X_i-\bar{X})^2}\\
+  =&\frac{(\frac{\bar{Y-E\bar{Y}}}{\sigma\set{\bar{Y}}})^2+(\frac{b_1-\beta_1}{\sigma\set{b_1}})^2}{\frac{SSE}{(n-2)\sigma^2}}\tag{*}
+\end{align*}
+$$
+
+Note:
+
+$$
+(*)\xlongequal{d}\frac{\chi^2_1+\chi^2_1}{\frac{\chi^2_{n-2}}{n-2}} \quad\text{and each part is independent}
+$$
+
+$$
+\because \frac{\frac{\chi^2_2}{2}}{\frac{\chi^2_{n-2}}{n-2}}\sim F_{2,n-2}\implies (*)\sim 2\cdot F_{2,n-2}
+$$
+
+也就是說
+
+$$
+\begin{align*}
+   &\begin{align*}
+     1-\alpha&=P(\beta_0+\beta_1X\in [\hat{Y}_x\plusmn S\set{\hat{Y}_x}M_\alpha ])\\
+     &=P(2w\le M^2_\alpha)\quad \text{with } w\sim F_{2,n-2}\\
+     &=P(w\le M^2_\alpha/2)\\
+   \end{align*}\\
+
+   \implies &M_\alpha=\sqrt{2F_{2,n-2,\alpha}}
+\end{align*}
+$$
+
+:::tip[Theorem]
+*Walking-Hotelling confidence band* for $\beta_0+\beta_1X$ with $1-\alpha$ confidence level is
+
+$$
+\left[\hat{Y}_x\plusmn \sqrt{2F_{2,n-2,\alpha}}\cdot S\set{\hat{Y}_x}\right]
+$$
+:::
