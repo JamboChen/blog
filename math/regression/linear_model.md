@@ -266,7 +266,7 @@ $$
 
 :::tip[Definition]
 $$
-MSE\triangleq\frac{SSE}{n-p}\qquad MSR\triangleq\frac{SSR}{p-1}
+MSE\triangleq\frac{SSE}{n-p}\qquad MSR\triangleq\frac{SSR}{k}
 $$
 :::
 
