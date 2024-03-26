@@ -243,3 +243,48 @@ with a given $0<\alpha<1$，除非存在一個 power=1 & sig. level $<\alpha$ �
 3. **必要條件**
    如果 $\phi^*$ 是 level $\alpha$ 的 MP 檢定，則 $\phi^*$ 滿足存在性的兩個條件。
 :::
+
+**Remark**:
+
+1. 根據 Lemma 的第 1 點，通常可以得到唯一的 MP $\alpha$ 檢定（反例：$U(0, \theta)$）
+2. 滿足以下條件的檢定函數 $\phi$ 被稱爲 N-P 檢定函數：
+   $$
+    \phi(\utilde{X})=\begin{cases}
+        1 & \text{if } f(\utilde{x};\theta_1) > cf(\utilde{x};\theta_0)\\
+        0 & \text{if } f(\utilde{x};\theta_1) < cf(\utilde{x};\theta_0)\\
+        \gamma & \text{if } f(\utilde{x};\theta_1) = cf(\utilde{x};\theta_0)
+    \end{cases}
+    \quad \text{with }c>0\quad \gamma\in[0,1]
+   $$
+
+   使得 $E_{\theta_0}\phi(\utilde{X})=P_{\theta_0}(f(\utilde{x};\theta_1) > cf(\utilde{x};\theta_0))+\gamma P_{\theta_0}(f(\utilde{x};\theta_1) = cf(\utilde{x};\theta_0))=\alpha$
+
+    因此，$\phi$ 滿足 Lemma 的兩個條件，所以 N-P 檢定函數是 MP 檢定函數。
+
+:::tip[Corollary]
+如果 $\phi$ 滿足 N-P Lemma 的兩個條件（因此 $\phi$ 是 MP level $\phi$ 檢定）
+
+則 $E_{\theta_1}\phi(\utilde{X})\ge \alpha = E_{\theta_0}\phi(\utilde{X})$
+:::
+
+**Proof**: 令 $\phi_\alpha(\utilde{X})=\alpha\implies E_\theta\phi_\alpha(\utilde{X})=\alpha$
+
+$\because \phi$ is MP level $\alpha$ $\implies E_{\theta_1}\phi(\utilde{X})\ge E_{\theta_1}\phi_\alpha(\utilde{X})$
+
+如果等於號成立，則 $\phi_\alpha(\utilde{X})$ 也會是 MP level $\alpha$ 檢定。
+
+**Remark**:事實上，除非 $\utilde{X}$ 在 $\theta_1$ 和 $\theta_0$ 的 cdf 相同，否則等號不會成立。
+
+by N-P Lemma, $\exist c>0$ s.t.:
+
+$$
+\alpha=\phi_\alpha\utilde{X}=\begin{cases}
+    1 & \text{if } f(\utilde{x};\theta_1) > cf(\utilde{x};\theta_0)\\
+    0 & \text{if } f(\utilde{x};\theta_1) < cf(\utilde{x};\theta_0)\\
+    \gamma & \text{if } f(\utilde{x};\theta_1) = cf(\utilde{x};\theta_0)
+\end{cases}
+$$
+
+$$
+\implies \gamma=\alpha
+$$

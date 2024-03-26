@@ -208,7 +208,7 @@ $$
 - $H_0:\beta_1=\beta_{1,0} \text{ vs } H_1:\beta_1>\beta_{1,0}$，拒絕 $H_0 \iff \frac{b_1-\beta_{1,0}}{S\set{b_1}}>t_{n-p,\alpha}$
 - $H_0:\beta_1=\beta_{1,0} \text{ vs } H_1:\beta_1<\beta_{1,0}$，拒絕 $H_0 \iff \frac{b_1-\beta_{1,0}}{S\set{b_1}}<-t_{n-p,\alpha}$
 
-## 預測值的信賴區間
+## 預測值平均的信賴區間
 
 在簡單線性迴歸中，我們拿到數據 $\utilde{Y},\utilde{X}$ 後，假設我們關注一個新的 $X_h$ 所對應的 $Y_h$。$X_h$ 獨立於得到的數據 $\utilde{X}$，但它的值可能和 $\utilde{X}$ 中的值相同。
 
@@ -282,7 +282,7 @@ $$
 [\hat{Y}_h\plusmn S\set{\hat{Y}_h}\cdot t_{n-p,\frac{\alpha}{2}}]
 $$
 
----
+## 預測值的信賴區間
 
 如果我們對同樣在 $X_h$ 上的另一個獨立的**隨機變量** $Y_{h,new}$ 感興趣 $\implies Y_{h,new}\perp\hat{Y}_h=b_0+b_1X_h$, and
 
@@ -447,3 +447,42 @@ $$
 \left[\hat{Y}_x\plusmn \sqrt{2F_{2,n-2,\alpha}}\cdot S\set{\hat{Y}_x}\right]
 $$
 :::
+
+## R squared
+
+:::tip[Definition]
+$$
+R^2=\frac{\text{SSR}}{\text{SSTO}}=1-\frac{\text{SSE}}{\text{SSTO}}
+$$
+
+$R^2$ 可以衡量 $Y$ 中的變異量有多少可以被 $X$ 解釋。也就是 $X$ 和 $Y$ 之間的線性關係有多強。
+:::
+
+**Note**:
+1. $R^2\in[0,1]$
+2. $R^2=1\iff \text{SSE}=0\iff e_i=0\quad\forall i \iff \hat{Y}_i=Y_i\quad\forall i$
+   
+   i.e. $Y_1, \cdots, Y_n$ 在一條直線上 $\implies X$ 可以完全解釋 $Y$ 的變異量。
+3. $R^2=0\iff \text{SSR}=0\iff \hat{Y}_i=\bar{Y}\quad\forall i$
+   
+   i.e. 無論 $X$ 如何變動，$Y$ 的預測值都是一樣的 $\implies X$ 和 $Y$ 之間沒有**線性**關係。
+
+   ![alt text](img/2-3.png)
+
+注意到：
+$$
+\begin{align*}
+   R^2&=\frac{\text{SSR}}{\text{SSTO}}=\frac{\sum(\hat{Y}_i-\bar{Y})^2}{\sum(Y_i-\bar{Y})^2}=\frac{b^2_1\sum(X_i-\bar{X}^2)}{\sum(Y_i-\bar{Y})^2}\quad \text{with } b_1=\frac{\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sum(X_i-\bar{X})^2}\\
+   &=\frac{\left(\sum(X_i-\bar{X})(Y_i-\bar{Y})\right)^2}{\sum(X_i-\bar{X})^2\sum(Y_i-\bar{Y})^2}=\left[\frac{\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sqrt{\sum(X_i-\bar{X})^2\sum(Y_i-\bar{Y})^2}} \right]^2
+\end{align*}
+$$
+
+而 $\utilde{X}, \utilde{Y}$ 的樣本協方差是 $\alpha\sum(X_i-\bar{X})(Y_i-\bar{Y})$，$\utilde{X}$ 的樣本方差是 $\alpha\sum(X_i-\bar{X})^2$
+
+$\implies \frac{\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sqrt{\sum(X_i-\bar{X})^2\sum(Y_i-\bar{Y})^2}}=\rho$ 是 $\utilde{X}$ 和 $\utilde{Y}$ 的樣本相關係數。i.e. 
+
+$$
+R^2=\rho^2\iff \rho=\frac{b_1\sqrt{\sum(X_i-\bar{X})^2}}{\sqrt{\sum(Y_i-\bar{Y})^2}}
+$$
+
+因此 $\rho$ 與 $b_1$ 同號。但只有在 SLR 中，$R^2$ 和 $\rho$ 才有以上的關係。
