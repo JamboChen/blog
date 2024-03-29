@@ -276,15 +276,15 @@ $$
 \end{align*}
 $$
 
-因此，對於任何給定的 $X=X_h$，$E[Y_h]=\beta_0+\beta_1X_h$ 的 $1-\alpha$ conf. int. 是
+因此，對於任何給定的 $X=X_h$，預測平均 $E[Y_h]=\beta_0+\beta_1X_h$ 的 $1-\alpha$ conf. int. 是
 
 $$
 [\hat{Y}_h\plusmn S\set{\hat{Y}_h}\cdot t_{n-p,\frac{\alpha}{2}}]
 $$
 
-## 預測值的信賴區間
+## 預測值的預測區間
 
-如果我們對同樣在 $X_h$ 上的另一個獨立的**隨機變量** $Y_{h,new}$ 感興趣 $\implies Y_{h,new}\perp\hat{Y}_h=b_0+b_1X_h$, and
+如果我們對同樣在 $X_h$ 上的一個獨立的**隨機變量** $Y_{h,new}$ 感興趣 $\implies Y_{h,new}\perp\hat{Y}_h=b_0+b_1X_h$, 並且
 
 $$
 \begin{alignat*}{2}
@@ -310,6 +310,8 @@ $$
   \implies & 1-\alpha=P(Y_{h,new}\in [\hat{Y}_h\plusmn S\set{\text{perd}}\cdot t_{n-p,\frac{\alpha}{2}}])
 \end{align*}
 $$
+
+i.e. $[\hat{Y}_h\plusmn S\set{\text{perd}}\cdot t_{n-p,\frac{\alpha}{2}}]$ 是 $Y_{h,new}$ 的 $1-\alpha$ 預測區間（Prediction Interval）。
 
 **Remark**: 在同一個 $X_h$ 上
 
