@@ -110,7 +110,7 @@ $$
 :::
 
 :::tip[Lemmma]
-Given $\utilde{c}\in\R^k$, $f(\utilde{\theta}=\utilde{c}^T\utilde{\theta})=\utilde{\theta}^T\utilde{c}$, $\forall \utilde{\theta}\in\R^k$
+Given $\utilde{c}\in\R^k$, $f(\utilde{\theta})=\utilde{c}^T\utilde{\theta}=\utilde{\theta}^T\utilde{c}$, $\forall \utilde{\theta}\in\R^k$
 $$
 \frac{\partial}{\partial\utilde{\theta}}f(\utilde{\theta})=\utilde{c}
 $$
