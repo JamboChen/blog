@@ -118,13 +118,15 @@ i.e. $\frac{\partial}{\partial\utilde{\theta}}(\utilde{c}^T\utilde{\theta})=\fra
 :::
 
 :::tip[Lemmma]
-如果 $A$ 是 $k\times k$ 的對稱常數矩陣
+如果 $A$ 是 $k\times k$ 的對稱常數矩陣，則以下形式的矩陣被稱為二次型(Quadratic Form)：
 $$
 f(\utilde{\theta})=\utilde{\theta}^TA\utilde{\theta}=\sum_{i,j}\theta_iA_{ij}\theta_j
 $$
 
+並且
+
 $$
-\implies \frac{\partial}{\partial\utilde{\theta}}f(\utilde{\theta})=2A\utilde{\theta}
+\frac{\partial}{\partial\utilde{\theta}}f(\utilde{\theta})=2A\utilde{\theta}
 $$
 
 如果 $A$ 不一定對稱，則 $\frac{\partial}{\partial\utilde{\theta}}f(\utilde{\theta})=A\utilde{\theta}+A^T\utilde{\theta}$
@@ -167,5 +169,4 @@ $$
     Q(\utilde{\beta})&=\utilde{Y}^T_{1\times n}\utilde{Y}_{n\times 1}-\utilde{Y}^T_{1\times n}D_{n\times p}\utilde{\beta}_{p\times 1}-\utilde{\beta}^T_{1\times p}D^T_{p\times n}\utilde{Y}_{n\times 1}+\utilde{\beta}^T_{1\times p}D^T_{p\times n}D_{n\times p}\utilde{\beta}_{p\times 1}\\
     &=\utilde{Y}^T\utilde{Y}-2\utilde{\beta}^TD^T\utilde{Y}+\utilde{\beta}^TD^TD\utilde{\beta}\\
 \end{align*}
-
 $$
