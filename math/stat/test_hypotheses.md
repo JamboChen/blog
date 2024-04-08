@@ -126,7 +126,7 @@ $\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{X})=\alpha$ 被稱為檢定函數 
 
 令 $\theta_0$ 使得 $E_{\theta_0}\phi(\utilde{X})=\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{X})=\alpha$，$\theta_0$ 通常會在 $\omega_0$ 的邊界。為了使 $\theta_0\in\omega_0$，我們需要讓 $\omega_0$ 是閉區間。因此檢定假設的等號會放在 $H_0$ 上。
 
-## UMP 檢定
+## MP 檢定
 
 :::tip[Definition]
 如果 $\sup_{\theta\in\omega_0}E_\theta \phi^*(\utilde{X})=\alpha$ 是 level $\alpha$ 的檢定，並且對於所有的 level $\alpha$ 的檢定 $\phi(\utilde{X})$ 有
@@ -140,7 +140,7 @@ $$
 如果 $H_1$ 是 simple，則 UMP 被稱為 *MP* 檢定。
 :::
 
-## Neyman-Pearson Lemma
+### Neyman-Pearson Lemma
 
 我們獲得單筆數據 $X$，並且有以下分佈：
 
@@ -289,6 +289,10 @@ $$
 \implies \gamma=\alpha
 $$
 
+因此
+1. 當$\theta_1>\theta_0$,  $E_\theta\phi(\utilde{X})$ 是沿着 $\theta$ 遞增 $\implies \sup_{\theta\le\theta_0}E_\theta\phi(\utilde{X})=E_{\theta_0}\phi(\utilde{X})=\alpha$。因此我們可以把 H_0 擴產爲 $H_0: \theta\le\theta_0$。
+2. 當$\theta_1<\theta_0$,  $E_\theta\phi(\utilde{X})$ 是沿着 $\theta$ 遞減 $\implies \sup_{\theta\ge\theta_0}E_\theta\phi(\utilde{X})=E_{\theta_0}\phi(\utilde{X})=\alpha$。因此我們可以把 H_0 擴產爲 $H_0: \theta\ge\theta_0$。
+
 ---
 
 **EX**: 我們得到單個數據 $X$，並且作以下檢定：
@@ -343,3 +347,90 @@ $$
 $$
 \phi(\utilde{X})=1 \text{ if } \sum_{i=1}^n(-2\ln X_i)<\chi^2_{2n,1-\alpha}
 $$
+
+## UMP 檢定
+
+在做 simple $H_0$ 和 simple $H_1$ 的檢定時，N-P Lemma 可以直接給我們一個 MP 檢定。而它還可以幫我們找到某些 composite $H_0$ 和 composite $H_1$ 的 UMP 檢定。
+
+對於 $H_0: \theta\in\omega_0$ v.s. $H_1: \theta\in\omega_1$。因爲 N-P lemma 告訴我們，在 level $\alpha$ 下找到的 MP test，對於  level $<\alpha$ 時也會是 MP test。那麼如果還有 $\forall \theta\in\omega_1$ 可以得到同一個 $\phi$，那麼就可以把複雜的檢定變成簡單的檢定，並使用 N-P Lemma。
+
+記得 $f(\utilde{X};\theta)=g(T:\theta)h(\utilde{X})$ with $T=T(\utilde{X})$ 是 $\theta$ 的 sufficient statistic，並且我們可以讓 $g(T;\theta)$ 是 pdf。
+
+因此如果一個滿足 N-P Lemma 的檢定函數，i.e. 拒絕 $H_0\iff f(\utilde{x};\theta_1)>cf(\utilde{x};\theta_0)\iff g(t;\theta_1)>cg(t;\theta_0)$
+
+:::tip[Theorem]
+$\utilde{X}\sim f(\utilde{x};\theta), \theta\in\Omega$, let $T=T(\utilde{X})$ be suff for $\theta$ and $g(t;\theta)$ be its pdf.
+
+Given $\omega_0\subset\Omega, \omega_1\subset\Omega$ with $\w_0\cap\w_1=\empty$.
+
+For tesing $H_0: \theta\in\w_0$ v.s. $H_1: \theta\in\w_1$. Suppose a test $\phi(T)$ with:
+1. $\sup_{\theta\in\omega_0}E_\theta\phi(t)=\alpha$
+2. $\exist \theta_0\in\omega_0$  s.t. $E_{\theta_0}\phi(T)=\alpha$ and $\forall \theta\in\omega_1, \exist c>0$ s.t.
+   $$
+    \phi(T)=\begin{cases}
+         1 & \text{if } g(t;\theta_1)>cg(t;\theta_0)\\
+         0 & \text{if } g(t;\theta_1)<cg(t;\theta_0)
+    \end{cases}
+    $$
+$\implies$ $\phi(T)$ is UMP level $\alpha$ test.
+
+Note: $\forall \theta\in\omega_1$ find the same $\phi$
+:::
+
+### MLR
+
+:::tip[Definition]
+**Monotone Likelihood Ratio (MLR)**:
+
+$\utilde{X}\sim f(\utilde{x};\theta), \theta\in\omega\subset\R$ and $T=T(\utilde{X})$ is suff for $\theta$ with pdf $g(t;\theta)$.
+
+Suppose $\forall \theta_2>\theta_1$
+$$
+\frac{f(\utilde{x};\theta_2)}{f(\utilde{x};\theta_1)}=\frac{g(t;\theta_2)}{g(t;\theta_1)} \quad \text{is monotone in } v(t)
+$$
+
+$\implies f(\utilde{x};\theta)$ (or $g(t;\theta)$) has MLR.
+:::
+
+假設 $f$ 有 MLR, $f(\utilde{x};\theta_1)>cf(\utilde{x};\theta_0) \iff f(\utilde{x};\theta_1)/f(\utilde{x};\theta_0)>c$
+
+1. 如果 $\theta_1>\theta_0$，則 $g(t;\theta_1)/g(t;\theta_0)$ 是單調遞增的，i.e. $v(t)$ 越大，$g(t;\theta_1)/g(t;\theta_0)$ 越大。
+2. 如果 $\theta_1<\theta_0$，則 $g(t;\theta_1)/g(t;\theta_0)$ 是單調遞減的，i.e. $v(t)$ 越小，$g(t;\theta_1)/g(t;\theta_0)$ 越大。
+
+$\exist k$ s.t.
+
+$$
+\iff \begin{cases}
+    v(t)>k & \text{if } \theta_1>\theta_0\\
+    v(t)<k & \text{if } \theta_1<\theta_0
+\end{cases}
+$$
+
+因此當在 $v(t)$ 下具有 MLR 時，作檢定：
+1. $H_0:\theta=\theta_0$ v.s. $H_1:\theta=\theta_1$ ($\theta_1>\theta_0$)
+
+   拒絕 $H_0$ if $v(T)>k$ 會是 MP 檢定。
+2. $H_0:\theta=\theta_0$ v.s. $H_1:\theta=\theta_1$ ($\theta_1<\theta_0$)
+
+   拒絕 $H_0$ if $v(T)<k$ 會是 MP 檢定。
+
+:::tip[Theorem]
+$\utilde{X}\sim f(\utilde{x};\theta), T=T(\utilde{X})$ is suff for $\theta$ with pdf $g(t;\theta)$ has MLR in $v(t)$. Then for test:
+
+1. $H_0:\theta=\theta_0$ v.s. $H_1:\theta=\theta_1$ ($\theta_1>\theta_0$)
+
+   $$
+    \phi(\utilde{X})=\phi(T)=\begin{cases}
+        1 & \text{if } v(T)>k\\
+        0 & \text{if } v(T)<k
+    \end{cases}
+    \quad \text{with } E_{\theta_0}\phi(T)=\alpha
+    $$
+    is UMP level $\alpha$ test.
+
+2. $H_0: \theta=\theta_0$ v.s. $H_1:\theta>\theta_0$
+   UMP level $\alpha$ test is also $\phi(T)$ in (1).
+
+3. $H_0: \theta\le\theta_0$ v.s. $H_1:\theta>\theta_0$
+   UMP level $\alpha$ test is also $\phi(T)$ in (1).
+:::
