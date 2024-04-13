@@ -27,7 +27,7 @@
 
 因此檢定 $H_0: \theta\in \omega_0$ v.s. $H_1: \theta\in\omega_1$ 時
 - $H_0$ 是默認的假設，稱爲*虛無假設（null hypothese）*。
-- $H-1$ 是*對立假設（attenative hypothese）*，是我們想要説明的假設。
+- $H_1$ 是*對立假設（attenative hypothese）*，是我們想要説明的假設。
 
 **E.G.**:
 - $H_0:$ 無罪 v.s. $H_1:$ 有罪
