@@ -587,7 +587,7 @@ $$
 - $H_1:\theta>\theta_0$，拒絕 $H_0$ if $v(T)>k$
 - $H_1:\theta<\theta_0$，拒絕 $H_0$ if $v(T)<k$
 
-## 1-par exp family
+### 1-par exp family
 
 如果 $f(\utilde{x};\theta)\in$ 1-par exp family，i.e. $f(\utilde{x};\theta)=c(\theta)\exp(Q(\theta)T(\utilde{\theta}))h(\utilde{x})$ with $\mathscr{X}=\set{\utilde{x};f(\utilde{x};\theta)>0}\perp\theta$
 
@@ -657,3 +657,60 @@ $f\in$ 1-par exp family
 
     s.t. $E_{\theta_i}\phi(T)=\alpha$
 :::
+
+**EX**: $X_1,\cdots, X_n\overset{\text{iid}}{\sim}B(1, \theta)$
+
+$$
+\begin{align*}
+    \implies f(\utilde{x};\theta)&=\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}\\
+    &=\theta^t(1-\theta)^{n-t}\quad \text{with } t=\sum x_i\\
+    &=(1-\theta)^n\left(\frac{\theta}{1-\theta}\right)^t\\
+    &=c(\theta)\exp\left(t\ln\frac{\theta}{1-\theta}\right)\in \text{ 1-par exp family}\\
+    \text{with }Q(\theta)&=\ln\frac{\theta}{1-\theta}\quad Q'(\theta)=\frac{1}{\theta}+\frac{1}{1-\theta}>0
+\end{align*}
+$$
+
+因此 $f$ 在 $T=\sum X_i$ 下具有 MLR。對於檢定：
+
+$$
+H_0:\theta\overset{(=)}{\le}\theta_0\text{ v.s. }H_1:\theta>\theta_0
+$$
+
+UMP level $\alpha$ test 是：
+
+$$
+\phi(t)=\begin{cases}
+    1 & \text{if } t>k\\
+    r & \text{if } t=k\\
+    0 & \text{if } t<k
+\end{cases}
+$$
+$$
+\text{ with } \alpha=E_{\theta_0}\phi(T)=P_{\theta_0}(T>k)+r\cdot P_{\theta_0}(T=k)
+$$
+
+在樣本數比較大的情況下，我們難以計算 $P_{\theta_0}(T>k)$。我們可以用中央極限定理來近似到標準常態分佈，這樣就可以查表得到 $k$。
+
+$$
+\begin{align*}
+    \alpha&=P_{\theta_0}(T>k)+r\cdot P_{\theta_0}(T=k)\\
+    &=P\left(\frac{T-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}}>\frac{k-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}}\right)+r\cdot \underbrace{P\left(\frac{T-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}}=\frac{k-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}}\right)}_{\text{連續分佈的單點幾率為0}}\\
+    &\approx P(Z>\frac{k-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}})\\
+    &\implies \frac{k-n\theta_0}{\sqrt{n\theta_0(1-\theta_0)}}=Z_\alpha\\
+    &\implies k=n\theta_0+Z_\alpha\sqrt{n\theta_0(1-\theta_0)}
+\end{align*}
+$$
+
+- 假設 $n=25, \theta_0=0.5, \alpha=0.01$
+
+$k=25\cdots\frac{1}{2}+Z_{0.01}\sqrt{25\cdot\frac{1}{2}\cdot\frac{1}{2}}\approx 25\cdot\frac{1}{2}+2.33\approx 18.3$
+
+$$
+\implies \phi(t)=\begin{cases}
+    1 & \text{if } t>18.3\\
+    0 & \text{if } t<18.3
+\end{cases}=\begin{cases}
+    1 & \text{if } t=19, 20, \cdots, 25\\
+    0 & \text{o.w.}
+\end{cases}
+$$
