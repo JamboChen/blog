@@ -348,6 +348,75 @@ $$
 \phi(\utilde{X})=1 \text{ if } \sum_{i=1}^n(-2\ln X_i)<\chi^2_{2n,1-\alpha}
 $$
 
+---
+
+**EX**: $X_1, \cdots, X_n \overset{\text{iid}}{\sim} U(0, \theta)$
+
+給定 $\theta_1\neq\theta_0\in\R^+$，做以下檢定：
+
+$$
+H_0: \theta=\theta_0 \text{ v.s. } H_1: \theta=\theta_1
+$$
+
+根據 N-P Lemma，我們可以得到 level $\alpha$ 的 MP 檢定是：
+
+$$
+\phi(\utilde{X})=\begin{cases}
+    1& \text{if } f(\utilde{x};\theta_1)\ge cf(\utilde{x};\theta_0)\\
+    0& \text{if } f(\utilde{x};\theta_1)<cf(\utilde{x};\theta_0)
+\end{cases}
+\quad \text{with } c>0 \text{ s.t. } E_{\theta_0}\phi(\utilde{X})=\alpha
+$$
+
+因為 $X_{(n)}$ 是 sufficient statistic，我們可以得到：
+
+$$
+\iff \phi(\utilde{X})=\begin{cases}
+    1 & \text{if } X_{(n)}\ge k\\
+    0 & \text{if } X_{(n)}<k
+\end{cases}
+$$
+
+with
+
+$$
+\alpha=E_{\theta_0}\phi(\utilde{X})=P_{\theta_0}(X_{(n)}\ge k)=1-\left(\frac{k}{\theta_0}\right)^n \quad\implies k=\theta_0(1-\alpha)^{1/n}<\theta_0
+$$
+
+而它的 power 是：
+
+$$
+E_{\theta_1}\phi(\utilde{X})=P_{\theta_1}(X_{(n)}\ge k)=1-\left(\frac{k}{\theta_1}\right)^n=1-\left(\frac{\theta_0(1-\alpha)^{1/n}}{\theta_1}\right)^n=1-\left(\frac{\theta_0}{\theta_1}\right)^n(1-\alpha)
+$$
+
+但對於這種情況，可以發現如果有 $X$ 落在 $\theta_0$ 和 $\theta_1$ 之間，那我們可以立馬得知 $\theta_1$ 是真的。因此我們可以造另一個檢定函數：
+
+$$
+\phi_1 = \begin{cases}
+    1 & \text{if } X_{(n)}> \theta_0\\
+    \alpha & \text{if } 0<X_{(n)}\le \theta_0\\
+\end{cases}
+$$
+
+with
+
+$$
+E_{\theta_0}\phi_1(\utilde{X})=P_{\theta_0}(X_{(n)}>\theta_0)+\alpha P_{\theta_0}(0<X_{(n)}\le \theta_0)=0+\alpha\cdot 1=\alpha
+$$
+
+而它的 power 同樣會是：
+
+$$
+\begin{align*}
+    E_{\theta_1}\phi_1(\utilde{X})&=P_{\theta_1}(X_{(n)}>\theta_0)+\alpha P_{\theta_1}(0<X_{(n)}\le \theta_0)\\
+    &=1-P_{\theta_1}(X_{(n)}\le \theta_0)+\alpha P_{\theta_1}(0<X_{(n)}\le \theta_0)\\
+    &=1-\left(\frac{\theta_0}{\theta_1}\right)^n+\alpha\left(\frac{\theta_0}{\theta_1}\right)^n\\
+    &=1-\left(\frac{\theta_0}{\theta_1}\right)^n(1-\alpha)
+\end{align*}
+$$
+
+因此我們造出了兩個不同但都是 MP 的檢定函數。
+
 ## UMP 檢定
 
 在做 simple $H_0$ 和 simple $H_1$ 的檢定時，N-P Lemma 可以直接給我們一個 MP 檢定。而它還可以幫我們找到某些 composite $H_0$ 和 composite $H_1$ 的 UMP 檢定。
@@ -358,12 +427,34 @@ $$
 
 因此如果一個滿足 N-P Lemma 的檢定函數，i.e. 拒絕 $H_0\iff f(\utilde{x};\theta_1)>cf(\utilde{x};\theta_0)\iff g(t;\theta_1)>cg(t;\theta_0)$
 
+---
+
+**EX**: $X_1, \cdots, X_n \overset{\text{iid}}{\sim}N(\theta, \sigma^2_0)$
+
+$$
+H_0:\theta=\theta_0 \text{ v.s. } H_1:\theta=\theta_1
+$$
+
+$\implies$ MP level $\alpha$ 檢定是：拒絕 $H_0$ if $\frac{\bar{X}-\theta_0}{\sigma_0/\sqrt{n}}>Z_\alpha$。這對於任何 $\theta_1>\theta_0$ 都適用。
+
+注意到
+
+$$
+\begin{align*}
+    &E_\theta\phi(\utilde{X})=P_\theta\left(\frac{\bar{X}-\theta_0}{\sigma_0/\sqrt{n}}>Z_\alpha\right)=1-\Phi(\frac{\sqrt{n}}{\sigma^2}(\theta_0-\theta)+Z_\alpha)\\
+    \implies& \frac{d}{d\theta} E_\theta\phi(\utilde{X})=\frac{\sqrt{n}}{\sigma_0}\phi(\frac{\sqrt{n}}{\sigma_0}(\theta_0-\theta)+Z_\alpha)>0\\
+    \implies& \sup_{\theta\le\theta_0}E_\theta \phi(\utilde{X})=E_{\theta_0}\phi(\utilde{X})=\alpha\\
+    & \text{i.e. }\phi\text{ is level }\alpha\text{ test for }H^*_0:\theta\le\theta_0\\
+    \implies& \text{For testing }H_0:\theta\le\theta_0\text{ v.s. }H_1:\theta>\theta_0\text{, we can use the same }\phi
+\end{align*}
+$$
+
 :::tip[Theorem]
 $\utilde{X}\sim f(\utilde{x};\theta), \theta\in\Omega$, let $T=T(\utilde{X})$ be suff for $\theta$ and $g(t;\theta)$ be its pdf.
 
-Given $\omega_0\subset\Omega, \omega_1\subset\Omega$ with $\w_0\cap\w_1=\empty$.
+Given $\omega_0\subset\Omega, \omega_1\subset\Omega$ with $\omega_0\cap\omega_1=\empty$.
 
-For tesing $H_0: \theta\in\w_0$ v.s. $H_1: \theta\in\w_1$. Suppose a test $\phi(T)$ with:
+For tesing $H_0: \theta\in\omega_0$ v.s. $H_1: \theta\in\omega_1$. Suppose a test $\phi(T)$ with:
 1. $\sup_{\theta\in\omega_0}E_\theta\phi(t)=\alpha$
 2. $\exist \theta_0\in\omega_0$  s.t. $E_{\theta_0}\phi(T)=\alpha$ and $\forall \theta\in\omega_1, \exist c>0$ s.t.
    $$
@@ -432,5 +523,19 @@ $\utilde{X}\sim f(\utilde{x};\theta), T=T(\utilde{X})$ is suff for $\theta$ with
    UMP level $\alpha$ test is also $\phi(T)$ in (1).
 
 3. $H_0: \theta\le\theta_0$ v.s. $H_1:\theta>\theta_0$
-   UMP level $\alpha$ test is also $\phi(T)$ in (1).
+   UMP level $\alpha$ test is also $\phi(T)$ in (1)
+
+    and its power function $\nearrow$ in $\theta$.
+
+4. $H_0: \theta\ge\theta_0$ v.s. $H_1:\theta<\theta_0$
+   
+   UMP level $\alpha$ test is
+   $$
+    \phi(\utilde{X})=\begin{cases}
+        1 & \text{if } v(T)<k\\
+        0 & \text{if } v(T)>k
+    \end{cases}
+   $$
+
+    and its power function $\searrow$ in $\theta$.
 :::

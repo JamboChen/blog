@@ -299,8 +299,8 @@ i.e. $rank(P)=r$
 :::tip[Lemma 4]
 P: $n\times n$ 的對稱幂等矩陣（Symmetric Idempotent Matrix），並且 $rank(P)=r$。則：
 1. $P$ 有 $r$ 個特徵值為 1，$n-r$ 個特徵值為 0
-2. $tr(P)\triangleq\sum_{i=1}^n P_{ii}=r$
-3. $I-P$ 也是對稱幂等矩陣，並且 $rank(I-P)=n-r=tr(I-P)$
+2. $\text{tr}(P)\triangleq\sum_{i=1}^n P_{ii}=r$
+3. $I-P$ 也是對稱幂等矩陣，並且 $rank(I-P)=n-r=\text{tr}(I-P)$
 4. $\forall \utilde{a}\in\R^n, \utilde{a}^tP\utilde{a}\ge 0$
 :::
 
@@ -322,7 +322,7 @@ $$
 $\implies$ $B$ 有 $r$ 個 1 和 $n-r$ 個 0。並且還有
 
 $$
-tr(P)=tr(PA^tA)=tr(A^tPA)=tr(B)=r
+\text{tr}(P)=\text{tr}(PA^tA)=\text{tr}(A^tPA)=\text{tr}(B)=r
 $$
 
 ---
@@ -374,14 +374,135 @@ $$
 \end{align*}
 $$
 
-並且 $M=I-H$ 也是對稱幂等矩陣，並且 $rank(M)=n-p
+並且 $M=I-H$ 也是對稱幂等矩陣, $rank(M)=n-p$
 
 **Note**：
 
 H 是 $\Omega$ 上的投影矩陣，而 M 是 $\Omega^\perp$ 上的投影矩陣。並且 $\R^n=\Omega+\Omega^\perp$
 
-如果我們對已經在 $\Omega$ 上的向量做投影，則投影後的向量不會改變。
+如果我們把已經在 $\Omega$ 上的向量再投影到 $\Omega$ 上，那麼投影後的向量不會改變。而如果把 $\Omega$ 上的向量投影到垂直於 $\Omega$ 的空間上，那麼投影後的向量會是 0。i.e.
 
 $$
 H\utilde{\theta}=\utilde{\theta} \qquad M\utilde{\theta}=0 \quad \forall \utilde{\theta}\in\Omega
 $$
+
+因為 $D\in\Omega, \utilde{e}\in\Omega^\perp\implies D^t\utilde{e}=0$。我們可以衍生得到 $\utilde{1}^t\utilde{e}=0$，$\utilde{X}_j^t\utilde{e}=0$，$j=1,2,\cdots,k$。因為 $\utilde{1}$ 和 $\utilde{X}_j$ 都在 $\Omega$ 上。
+
+上面說 $\utilde{\hat{Y}}$ 是在 $\Omega$ 上的投影，因此 $\utilde{\hat{Y}}^t\utilde{e}=0$。由此可以得到以下性質：
+
+1. SSE 的性質：
+
+   $$
+   \begin{align*}
+       & \begin{align*}
+           \bullet\quad\text{SSE} &\triangleq \utilde{e}^t\utilde{e}=(MY)^t(MY)=\utilde{Y}^tM^tM\utilde{Y}\\
+           &=\utilde{Y}^tM\utilde{Y} \quad \because M \text{ is symmetric idempotent}\\
+           &=(D\utilde{\beta}+\utilde{\varepsilon})^tM(D\utilde{\beta}+\utilde{\varepsilon})\\
+           &=\utilde{\beta}^tD^tMD\utilde{\beta}+2\utilde{\beta}^tD^tM\utilde{\varepsilon}+\utilde{\varepsilon}^tM\utilde{\varepsilon}\\
+           &=\utilde{\varepsilon}^tM\utilde{\varepsilon} \quad \because D^tM=0
+       \end{align*}\\
+
+       & \begin{align*}
+           \bullet\quad E[\text{SSE}]&=E[\utilde{\varepsilon}^tM\utilde{\varepsilon}]=\sum_{i=1}^n\sum_{j=1}^nE[\varepsilon_iM_{ij}\varepsilon_j]\\
+           &=\sum_{i=1}^nM_{ij}E[\varepsilon_i^2] \quad \because E[\varepsilon_i\varepsilon_j]=0, i\ne j\\
+           &=\sigma^2\text{tr}(M)=\sigma^2(n-p)
+       \end{align*}\\
+       & \bullet\quad E[\text{MSE}]=E[\frac{\text{SSE}}{n-p}]=\sigma^2
+   \end{align*}
+   $$
+
+2. $\utilde{b}$ 的性質：
+
+   $$
+   \begin{align*}
+       &\begin{align*}
+          \bullet\quad E[\utilde{b}]&=E[(D^tD)^{-1}D^t\utilde{Y}]\\
+          &=(D^tD)^{-1}D^t\cdot E[\utilde{Y}]\\
+          &=(D^tD)^{-1}D^tD\utilde{\beta}\\
+          &=\utilde{\beta}\quad \text{i.e. } \utilde{b} \text{ is unbiased for } \utilde{\beta}
+      \end{align*}\\
+      &\begin{align*}
+          \bullet\quad \sigma^2\set{\utilde{b}}&=\sigma^2\set{(D^tD)^{-1}D^t\utilde{Y}}\\
+          &=(D^tD)^{-1}D^t\sigma^2\set{\utilde{Y}}D(D^tD)^{-1}\\
+          &=\sigma^2 (D^tD)^{-1}\underbrace{D^tD(D^tD)^{-1}}_{=I} \quad \sigma^2\set{\utilde{Y}}=\sigma^2I\\
+          &=\sigma^2(D^tD)^{-1}
+      \end{align*}\\
+      &\bullet\quad S^2\set{\utilde{b}}=\text{MSE}(D^tD)^{-1} \quad \text{to est } \sigma^2\set{\utilde{b}}
+   \end{align*}
+   $$
+
+3. $\utilde{\hat{Y}}$ 的性質：
+
+   $$
+   \begin{align*}
+       &\begin{align*}
+           \bullet\quad E[\utilde{\hat{Y}}]&=E[HY]=H\cdot E[\utilde{Y}]=HD\utilde{\beta}=D\utilde{\beta}=E[\utilde{Y}]\\
+           \implies& \utilde{\hat{Y}} \text{ is unbiased for } E[\utilde{Y}]
+       \end{align*}\\
+       &\begin{align*}
+           \bullet\quad \sigma^2\set{\utilde{\hat{Y}}}&=\sigma^2\set{HY}=H\sigma^2\set{\utilde{Y}}H^t\\
+           &=\sigma^2HH^t=\sigma^2H
+       \end{align*}\\
+   \end{align*}
+   $$
+
+4. $\utilde{e}$ 的性質：
+   
+   $$
+   \begin{align*}
+        &\bullet\quad E[\utilde{e}]=E[M\utilde{Y}]=ME[\utilde{Y}]=\underbrace{MD}_{=0}\utilde{\beta}=0\\
+        &\bullet\quad \sigma^2\set{\utilde{e}}=\sigma^2\set{MY}=\sigma^2M
+   \end{align*}
+   $$
+
+5. $S^2\set{\ast}\triangleq\sigma^2\set{\ast}|_{\sigma^2=\text{MSE}}$ is unbiased for $\sigma^2\set{\ast}$
+
+## ANOVA
+
+$$
+\begin{align*}
+    &\begin{align*}
+        \bullet\quad &\utilde{Y}=\utilde{\hat{Y}}+\utilde{e}\\
+        &\begin{align*}
+            \implies ||\utilde{Y}||^2&=||\utilde{\hat{Y}}||^2+||\utilde{e}||^2+2\utilde{\hat{Y}}^t\utilde{e}=||\utilde{\hat{Y}}||^2+||\utilde{e}||^2\\
+            &=||\utilde{\hat{Y}}||^2 + \text{SSE}
+        \end{align*}
+    \end{align*}\\
+    &\begin{align*}
+        \bullet\quad &\utilde{Y}=\utilde{Y}-\bar{Y}\utilde{1}+\bar{Y}\utilde{1}\quad \bar{Y}\utilde{1}\in\Omega\\
+
+        &\begin{align*}
+            \implies ||\utilde{Y}||^2 &= ||\utilde{Y}-\bar{Y}\utilde{1}||^2 + \bar{Y}^2\cdot n\\
+            &=\sum_{i=1}^n(Y_i-\bar{Y})^2+n\bar{Y}^2\\
+            &=\text{SSTO}+n\bar{Y}^2
+        \end{align*}
+    \end{align*}\\
+    &\begin{align*}
+        \bullet\quad &\utilde{\hat{Y}}=\utilde{\hat{Y}}-\bar{Y}\utilde{1}+\bar{Y}\\
+        &\begin{align*}
+            \implies ||\utilde{\hat{Y}}||^2&=||\utilde{\hat{Y}}-\bar{Y}\utilde{1}||^2+\bar{Y}^2\cdot n\\
+            &=\sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2+n\bar{Y}^2\\
+            &=\text{SSR}+n\bar{Y}^2
+        \end{align*}
+    \end{align*}\\
+    &\implies ||\utilde{Y}||^2=||\utilde{\hat{Y}}||^2+||\utilde{e}||^2\\
+    &\implies \text{SSTO}+\bcancel{n\bar{Y}^2}=\text{SSR}+\bcancel{n\bar{Y}^2}+\text{SSE}
+\end{align*}
+$$
+
+Note:
+
+$$
+\begin{align*}
+    ||\bar{Y}\utilde{1}||^2&=n\bar{Y}^2\\
+    &=\bar{Y}\utilde{1}^t\utilde{1}\bar{Y}\\
+    &=\frac{1}{n}\utilde{Y}^t\utilde{1}\utilde{1}^t\utilde{1}\frac{1}{n}\utilde{1}^t\utilde{Y}\\
+    &=\utilde{Y}^t\frac{\utilde{1}\utilde{1}^t}{n}\utilde{Y} \quad \because\utilde{1}^t\utilde{1}=n\\
+    &=\utilde{Y}^t\frac{J}{n}\utilde{Y}\quad \text{where } J=[1]_{n\times n}
+\end{align*}
+$$
+
+- $(\frac{J}{n})^t=\frac{1}{n}J^t=\frac{1}{n}J$
+- $\frac{J}{n}\cdot\frac{J}{n}=\frac{J}{n}$
+
+$\implies \frac{J}{n}$ is $n\times n$ symmetric idempotent matrix with rank 1。i.e. 它是一个 $span\set{\utilde{1}}$ 上的投影矩阵。
