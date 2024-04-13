@@ -506,3 +506,48 @@ $$
 - $\frac{J}{n}\cdot\frac{J}{n}=\frac{J}{n}$
 
 $\implies \frac{J}{n}$ is $n\times n$ symmetric idempotent matrix with rank 1。i.e. 它是一个 $span\set{\utilde{1}}$ 上的投影矩阵。
+
+$$
+\begin{align*}
+    &\begin{align*}
+        \bullet\quad &\utilde{Y}^tI\utilde{Y}=\utilde{Y}^t\left(\frac{J}{n}+I-\frac{J}{n}\right)\utilde{Y}\\
+        &\begin{align*}
+            \iff ||\utilde{Y}||^2&=\utilde{Y}^t\frac{J}{n}\utilde{Y}+\utilde{Y}^t\left(I-\frac{J}{n}\right)\utilde{Y}\\
+            &=n\bar{Y}^2+\text{SSTO}
+        \end{align*}\\
+        &\text{i.e. SSTO }\triangleq \sum_{i=1}^n(Y_i-\bar{Y})^2=\utilde{Y}^t\left(I-\frac{J}{n}\right)\utilde{Y}
+    \end{align*}\\
+    &\begin{align*}
+        \bullet\quad \text{SSE } &=||\utilde{e}||^2=\utilde{e}^t\utilde{e}=(M\utilde{Y})^tM\utilde{Y}=\utilde{Y}^tM^tM\utilde{Y}\\
+        &=\utilde{Y}^tM\utilde{Y}=\utilde{Y}^t(I-H)\utilde{Y}
+    \end{align*}\\
+    &\begin{align*}
+        \bullet\quad \text{SSR } &= \sum_{i=1}^n(\hat{Y}_i-\bar{Y})^2=\text{SSTO}-\text{SSE}\\
+        &=\utilde{Y}^t\left(I-\frac{J}{n}\right)\utilde{Y}-\utilde{Y}^t(I-H)\utilde{Y}\\
+        &=\utilde{Y}^t(H-\frac{J}{n})\utilde{Y}
+    \end{align*}
+\end{align*}
+$$
+
+Note: 
+
+$$
+\begin{align*}
+    I&=\underbrace{\frac{J}{n}}_{\in\Omega}+\underbrace{(I-\frac{J}{n})}_{\in\Omega^\perp}\\
+    &=\underbrace{H}_{\in\Omega}+\underbrace{(I-H)}_{\in\Omega^\perp}\\
+    &=\underbrace{(H-\frac{J}{n})}_{\in\Omega}+\underbrace{I-H+\frac{J}{n}}_{\in\Omega^\perp}
+\end{align*}\qquad\text{and}\qquad
+\begin{align*}
+    &\text{SSTO}=\utilde{Y}^t\left(I-\frac{J}{n}\right)\utilde{Y}\\
+    &\text{SSE}=\utilde{Y}^t(I-H)\utilde{Y}\\
+    &\text{SSR}=\utilde{Y}^t(H-\frac{J}{n})\utilde{Y}
+\end{align*}
+$$
+
+:::tip[Corollary]
+$I=P_1+P_2+\cdots+P_m$, where $P_i$ is projection matrix then $||\utilde{Y}||^2=\sum_{i=1}^m\utilde{Y}^tP_i\utilde{Y}$
+:::
+
+從上面的推理我們可以知道 SSTO, SSE, SSR 都是 quadratic form。$\utilde{Y}^tP\utilde{Y}$，其中 $P$ 是 projection matrix ($n\times n$ symmetric idempotent matrix)。
+
+因此我們需要一些 quadratic form 的分佈定理。

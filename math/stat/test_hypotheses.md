@@ -539,3 +539,121 @@ $\utilde{X}\sim f(\utilde{x};\theta), T=T(\utilde{X})$ is suff for $\theta$ with
 
     and its power function $\searrow$ in $\theta$.
 :::
+
+**EX**: $X_1, \cdots, X_n\overset{\text{iid}}{\sim}e^{-(x-\theta)}, x\ge\theta$
+
+UMP level $\alpha$ test for $H_0:\theta\le\theta_0$ v.s. $H_1:\theta>\theta_0$
+
+Note:
+
+$$
+f(\utilde{x};\theta)=\prod_{i=1}^ne^{-(x_i-\theta)}I(x_i\ge\theta)=e^{-\sum x_i+n\theta}I(x_{(1)}\ge\theta)
+$$
+
+$$
+\implies \forall\theta_2>\theta_1, \frac{f(\utilde{x};\theta_2)}{f(\utilde{x};\theta_1)}=e^{n(\theta_2-\theta_1)}\frac{I(x_{(1)}\ge\theta_2)}{I(x_{(1)}\ge\theta_1)}\text{ is monotone in } x_{(1)}
+$$
+
+i.e. $f(\utilde{x};\theta)$ has MLR in $x_{(1)}$. UMP level $\alpha$ test is:
+
+$$
+\phi(\utilde{x})=\utilde{x_{(1)}}=\begin{cases}
+    1 & \text{if } x_{(1)}>k\\
+    r & \text{if } x_{(1)}=k\\
+    0 & \text{if } x_{(1)}< k
+\end{cases}
+$$
+
+$$
+\begin{align*}
+    \text{s.t. } \alpha&=E_{\theta_0}\phi(\utilde{x})=P_{\theta_0}(x_{(1)}>k)+r\cdot P_{\theta_0}(x_{(1)}=k)\\
+    &=P_{\theta_0}(x_i>k, \forall i)\xlongequal{\text{iid}}\left[P_{\theta_0}(x_1>k)\right]^n\\
+    &=\left[\int_k^\infty e^{-(x-\theta_0)}dx\right]^n=\left[e^{\theta_0}(-e^{-x}|_k^\infty)\right]^n\\
+    &=e^{n\theta_0-nk}\\
+    \implies k&=\theta_0-\frac{\ln \alpha}{n}
+\end{align*}
+$$
+
+因此 UMP level $\alpha$ test 是：拒絕 $H_0$ if $x_{(1)}>\theta_0-\frac{\ln \alpha}{n}$
+
+---
+
+當假設檢定的對立假設是 $H_1:\theta>\theta_0$ 或 $H_1:\theta<\theta_0$ 時，稱為單邊（One-Sided）檢定。
+
+而對立假設是 $H_1:\theta\neq\theta_0$ 或 $H_1:\theta<\theta_1$ or $\theta>\theta_2$ 時，稱為雙邊（Two-Sided）檢定。
+
+對於單邊檢定問題，如果有 MLR 性質，我們可以直接得到 UMP 檢定。並且拒絕 $H_0$ 的範圍與 $H_1$ 是“同方向”的。i.e.:
+
+- $H_1:\theta>\theta_0$，拒絕 $H_0$ if $v(T)>k$
+- $H_1:\theta<\theta_0$，拒絕 $H_0$ if $v(T)<k$
+
+## 1-par exp family
+
+如果 $f(\utilde{x};\theta)\in$ 1-par exp family，i.e. $f(\utilde{x};\theta)=c(\theta)\exp(Q(\theta)T(\utilde{\theta}))h(\utilde{x})$ with $\mathscr{X}=\set{\utilde{x};f(\utilde{x};\theta)>0}\perp\theta$
+
+$$
+\implies \forall\theta_2>\theta_1, \frac{f(\utilde{x};\theta_2)}{f(\utilde{x};\theta_1)}=\frac{c(\theta_2)}{c(\theta_1)}\exp\left(T(\utilde{x})(Q(\theta_2)-Q(\theta_1))\right)
+$$
+
+注意到，如果對於所有 $\theta_2>\theta_1$ 都有 $Q(\theta_2)-Q(\theta_1)>0$，這代表 $Q$ 是單調遞增的，反之亦然。因此：
+
+- 如果 $Q$ 遞增，那麼 $f$ 在 $T$ 下具有 MLR。
+- 如果 $Q$ 遞減，那麼 $f$ 在 $-T$ 下具有 MLR。
+
+:::tip[Theorem]
+$f\in$ 1-par exp family
+
+1. $Q$ 沿著 $\theta$ 遞增 $\implies$ $f$ 在 $T$ 下具有 MLR
+   1. $H_0:\theta\overset{(\le)}{=}\theta_0$ v.s. $H_1:\theta>\theta_0$.
+      $$
+      \phi(\utilde{X})=\begin{cases}
+          1 & \text{if } T(\utilde{X})>k\\
+          r & \text{if } T(\utilde{X})=k\\
+          0 & \text{if } T(\utilde{X})<k
+      \end{cases}
+      $$
+    2. $H_0:\theta\overset{(\ge)}{=}\theta_0$ v.s. $H_1:\theta<\theta_0$.
+      $$
+      \phi(\utilde{X})=\begin{cases}
+          1 & \text{if } T(\utilde{X})<k\\
+          r & \text{if } T(\utilde{X})=k\\
+          0 & \text{if } T(\utilde{X})>k
+      \end{cases}
+      $$
+    
+    s.t. $E_{\theta_0}\phi(\utilde{X})=\alpha$ is UMP level $\alpha$ test.
+
+2. $Q$ 沿著 $\theta$ 遞減 $\implies$ $f$ 在 $-T$ 下具有 MLR
+   1. $H_0:\theta\overset{(\le)}{=}\theta_0$ v.s. $H_1:\theta>\theta_0$.
+      $$
+      \phi(\utilde{X})=\begin{cases}
+          1 & \text{if } T(\utilde{X})<k\\
+          r & \text{if } T(\utilde{X})=k\\
+          0 & \text{if } T(\utilde{X})>k
+      \end{cases}
+      $$
+    2. $H_0:\theta\overset{(\ge)}{=}\theta_0$ v.s. $H_1:\theta<\theta_0$.
+      $$
+      \phi(\utilde{X})=\begin{cases}
+          1 & \text{if } T(\utilde{X})>k\\
+          r & \text{if } T(\utilde{X})=k\\
+          0 & \text{if } T(\utilde{X})<k
+      \end{cases}
+      $$
+    
+    s.t. $E_{\theta_0}\phi(\utilde{X})=\alpha$ is UMP level $\alpha$ test.
+
+3. $H_0:\theta\le\theta_1$ or $\theta\ge\theta_2$ v.s. $H_1:\theta_1<\theta<\theta_2$
+   
+   UMP level $\alpha$ test is
+   $$
+    \phi(t)=\begin{cases}
+        1 & \text{if } k_1<t<k_2\\
+        r_1 & \text{if } t=k_1\\
+        r_2 & \text{if } t=k_2\\
+        0 & \text{if } t<k_1\text{ or } t>k_2
+    \end{cases}
+   $$
+
+    s.t. $E_{\theta_i}\phi(T)=\alpha$
+:::
