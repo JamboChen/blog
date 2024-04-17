@@ -395,7 +395,7 @@ $$
    $$
    \begin{align*}
        & \begin{align*}
-           \bullet\quad\text{SSE} &\triangleq \utilde{e}^t\utilde{e}=(MY)^t(MY)=\utilde{Y}^tM^tM\utilde{Y}\\
+           \bullet\quad\text{SSE} &\triangleq \utilde{e}^t\utilde{e}=(M\utilde{Y})^t(M\utilde{Y})=\utilde{Y}^tM^tM\utilde{Y}\\
            &=\utilde{Y}^tM\utilde{Y} \quad \because M \text{ is symmetric idempotent}\\
            &=(D\utilde{\beta}+\utilde{\varepsilon})^tM(D\utilde{\beta}+\utilde{\varepsilon})\\
            &=\utilde{\beta}^tD^tMD\utilde{\beta}+2\utilde{\beta}^tD^tM\utilde{\varepsilon}+\utilde{\varepsilon}^tM\utilde{\varepsilon}\\
@@ -436,11 +436,11 @@ $$
    $$
    \begin{align*}
        &\begin{align*}
-           \bullet\quad E[\utilde{\hat{Y}}]&=E[HY]=H\cdot E[\utilde{Y}]=HD\utilde{\beta}=D\utilde{\beta}=E[\utilde{Y}]\\
+           \bullet\quad E[\utilde{\hat{Y}}]&=E[H\utilde{Y}]=H\cdot E[\utilde{Y}]=HD\utilde{\beta}=D\utilde{\beta}=E[\utilde{Y}]\\
            \implies& \utilde{\hat{Y}} \text{ is unbiased for } E[\utilde{Y}]
        \end{align*}\\
        &\begin{align*}
-           \bullet\quad \sigma^2\set{\utilde{\hat{Y}}}&=\sigma^2\set{HY}=H\sigma^2\set{\utilde{Y}}H^t\\
+           \bullet\quad \sigma^2\set{\utilde{\hat{Y}}}&=\sigma^2\set{H\utilde{Y}}=H\sigma^2\set{\utilde{Y}}H^t\\
            &=\sigma^2HH^t=\sigma^2H
        \end{align*}\\
    \end{align*}
@@ -451,7 +451,7 @@ $$
    $$
    \begin{align*}
         &\bullet\quad E[\utilde{e}]=E[M\utilde{Y}]=ME[\utilde{Y}]=\underbrace{MD}_{=0}\utilde{\beta}=0\\
-        &\bullet\quad \sigma^2\set{\utilde{e}}=\sigma^2\set{MY}=\sigma^2M
+        &\bullet\quad \sigma^2\set{\utilde{e}}=\sigma^2\set{M\utilde{Y}}=\sigma^2M
    \end{align*}
    $$
 
@@ -742,6 +742,158 @@ $\implies Q=(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}
 
   $B(\utilde{W}-\utilde{\eta})\sim N_m(\utilde{0}, B\sigma^2{\utilde{W}}B^t)=N_m(\utilde{0}, I)$
 
-  $\implies (B(\utilde{W}-\utilde{\eta}))^t*(B(\utilde{W}-\utilde{\eta}))\sim\chi^2_m$
+  $\implies (B(\utilde{W}-\utilde{\eta}))^t(B(\utilde{W}-\utilde{\eta}))\sim\chi^2_m$
 
-  $\implies(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}B(\utilde{W}-\utilde{\eta})\sim\chi^2_m$
+  $\implies(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}-\utilde{\eta})\sim\chi^2_m$
+
+- Way 2:
+  $$
+  \begin{align*}
+    M_Q(t)=E[e^{tQ}]&=\int_{\R^m}f_{\utilde{W}}(\utilde{w})e^{tQ}d\utilde{w}\\
+    &=\int_{\R^m}e^{tQ}\left(\frac{1}{\sqrt{2\pi}}\right)^m|\bcancel{\Sigma}_{\utilde{W}}|^{\frac{-1}{2}}e^{-\frac{Q}{2}}d\utilde{w}\\
+    &=\int_{\R^m}\left(\frac{1}{\sqrt{2\pi}}\right)^m|\bcancel{\Sigma}_{\utilde{W}}|^{\frac{-1}{2}}\exp\set{\frac{-1}{2}(1-2t)(\utilde{w}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}^{-1}(\utilde{w}-\utilde{\eta})}d\utilde{w}\\
+    &=\int_{\R^m}\left(\frac{1}{\sqrt{2\pi}}\right)^m|\bcancel{\Sigma}_{\utilde{W}}|^{\frac{-1}{2}}\exp\set{\frac{-1}{2}(\utilde{w}-\utilde{\eta})^t(\frac{\bcancel{\Sigma}_{\utilde{W}}}{1-2t})^{-1}(\utilde{w}-\utilde{\eta})^t}d\utilde{w}\\
+    \bcancel{\Sigma}^*\triangleq\frac{\bcancel{\Sigma}_{\utilde{W}}}{1-2t}\quad &=(1-2t)^{-\frac{m}{2}}\int_{\R^m}\left(\frac{1}{\sqrt{2\pi}}\right)^m|\bcancel{\Sigma}^*|^{\frac{-1}{2}}\exp\set{\frac{-1}{2}(\utilde{w}-\utilde{\eta})^t\bcancel{\Sigma}^*(\utilde{w}-\utilde{\eta})}d\utilde{w}\\
+    &=(1-2t)^{-\frac{m}{2}}\\
+    &=\text{mgf of }\chi^2_m\\
+    &\implies Q\sim\chi^2_m
+  \end{align*}
+  $$
+
+## Distribution of Quadratic Form
+
+:::info[Definition]
+**non-central chi-square**:
+
+$W_i\sim N(\theta_i, 1), i=1,\cdots, n$ independent, i.e. $\utilde{W}\sim N_n(\utilde{\theta}, I)$
+
+$$
+||\utilde{W}||^2=\sum_{i=1}^nW_i^2\sim\chi^2_{n,\delta}\text{ where }\delta=||\utilde{\theta}||^2=\sum_{i=1}^n\theta_i^2
+$$
+- $n$ called *degree of freedom*
+- $\delta$ called *non-centrality*
+
+Note: $\chi^2_{n,0}=\chi^2_n$
+:::
+
+Note:
+
+- 
+$$
+\begin{align*}
+    u&=||\utilde{W}||^2\sim\chi^2_{n,\delta}\text{ where }\delta=||\utilde{\theta}||^2\\
+    &\overset{\text{d}}{=}\sum_{i=1}^nN(\theta_i, 1)^2\overset{\text{d}}{=}\sum_{i=1}^n(N(0,1)+\theta_i)^2\\
+    &\overset{\text{d}}{=}\sum_{i=1}^nZ^2+\sum_{i=1}^n2Z\theta_i+\sum_{i=1}^n\theta_i^2\\
+    &\overset{\text{d}}{=}Z^2+N(0,4\sum_{i=1}^n\theta_i^2)+\sum_{i=1}^n\theta_i^2+\sum_{i=2}^nZ^2\\
+    &\overset{\text{d}}{=}\left(N(0,1)^2+N(0,1)\cdot 2\sqrt{\sum_{i=1}^n\theta_i^2}+\sum_{i=1}^n\theta_i^2\right)+\chi^2_{n-1}\\
+    &\overset{\text{d}}{=}\left(N(0,1)+\sqrt{\sum_{i=1}^n\theta_i^2}\right)^2+\chi^2_{n-1}\\
+    &\overset{\text{d}}{=}N(||\utilde{\theta}||, 1)^2+\chi^2_{n-1}\text{ where } ||\utilde{\theta}||=\sqrt{\sum_{i=1}^n\theta_i^2}\\
+    &\overset{\text{d}}{=}\chi^2_{1, \delta}+\chi^2_{n-1} 
+\end{align*}
+$$
+
+- 
+$$
+\begin{align*}
+    E[u]&=E[(Z+||\theta||)^2]+n-1\\
+    &=E[Z^2]+2||\theta||E[Z]+||\theta||^2+n-1\\
+    &=n+||\theta||^2\\
+    \text{i.e. }& E[\chi^2_{n,\delta}]=n+\delta
+\end{align*}
+$$
+
+-  
+
+$$
+\begin{align*}
+    Var[u]&=Var[(Z+||\theta||)^2]+2(n-1)\\
+    &=E[(Z+||\theta||)^4]-E[(Z+||\theta||)^2]^2+2(n-1)\\
+    &=2n+4\delta
+\end{align*}
+$$
+
+-  
+
+$$
+U_1\sim\chi^2_{n_1,\delta_1}, U_2\sim\chi^2_{n_2,\delta_2}\text{ independent}\implies U_1+U_2\sim\chi^2_{n_1+n_2, \delta_1+\delta_2}
+$$
+
+:::info[Definition]
+**non-central F, t**:
+
+$$
+F_{m,n,\delta}\overset{\text{d}}{=}\frac{\chi^2_{m,\delta}/m}{\chi^2_n/n} \qquad t_{m,\delta}\overset{\text{d}}{=}\frac{N(\sqrt{\delta},1)}{\sqrt{\chi^2_m/m}}\quad\text{分子分母均獨立}
+$$
+
+$\implies (t_{m,\delta})^2\overset{\text{d}}{=}F_{1,m,\delta}$
+:::
+
+$$
+\utilde{Y}=D\utilde{\beta}+\utilde{\varepsilon}=\utilde{\theta}+\utilde{\varepsilon}\quad\text{where }\utilde{\varepsilon}\sim N_n(\utilde{0}, I)
+$$
+
+$\implies \utilde{Y}\sim N_n(\utilde{\theta}, \sigma^2I)$
+
+:::tip[Lemma 7]
+Let $\utilde{Y}\sim N_n(\utilde{\theta}, \sigma^2I)$ and $P$ is $n\times n$ symmetric idempotent matrix of rank $r$
+
+$$
+\implies \frac{\utilde{Y}^tP\utilde{Y}}{\sigma^2}\sim\chi^2_{r, \delta}\text{ where }\delta=\frac{\utilde{\theta}^tP\utilde{\theta}}{\sigma^2}
+$$
+:::
+
+**Proof**: $\exist A_{n\times n}=(\utilde{a_1}, \cdots, \utilde{a_n})$ is orthogonal matrix s.t.
+
+$$
+\begin{align*}
+    A^tPA&=\text{diag}(\underbrace{1,1,\cdots,1}_{r},\underbrace{0,0,\cdots,0}_{n-r})\\
+    &=\begin{bmatrix*}
+        I_r&0\\
+        0&0
+    \end{bmatrix*}
+\end{align*}
+$$
+
+$$
+\implies P=A\begin{bmatrix*}
+    I_r&0\\
+    0&0
+\end{bmatrix*}A^t=(\utilde{a_1}, \cdots, \utilde{a_r})\begin{pmatrix}
+    \utilde{a_1}^t\\
+    \vdots\\
+    \utilde{a_r}^t\\
+\end{pmatrix}=A_rA_r^t\tag{$\vartriangle_1$}
+$$
+
+Let $\utilde{W}=A^t\utilde{Y}\iff A\utilde{W}=\utilde{Y}$
+
+$$
+\implies \utilde{Y}^tP\utilde{Y}=(A\utilde{W})^tP(A\utilde{W})=\utilde{W}^tA^tPA\utilde{W}=\utilde{W}^t\begin{bmatrix*}
+    I_r&0\\
+    0&0
+\end{bmatrix*}\utilde{W}=\sum_{i=1}^rW_i^2\tag{$\vartriangle_2$}
+$$
+
+$\because\utilde{Y}\sim N_n(\utilde{\theta}, \sigma^2I)$
+
+$\therefore\utilde{W}=A^t\utilde{Y}\sim N_n(A^t\utilde{\theta}, \sigma^2I)$, note $\sigma^2\set{A^t\utilde{Y}}=\sigma^2AIA^t=\sigma^2I$
+
+$W_i, i=1,\cdots, n$ are independent
+
+$$
+\implies \sum_{i=1}^r\frac{W_i^2}{\sigma^2}\sim\chi^2_{r, \delta} \text{ with }\delta =\frac{1}{\sigma^2}\sum_{i=1}^r(\utilde{a_i}_{1\times n}^t\utilde{\theta}_{n\times 1})^2=\frac{\utilde{\theta}^tA_rA_r^t\utilde{\theta}}{\sigma^2}\xlongequal[\vartriangle_1]{\text{by}}\frac{\utilde{\theta}^tP\utilde{\theta}}{\sigma^2}
+$$
+
+$$
+\xRightarrow{\text{by }\vartriangle_2}\frac{1}{\sigma^2}\sum_{i=1}^rW_i^2=\frac{\utilde{Y}^tP\utilde{Y}}{\sigma^2}\sim\chi^2_{r, \delta}\text{ where }\delta=\frac{\utilde{\theta}^tP\utilde{\theta}}{\sigma^2}=\frac{E[\utilde{Y}]^tPE[\utilde{Y}]}{\sigma^2}
+$$
+
+---
+
+$$
+\begin{align*}
+    \implies& \frac{\text{SSTO}}{\sigma^2}=\frac{\utilde{Y}^t(I-\frac{J}{n})\utilde{Y}}{\sigma^2}\sim\chi^2_{n, \delta}\text{ with } \delta=\frac{\sum(\theta_i-\bar{\theta})^t}{\sigma^2}\\
+    &\frac{\text{SSR}}{\sigma^2}=\frac{\utilde{Y}^t(H-\frac{J}{n})\utilde{Y}}{\sigma^2}\sim\chi^2_{p-1, \delta}\text{ with }\delta=\frac{\utilde{\theta}^t(H-\frac{J}{n})\utilde{\theta}}{\sigma^2}\\
+    &\frac{\text{SSE}}{\sigma^2}=\frac{\utilde{Y}^t(I-H)\utilde{Y}}{\sigma^2}\sim\chi^2_{n-r, \delta} \text{ with }\delta = \frac{\utilde{\theta}^t(I-H)\utilde{\theta}}{\sigma^2}
+\end{align*}
+$$
