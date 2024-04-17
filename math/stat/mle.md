@@ -2,7 +2,7 @@
 
 給定一組從母體得到的樣本。MLE 的目標是找到那個最有可能得到這組樣本的母體參數。
 
-:::tip[Definition]
+:::info[Definition]
 Given $\utilde{X}=\utilde{x}$
 1. Likelihood function: $L(\theta|\utilde{x})\triangleq f(\utilde{x};\theta)$，是 $\theta$ 的函數，$\utilde{x}$ 是固定的。
 2. $\hat{\theta}=\hat{\theta}(\utilde{X})$ 如果滿足以下條件：

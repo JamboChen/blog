@@ -2,7 +2,7 @@
 
 當我們獲得的數據量越來越多時，一個好的估計方法應該要能更準確的估計出真實的數據分布。這種性質稱為一致性。
 
-:::tip[Definition]
+:::info[Definition]
 $\forall \varepsilon >0$ ，we say $\delta_n \xrightarrow[n\to\infty]{P} \eta(\theta)$ if
 
 $$

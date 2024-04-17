@@ -2,7 +2,7 @@
 
 ## 統計量（Statistics）
 
-:::tip[Definition]
+:::info[Definition]
 $T:\R^n\to \R^m$ with $T(\utilde{X})=(T_1(\utilde{X}),T_2(\utilde{X})\ldots,T_m(\utilde{X}))$ is called **statistics** of $\utilde{X}=(X_1,X_2,\ldots,X_n)$.
 
 Usually, $m\le n$.
@@ -14,7 +14,7 @@ Usually, $m\le n$.
 
 -  Idea: 認為樣本 $\utilde{X}$ 包含了所有關於參數 $\theta$ 的信息。我們希望使用的統計量能夠保留所有關於參數 $\theta$ 的信息。
 
-:::tip[Definition]
+:::info[Definition]
 A stat $T=T(\utilde{X})$ is sufficient for $\theta$ (or sufficient for $\mathscr{F}$, where $\mathscr{F}=\set{f(:\theta):\theta\in\Omega}$)
 
 **iff** the conditional distribution of $\utilde{X}$ given $T(\utilde{X})$ does not depend on $\theta$.
@@ -157,7 +157,7 @@ with $t=x_{(n)}$ $\implies T=X_{(n)}$ is suff for $\theta$.
 
 ## 最小充分統計量（Minimal Sufficient Statistics）
 
-:::tip[Definition]
+:::info[Definition]
 A sufficient stat $T^*$ is called **minimal sufficient** for $\theta$ 
 
 **iff** $\forall$ suff stat $T$ for $\theta$, $\exists$ function $h$ such that $T^*=h(T)$.

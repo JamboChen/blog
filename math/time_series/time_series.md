@@ -18,7 +18,7 @@
 
 ## 分析
 
-:::tip[Definition]
+:::info[Definition]
 任兩個間隔爲 $k$ 的數據，其協方差是固定的，則稱這個時間序列是*穩定的*，i.e.:
 
 $$
@@ -54,7 +54,7 @@ $$
 
 當第 $t$ 個數據點是由前 $q$ 個白噪音決定時，我們稱這個時間序列是 MA(q) 模型。
 
-:::tip[Definition]
+:::info[Definition]
 $$
 X_t = \sum_{i=0}^{q}\theta_iZ_{t-i} \quad Z_t\sim \text{mean }0, \text{variance } \sigma^2 
 $$

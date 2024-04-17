@@ -26,7 +26,7 @@ i.e. $E[(X-c)^2]\ge E[(X-E[X])^2]$, and the equality holds if and only if $c=E[X
 
 也就是说 $E[X]$ 是 $X$ 的均值（中心），因为每个点到 $E[X]$ 的距离的平方的期望值最小。
 
-:::tip[Definition]
+:::info[Definition]
 **Variance**
 
 $X$ 每个點  到中心的距离的平方的期望值，即 $X$ 的分散程度，称为 $X$ 的方差。
@@ -64,7 +64,7 @@ $$
 
 ## 動差（Moments）
 
-:::tip[Definition]
+:::info[Definition]
 The Moment Generation Function of $X$ is defined as
 $$
 M_X(t)\triangleq E[e^{tX}],\quad t\in\mathbb{R}

@@ -30,7 +30,7 @@ $$
 
 ## 矩陣形式下的基礎定義和結論
 
-:::tip[Definition]
+:::info[Definition]
 $$
 W_{n\times 1} = \begin{bmatrix}
     W_1\\
@@ -95,7 +95,7 @@ $$
 
 因此 $\utilde{a}^t\sigma^2\set{W}\utilde{a}$ 是半正定矩陣(Positive Semi-Definite)。而等於號僅在 $\utilde{a}=0$ 時成立。
 
-:::tip[Definition]
+:::info[Definition]
 令 $f:\R^k\to\R$，並且 $f(\utilde{\theta})\in\R, \forall\theta=(\theta_1, \cdots, \theta_k)^t\in\R^k$
 
 $$
@@ -149,7 +149,7 @@ $$
 \end{align*}
 $$
 
-:::tip[Definition]
+:::info[Definition]
 $$
 \begin{align*}
     Q(\utilde{\beta})\triangleq& ||\utilde{Y}-E[\utilde{Y}]||^2\\
@@ -178,7 +178,7 @@ $$
 
 如果 $\utilde{b}$ 是 $\utilde{\beta}$ 的 LSE $\iff$ $\frac{\partial}{\partial\utilde{\beta}}Q(\utilde{\beta})|_{\utilde{b}}=0 \iff -2D^t\utilde{Y}+2D^tD\utilde{b}=0$
 
-:::tip[Definition]
+:::info[Definition]
 **Normal Equation**:
 
 $$
@@ -550,4 +550,198 @@ $I=P_1+P_2+\cdots+P_m$, where $P_i$ is projection matrix then $||\utilde{Y}||^2=
 
 從上面的推理我們可以知道 SSTO, SSE, SSR 都是 quadratic form。$\utilde{Y}^tP\utilde{Y}$，其中 $P$ 是 projection matrix ($n\times n$ symmetric idempotent matrix)。
 
-因此我們需要一些 quadratic form 的分佈定理。
+## Gauss-Markov Theorem
+
+:::info[Definition]
+Let $\xi=\utilde{c}^t\utilde{\beta}$ with $\utilde{c}\in\R^p$
+
+$\xi$ is estimable if $\exist \utilde{a}\in\R^n$ s.t. $E[\utilde{a}^t\utilde{Y}]=\xi$, i.e. $\utilde{a}^t\utilde{Y}$ is unbiased for $\xi$
+:::
+
+:::tip[Theorem]
+**Gauss-Markov Theorem**:
+
+Suppose # of observations $n\ge p$ # of parameters
+
+$$
+\text{If }\utilde{Y}=D\utilde{\beta}+\utilde{\varepsilon}\text{ with } E[\utilde{\varepsilon}]=0, \sigma^2\set{\utilde{\varepsilon}}=\sigma^2I_{n\times n}
+$$
+
+Let $\utilde{c}\in\R^p$ s.t. $\xi =\utilde{c}^t\utilde{\beta}$ is estimable and $\hat{\xi}=\utilde{c}^t\utilde{b}$ where $\utilde{b}$ is LSE of $\utilde{\beta}$
+
+Then
+
+1. $\hat{\xi}$ is linear unbiased estimator for $\xi$
+2. $\sigma^2\set{\hat{\xi}}\le\sigma^2\set{\tilde{\xi}}, \forall \tilde{\xi}$ is linear unbiased estimator for $\xi$
+
+i.e. $\hat{\xi}$ is BLUE (Best Linear Unbiased Estimator) for $\xi$
+:::
+
+**Proof**:
+
+因為我們對於所有 $\utilde{\beta}$ 都假設 $\xi=\utilde{c}^t\utilde{\beta}$ 是 estimable，其中 $\utilde{c}\in\R^p$。i.e.
+
+$$
+\begin{align*}
+    &\forall\beta\in\R^p, \exist \utilde{a}\in\R^n \text{ s.t. } E[\utilde{a}^t\utilde{Y}]=\xi\\
+    \iff& \utilde{a}^tD\utilde{\beta}=\utilde{c}^t\utilde{\beta},\forall\utilde{\beta}\in\R^p\\
+    \iff& \left(\utilde{a}^tD-\utilde{c}^t\right)\utilde{\beta}=0,\forall\utilde{\beta}\in\R^p\\
+    \iff& \utilde{a}^tD-\utilde{c}^t=0\quad\because \forall\utilde{\beta}\in\R^p\\
+    \iff& \utilde{a}^tD=\utilde{c}^t
+\end{align*}
+$$
+
+Let $\Omega=$ column space of $D$，which is a sub-vector space of $\R^n$.
+
+$\implies \forall\utilde{a}\in\R^n,\exist!\utilde{d}\in\Omega,\utilde{\omega}\in\Omega^\perp$ s.t. $\utilde{a}=\utilde{d}+\utilde{\omega}$. 對於每個 $\utilde{a}$，我們都可以找到相應的唯一分解。
+
+$$
+\begin{align*}
+    \implies E[\utilde{a}^t\utilde{Y}]&=E[(\utilde{d}+\utilde{\omega})^t\utilde{Y}]=E[\utilde{d}^t\utilde{Y}] + E[\utilde{\omega}^t\utilde{Y}]\\
+    &=\utilde{d}^tD\utilde{\beta}+\underbrace{\utilde{\omega}^tD\utilde{\beta}}_{=0}\quad \because \utilde{\omega}\in\Omega^\perp\text{ and } D\in\Omega\\
+    &=\utilde{d}^tD\utilde{\beta}
+\end{align*}
+$$
+
+而 $E[\utilde{a}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta},\forall\utilde{\beta}\in\R^p\implies\utilde{d}^t\utilde{Y}$ is also unbiased for $\xi$ and $\utilde{d}^tD=\utilde{c}^t$
+
+**Claim**: $\forall\utilde{\beta}\in\R^p,\utilde{d}$ is the only vector in $\Omega$ s.t. $E[\utilde{d}^t\utilde{Y}]=\xi$
+
+> **Proof**: Let $\utilde{\alpha}\in\Omega$ s.t. $E[\utilde{\alpha}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta},\forall\utilde{\beta}\in\R^p$
+> $$
+> \begin{align*}
+>    &\implies E[(\utilde{\alpha}-\utilde{d})^t\utilde{Y}]=0\\
+>    &\implies E[(\utilde{\alpha}-\utilde{d})^tD\utilde{\beta}]=0\quad \forall\utilde{\beta}\in\R^p\\
+>    &\implies (\utilde{\alpha}-\utilde{d})^tD=0\quad \forall\utilde{\beta}\in\R^p\\
+>    &\implies \utilde{\alpha}-\utilde{d}\in\Omega^\perp\text{, but }\utilde{\alpha} \text{ and } \utilde{d} \text{ are both in } \Omega\\
+>    &\implies \utilde{\alpha}-\utilde{d}\in \Omega\cap\Omega^\perp=\empty\\
+>    &\implies \utilde{\alpha}=\utilde{d}
+> \end{align*}
+> $$
+
+i.e. 即使能為 $\xi$ 找到多個線性無偏估計，但他們在 $\Omega$ 上的投影是相同的。
+
+令他們共同的投影為 $\utilde{d}$，則我們有 $\utilde{a}^tD=\utilde{c}^t, \utilde{d}^tD=\utilde{c}^t$ 並且 $E[\utilde{d}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta}, \forall\utilde{\beta}\in\R^p$
+
+Note $\utilde{d} \in \Omega$ and $\utilde{Y}-D\utilde{b}=\utilde{Y}-\utilde{\hat{Y}}=\utilde{e} \in\Omega^\perp\implies \utilde{d}^t\utilde{e}=0$
+
+$\implies \utilde{d}^t(\utilde{Y}-D\utilde{b})=\utilde{d}^t\utilde{Y}-\utilde{d}^tD\utilde{b}=\utilde{d}^t\utilde{Y}-\utilde{c}^t\utilde{b}=0$
+
+i.e. $\hat{\xi}\triangleq\utilde{c}^t\utilde{b}=\utilde{d}^t\utilde{Y}$
+
+i.e. $\hat{\xi}$ is linear estimator for $\xi$
+
+Now let $\tilde{\xi}$ be any linear unbiased estimator for $\xi$
+
+i.e. $\tilde{\xi}=\utilde{a}^t\utilde{Y}$ for some $\utilde{a}\in\R^n$ s.t. $E[\utilde{a}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta}, \forall\beta\in\R^p$
+
+Let $\utilde{d}$ be $\utilde{a}$'s projection onto $\Omega$
+
+$$
+\begin{align*}
+    \sigma^2\set{\tilde{\xi}}&=\sigma^2\set{\utilde{a}^t\utilde{Y}}=\utilde{a}^t\sigma^2\set{\utilde{Y}}\utilde{a}=\sigma^2||\utilde{a}||^2=\sigma^2||\utilde{d}+\utilde{\omega}||^2\\
+    &\ge \sigma||\utilde{d}||^2=\utilde{d}^t\sigma^2I\utilde{d}=\sigma^2\set{\utilde{d}^t\utilde{Y}}=\sigma^2\set{\hat{\xi}}
+\end{align*}
+$$
+
+i.e. $\sigma^2\set{\tilde{\xi}\ge}\sigma^2\set{\hat{\xi}},\forall \tilde{\xi}$
+
+---
+
+**Remark**:
+
+1. *Gauss-Markov Theorem* 不需要分配的假設，並且以上證明對於 $D$ 不是 full rank 也成立 
+2. 對於 $\xi=\utilde{c}^t\utilde{\beta}$ 是 estimable
+   
+   i.e. $\exist\utilde{a}\in\R^n$ s.t $E[\utilde{a}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta},\forall\utilde{\beta}\in\R^p$
+
+   $\implies\utilde{a}^tD=\utilde{c}^t$
+
+   i.e. $\utilde{c}^t$ 是由 D 的 row vectors 線性組合而成的
+
+   i.e. $\utilde{c}^t\in$ row space of D
+
+   **i.e. $\utilde{c}^t\utilde{\beta}$ is estimable $\iff\utilde{c}^t\in$ row space of D**
+
+   對於某些設計矩陣 D，$\utilde{c}^t\utilde{\beta}$ 可能不是 estimable
+   > $$
+   >  \text{e.g. }D=\begin{bmatrix*}
+   >      1&0\\
+   >      \vdots&\vdots\\
+   >      1&0
+   >  \end{bmatrix*}\quad \text{row space}=\set{(c,0);c\in\R}
+   > $$
+   > 
+   > $\iff$ estimable par is $c\beta_0,\forall c\in\R$ and $\beta_1$ is not estimable
+
+   If row space of $D=\R^p$, i.e. D is full rank, or $(D^tD)^{-1}$ exists $\iff\forall\utilde{c}\in\R^p, \utilde{c}^t\utilde{\beta}$ is estimable
+
+3. 如果 $\text{rank}(D)=p$(i.e. $(D^tD)^{-1}$ exists), 那麼 *Gauss-Markov Theorem* 有一個更簡單的證明：
+   $$
+    \begin{align*}
+        &\sigma^2\set{\tilde{\xi}}=\sigma^2\utilde{a}^tI\utilde{a}\\
+        &\begin{align*}
+            \sigma^2\set{\hat{\xi}}&=\sigma^2\set{\utilde{c}^t\utilde{b}}=\sigma^2\set{\utilde{c}^t(D^tD)^{-1}D^t\utilde{Y}}\\
+            &=\utilde{c}^t(D^tD)^{-1}D^t\sigma^2\set{\utilde{Y}}D(D^tD)^{-1}\utilde{c}\\
+            &=\sigma^2\utilde{c}^t(D^tD)^{-1}D^tD(D^tD)^{-1}\utilde{c}\\
+            &=\sigma^2\utilde{c}^t(D^tD)^{-1}\utilde{c}\\
+            &=\sigma^2\utilde{a}^tD(D^tD)^{-1}D^t\utilde{a}\quad \because \utilde{c}^t=\utilde{a}^tD\\
+            &=\sigma^2\utilde{a}^tH\utilde{a}
+        \end{align*}\\
+        &\sigma^2\set{\tilde{\xi}}-\sigma^2\set{\hat{\xi}}=\sigma^2\utilde{a}^t(I-H)\utilde{a}=\sigma^2\utilde{a}^tM\utilde{a}\ge 0\quad\because M \text{ is Positive definite}
+    \end{align*}
+   $$
+
+## Multivariate Normal
+
+$Z_1,Z_2,\cdots, Z_n\overset{\text{iid}}{\sim}N(0,1)$
+
+- Joint pdf $f(\utilde{z})=\left(\frac{1}{\sqrt{2\pi}}\right)^ne^{-\sum_{i=1}^n z^2_i /2}=\left(\frac{1}{\sqrt{2\pi}}\right)^ne^{-||z||^2/2},\utilde{z}\in\R^n$ where $||\utilde{z}||^2=\sum_{i=1}^nz^2_i\sim\chi^2_n$
+- $E[\utilde{Z}]=0, \sigma^2\set{\utilde{Z}}=I$
+- $\utilde{Z}\sim N_n(0, I)$
+
+Let $A_{m\times n}, \utilde{\eta}_{m\times 1}$ be non-random matrix and $\utilde{W}_{m\times 1}=A\utilde{Z}_{n\times 1}$+ $\utilde{\eta}$
+
+$\implies E[\utilde{W}]=AE[\utilde{Z}]+\utilde{\eta}=\utilde{\eta}, \sigma^2\set{\utilde{W}}=AA^t$ uniquely determine the distribution of $\utilde{W}$
+
+$$
+\utilde{W}\sim N_m(E[\utilde{W}], \sigma^2\set{\utilde{W}})=N_m(\utilde{\eta}, \bcancel\Sigma_{\utilde{w}}) \quad \text{where } \bcancel\Sigma_{\utilde{w}}=AA^t
+$$
+
+If $\bcancel{\Sigma}_{\utilde{W}}^{-1}$ exist, say that $\bcancel{\Sigma}_{\utilde{W}}$ is nonsingular, then pdf of $\utilde{W}$ is
+
+$$
+f_{\utilde{W}}(\utilde{w})=\left(\frac{1}{\sqrt{2\pi}}\right)^m|\bcancel{\Sigma}_{\utilde{W}}|^{\frac{-1}{2}}e^{-\frac{Q}{2}}\quad \text{where } |\bcancel{\Sigma}_{\utilde{W}}|=\det(\bcancel{\Sigma}_{\utilde{W}}), Q=(\utilde{w}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}^{-1}(\utilde{w}-\utilde{\eta})
+$$
+
+---
+
+$$
+f_{\utilde{W}}(\utilde{w})=\prod_{i=1}^m\frac{1}{\sqrt{2\pi}}\frac{1}{\sigma_i}\exp\set{\frac{-(w_i-\eta_i)^2}{2\sigma_i^2}}
+$$
+
+$$
+\begin{align*}
+    &\iff \bcancel{\Sigma}_{\utilde{w}}=\text{diag}(\sigma_1^2,\sigma_2^2,\cdots,\sigma_m^2)\\
+    &\iff \sigma\set{w_i,w_j}=\text{cov}(w_i,w_j)=0\quad \forall i\ne j\\
+    &\iff w_1,w_2,\cdots,w_m \text{ are independent}
+\end{align*}
+$$
+
+:::tip[Lemma 6]
+$\utilde{W}\sim N_m(\utilde{\eta}, \bcancel{\Sigma}_{\utilde{W}})$ where $\bcancel{\Sigma}_{\utilde{W}}$ is nonsingular
+
+$\implies Q=(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}-\utilde{\eta})\sim \chi^2_m$
+:::
+
+**Proof**:
+
+- Way 1: $\bcancel{\Sigma}_{\utilde{W}}$ is sym non-singular matrix, $\exist B$: non-singular s.t. $B\bcancel{\Sigma}_{\utilde{W}}B^t=I$
+
+  $\implies \bcancel{\Sigma}_{\utilde{W}}=(B^tB)^{-1}$, i,e, $\bcancel{\Sigma}_{\utilde{W}}^{-1}=B^tB$
+
+  $B(\utilde{W}-\utilde{\eta})\sim N_m(\utilde{0}, B\sigma^2{\utilde{W}}B^t)=N_m(\utilde{0}, I)$
+
+  $\implies (B(\utilde{W}-\utilde{\eta}))^t*(B(\utilde{W}-\utilde{\eta}))\sim\chi^2_m$
+
+  $\implies(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}B(\utilde{W}-\utilde{\eta})\sim\chi^2_m$

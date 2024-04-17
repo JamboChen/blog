@@ -2,7 +2,7 @@
 
 我們已經有 $n$ 個數據 $\utilde{X}=(X_1,\ldots,X_n)\stackrel{\text{iid}}{\sim} f(\utilde{x};\theta)$ with $\theta\in\Omega=\R^r$ 是未知的。假設我們對 $\eta(\theta)\in\R$ 感興趣。我們希望能夠用 $\utilde{X}$ 來估計 $\eta(\theta)$。
 
-:::tip[Definition]
+:::info[Definition]
 Any function $\delta :\R^n\to\R$ is called a point estimator of $\eta(\theta)$.
 
 i.e. $\delta(\utilde{X})=\hat{\eta(\theta)}$ 是一種估計 $\eta(\theta)$ 的**方法**。
@@ -35,7 +35,7 @@ $\implies$ 最佳的估計方法，是能夠在所有可能的数据情况下，
 $\implies E[(\delta(\utilde{X})-\eta(\theta))^2]$
 
 
-:::tip[Definition]
+:::info[Definition]
 $MSE(\delta(\utilde{X}), \eta(\theta))\triangleq E_\theta[(\delta(\utilde{X})-\eta(\theta))^2]$ is function of $\theta$.
 :::
 
@@ -50,7 +50,7 @@ $$
 \end{align*}
 $$
 
-:::tip[Definition]
+:::info[Definition]
 1. $E_\theta[\delta(\utilde{X})]-\eta(\theta)\triangleq Bias(\delta(\utilde{X}),\eta(\theta))$
 2. $E_\theta\delta(\utilde{X})=\eta(\theta) \implies \delta(\utilde{X})$ is *unbiased* for $\eta(\theta)$
 :::

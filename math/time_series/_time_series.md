@@ -27,7 +27,7 @@ $$
 ![alt text](img/0-2.png)
 
 
-:::tip[Definition]
+:::info[Definition]
 定義：
 - 退後運算子（Backward Operator）：$B^kX_t\triangleq X_{t-k}$
 - 差分運算子（Difference Operator）：$\nabla\triangleq 1-B$
@@ -72,7 +72,7 @@ $\hat{Y_{j,k}}=X_{j,k}-\hat{m_j}-\hat{S_k}$
 
 ## 穩定的時間序列
 
-:::tip[Definition]
+:::info[Definition]
 
 The **convaiance function** of ${X_j}$ is
 
@@ -83,7 +83,7 @@ $$
 
 Given data $X_1, X_2, \cdots, X_n$，$\hat{\gamma(k)}=\frac{1}{n}\sum_{j=1}^{n-k}(X_j-\bar{X})(X_{j+k}-\bar{X})$
 
-:::tip[Definition]
+:::info[Definition]
 **Autocorrelation function** of ${X_j}$ is
 
 $$
@@ -91,7 +91,7 @@ $$
 $$
 :::
 
-:::tip[Definition]
+:::info[Definition]
 如果 $\forall i,j$ and $i\neq j$ $\implies \gamma(i)=\gamma(j)$，即在任何時間點，等距時間的兩個數據的協方差相等，則 ${X_j}$ 是**穩定的**（stationary）。
 :::
 

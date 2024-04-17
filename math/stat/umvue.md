@@ -10,7 +10,7 @@ If $\delta$ is unbiased est's, $MSE(\delta, \eta(\theta))=Var(\delta(\utilde{X})
 無偏並不一定是最好的。
 :::
 
-:::tip[Definition]
+:::info[Definition]
 $\delta^*(\utilde{X})$ is called UMVUE for $\eta(\theta)$ iff
 1. $E_\theta\delta^*(\utilde{X})=\eta(\theta), \forall\theta$ i.e. unbiased.
 2. $\forall$ unbiased est. $\delta(\utilde{X})$ for $\eta(\theta)$,
@@ -78,7 +78,7 @@ $\delta_1(T_1)$ 和 $\delta_2(T_2)$ 都比 $S(\utilde{X})$ 好，但是我們無
 
 為了找到最好的充分統計量，我們需要引入完備（complete）的概念。
 
-:::tip[Definition]
+:::info[Definition]
 $\utilde{X}\stackrel{\text{iid}}{\sim} f(\utilde{x};\theta), \theta\in\Omega\subseteq\R^r$
 
 $\mathscr{F}=\set{f(;\theta);\theta\in\Omega}$ is *complete* $\iff$
@@ -88,7 +88,7 @@ $\forall h$ s.t. $E_\theta[h(\utilde{X})]=0\implies P_\theta(h(\utilde{X})=0)=1,
 
 Now, $\utilde{X}\stackrel{\text{iid}}{\sim} f(\utilde{x};\theta), \theta\in\Omega$, let $T=T(\utilde{X})$ with pdf $f_T(t;\theta)$ and $\mathscr{F}_T=\set{f_T(;\theta);\theta\in\Omega}$
 
-:::tip[Definition]
+:::info[Definition]
 $T$ is *complete*
 
 $\iff \mathscr{F}_T$ is *complete*
@@ -236,7 +236,7 @@ Hence, $X_{(n)}$ is suff for $\theta$ and is complete.
 
    $\implies E(\frac{n+2}{n}X_{(n)}^2)=\theta^2$
 
-:::tip[Definition]
+:::info[Definition]
 **Exp Family**
 Let $\utilde{X}\stackrel{\text{iid}}{\sim} f(\utilde{x};\theta), \theta\in\Omega\subseteq\R^r$
 Suppose that $\forall \utilde{x},\theta$ 
@@ -329,7 +329,7 @@ $$
 :::
 
 
-:::tip[Definition]
+:::info[Definition]
 **the Fisher-info**
 
 $$

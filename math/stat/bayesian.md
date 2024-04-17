@@ -4,7 +4,7 @@
 
 之前提到過，我們的目標是針對 $\eta(\theta)$ 找到一個好的點估計。而我們用 $MSE(\delta, \theta)\triangleq E_\theta[(\delta(\utilde{X})-\eta(\theta))^2]$ 來衡量一個點估計的好壞。但對於不同的情景和需求，我們可能會需要不同的損失函數，所以我們需要一個更一般的定義。
 
-:::tip[Definition]
+:::info[Definition]
 Define a loss function $L(\delta,\theta)$ for $\eta(\theta)$ $ with
 1. $L(\delta(\utilde{X},\theta))\ge 0, \forall \utilde{x}, \theta$
 2. $L(\eta(\theta), \theta)=0, \forall\theta$
@@ -19,7 +19,7 @@ E.g.
 
 ## 風險函數
 
-:::tip[Definition]
+:::info[Definition]
 The risk function of $\delta$ is defined as
 $$
 R(\delta, \theta)\triangleq E_\theta[L(\delta(\utilde{X}), \theta)]
@@ -44,7 +44,7 @@ $$
 
 ## 先驗分佈
 
-:::tip[Definition]
+:::info[Definition]
 **Bayes estimator**:
 
 $\pi(\theta)$: $\Omega$ 上的先驗分佈（prior distribution），是一個 pdf。
@@ -165,7 +165,7 @@ $$
 
 這是我們得到數據後，對 $\theta$ 推測的改進，就是*後驗*（posterior）分佈。
 
-:::tip[Definition]
+:::info[Definition]
 
 $X_1,\cdots, X_n \stackrel{\text{iid}}{\sim} f(\utilde{x};\theta)$, and $\pi(\theta)$ is the prior dist of $\theta$
 

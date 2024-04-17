@@ -71,7 +71,7 @@ $$
 
 之前我們計算的是在得到數據後，$\utilde{\beta}$ 最有可能的值。但單點估計大概率不會是真實值。因此我們還會關注 $\utilde{\beta}$ 會落在什麼範圍裡。
 
-:::tip[Definition]
+:::info[Definition]
 $$
 \text{Def } t_{m, \alpha_0} \text{ s.t. } P(t_{m}>t_{m, \alpha_0})=\alpha_0
 $$
@@ -93,7 +93,7 @@ $$
 \implies P(\beta_i\in [b_i\plusmn S\set{b_i}t_{n-p,\frac{\alpha}{2}}]) = 1-\alpha_0
 $$
 
-:::tip[Definition]
+:::info[Definition]
 $$
 CI(\beta;\alpha) = [b_i\plusmn S\set{b_i}t_{n-p,\frac{\alpha}{2}}] 
 $$
@@ -142,7 +142,7 @@ $$
 
 注意到 $|t^*_0|>t_{n-2,\frac{\alpha}{2}}$ 代表 pdf 曲線下，$[-\infty, -|t^*_0|]$ 和 $[|t^*_0|, +\infty]$ 的面積加起來會小於 $\alpha$，因為 $|t^*_0|$ 會在 $t_{n-2,\frac{\alpha}{2}}$ 的右邊。
 
-:::tip[Definition]
+:::info[Definition]
 $$
 \text{P-value} = P_{H_0}(|t^*|>|t^*_0|)=P(|t_{n-p}|>|t^*_0|)
 $$
@@ -452,7 +452,7 @@ $$
 
 ## R squared
 
-:::tip[Definition]
+:::info[Definition]
 $$
 R^2=\frac{\text{SSR}}{\text{SSTO}}=1-\frac{\text{SSE}}{\text{SSTO}}
 $$

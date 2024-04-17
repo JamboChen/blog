@@ -4,7 +4,7 @@
 
 ## 假設
 
-:::tip[Definition]
+:::info[Definition]
 1. 假設是關於 $\theta$ 的敘述。$\iff$ 對於母體分佈的敘述。
 2. 如何假設只描述了一種分佈，那麽稱之爲*簡單假設（Simple Hypothese）*。否則成爲*複合假設(Composite Hypothese)*。
 :::
@@ -38,7 +38,7 @@
 
 當我們拿到一組數據 $\utilde{X}=\utilde{x}$ ，希我們會需要在這組數據的基礎上利用檢定函數 $\phi$ 來決定是否拒絕 $H_0$。
 
-:::tip[Definition]
+:::info[Definition]
 任何函數 $\phi$ 滿足
 
 $$
@@ -110,7 +110,7 @@ $$
 \end{align*}
 $$
 
-:::tip[Definition]
+:::info[Definition]
 $$
 \text{Power Function: } \beta_\phi(\theta)=E_\theta\phi(\utilde{X})\quad \theta\in\omega_1
 $$
@@ -120,7 +120,7 @@ $$
 
 i.e. $\max E_\theta\phi(\utilde{X}), \theta\in\omega_1$ s.t. $\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{X})= \alpha$
 
-:::tip[Definition]
+:::info[Definition]
 $\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{X})=\alpha$ 被稱為檢定函數 $phi(\utilde{X})$ 的顯著水平（Significance Level）。而 $\phi(\utilde{X})$ 被稱為 level $\alpha$ 的檢定。
 :::
 
@@ -128,7 +128,7 @@ $\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{X})=\alpha$ 被稱為檢定函數 
 
 ## MP 檢定
 
-:::tip[Definition]
+:::info[Definition]
 如果 $\sup_{\theta\in\omega_0}E_\theta \phi^*(\utilde{X})=\alpha$ 是 level $\alpha$ 的檢定，並且對於所有的 level $\alpha$ 的檢定 $\phi(\utilde{X})$ 有
 
 $$
@@ -470,7 +470,7 @@ Note: $\forall \theta\in\omega_1$ find the same $\phi$
 
 ### MLR
 
-:::tip[Definition]
+:::info[Definition]
 **Monotone Likelihood Ratio (MLR)**:
 
 $\utilde{X}\sim f(\utilde{x};\theta), \theta\in\omega\subset\R$ and $T=T(\utilde{X})$ is suff for $\theta$ with pdf $g(t;\theta)$.

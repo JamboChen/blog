@@ -2,7 +2,7 @@
 
 ## 簡單線性模型（Simple Linear Regression, SLR）
 
-:::tip[Definition]
+:::info[Definition]
 *SLR*
 $i=1,\cdots,n, X_i\in \R^1$ and $E[\varepsilon_i]=0$
 
@@ -18,7 +18,7 @@ $E[Y_i|X=X_i]=E[\beta_0+\beta_1X_i+\varepsilon_i$]=$\beta_0+\beta_1X_i=f(X_i, \u
 
 複線性模型與 SLR 類似，但區別在於 $X_i=(X_{i,1},X_{i,2},\cdots,X_{i,n})\in \R^n$ 是多為向量。
 
-:::tip[Definition]
+:::info[Definition]
 **MLR**
 
 $i=1,\cdots,n \utilde{X_n}\in \R^k, k>1$
@@ -42,13 +42,13 @@ $$
 
 ## 最小二乘估計（Least Squares Estimation, LSE）
 
-:::tip[Definition]
+:::info[Definition]
 *残差*（residual）：$e_i=Y_i-\hat{Y_i}$
 :::
 
 我們希望預測值 $\hat{Y_i}$ 與實際值 $Y_i$ 的差距越小越好，即 $\sum_{i=1}^n e_i^2=\sum_{i=1}^n(Y_i-\hat{Y_i})^2$ 越小越好。為此，我們通常會使用 *最小二乘估計*（Least Squares Estimation, LSE）。
 
-:::tip[Definition]
+:::info[Definition]
 對於線性回歸 $Y_i=f(X_i;\utilde{\beta})+\varepsilon_i$，定義：
 $$
 Q(\utilde{\beta})=\sum_{i=1}^n(Y_i-E[Y_i])^2=\sum_{i=1}^n(Y_i-f(X_i;\utilde{\beta}))^2
@@ -121,7 +121,7 @@ $\implies e_i=Y_i-\bar{Y_i}=Y_i-\bar{Y}-b_1(X_i-\bar{X})$
 
    為了避免這種情況，我們需要所有誤差之間是沒有線性關係的，即 $Cov[e_i, e_j]=0, \forall i\neq j$。
 
-:::tip[Definition]
+:::info[Definition]
 
 formal statement of the of linear regression model
 
@@ -164,7 +164,7 @@ $\implies E\hat{Y_i}=E[b_0+b_1X_i]=\beta_0+\beta_1X_i=EY_i$，因此 $\hat{Y_i}$
 
 $\implies E[e_i]\triangleq E[Y_i-\hat{Y_i}]=0$
 
-:::tip[Definition]
+:::info[Definition]
 $\sum w_iY_i$ 被稱為線性估計量（linear estimator）。
 :::
 
@@ -226,7 +226,7 @@ $$
 \text{i.e.}\quad \underbrace{\sum(Y_i-\bar{Y})^2}_{\text{SSTO}}=\underbrace{\sum(\hat{Y_i}-\bar{Y})^2}_{\text{SSR}}+\underbrace{\sum(Y-\hat{Y_i})^2}_{\text{SSE}}
 $$
 
-:::tip[Definition]
+:::info[Definition]
 $$
 \begin{align*}
    \text{SSTO}&=\sum(Y_i-\bar{Y})^2 \quad \text{Sum of Squared Total var (Of Y)} \\
@@ -264,7 +264,7 @@ $$
 \implies E[\frac{SSE}{n-p}]=\sigma^2
 $$
 
-:::tip[Definition]
+:::info[Definition]
 $$
 MSE\triangleq\frac{SSE}{n-p}\qquad MSR\triangleq\frac{SSR}{k}
 $$
@@ -276,7 +276,7 @@ Hence, MSE is unbiased for $\sigma^2$.
 在回歸中，我們通常使用 MSE 估計 $\sigma^2$。而 $\sigma$ 則用 $\sqrt{\text{MSE}}$ 估計。
 :::
 
-:::tip[Definition]
+:::info[Definition]
 對於 $\sigma^2\set{*}=\sigma^2\cdot c$，我們定義一個估計方法：
 
 $$
@@ -296,7 +296,7 @@ $$
 
 在回歸模型的基礎上，我們進一步假設誤差項 $\varepsilon_i$ 是服從常態分佈的。
 
-:::tip[Definition]
+:::info[Definition]
 $$
 Y_i=f(\utilde{X_i};\utilde{\beta})+\varepsilon_i, \quad \varepsilon_i\overset{\text{iid}}{\sim} N(0,\sigma^2)
 $$
