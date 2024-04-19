@@ -964,7 +964,7 @@ $$
 UMPU test exist when p.d.f is of this form
 
 $$
-c(\theta,{\xi_1,\xi_2,\cdot,\xi_k})\exp\left(\theta T(\utilde{x})+\sum_{i=1}^k\xi_iU_i(\utilde{x})\right)h(\utilde{x})\in\text{ (k+1)-par exp family}
+c(\theta,\underbrace{\xi_1,\xi_2,\cdots,\xi_k}_{\text{nuisance param}})\exp\left(\theta T(\utilde{x})+\sum_{i=1}^k\xi_iU_i(\utilde{x})\right)h(\utilde{x})\in\text{ (k+1)-par exp family}
 $$
 
 of interest is $\theta\in\R$ and nulls are
@@ -985,3 +985,80 @@ $$
 **EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}N(\theta, \sigma^2)\implies(\bar{X}, S^2)$: sufficient for $(\theta, \sigma^2)$ with $\theta, \sigma^2$ unknown.
 
 $\implies H_0:\theta\le\theta_0$ v.s. $H_1:\theta>\theta_0$, UMPU level $\alpha$ test is reject $H_0$ if $\underbrace{\sqrt{n}(\bar{x}-\theta_0)/S}_{\sim t_{n-1}}>t_{n-1,\alpha}$
+
+## Likelihood Ratio Test(LRT)
+
+**Recall**: $L(\theta;\utilde{x})=f(\utilde{x};\theta)$ a function of $\theta$ given $\utilde{x}$. 在 $\theta$ 下出現當前樣本的機率。
+
+**Note**: MP test rejects $H_0=\theta=\theta_0$ if
+
+$$
+\begin{align*}
+    &f(\utilde{x};\theta_1)>c\cdot f(\utilde{x};\theta_0)\\
+    \iff &L(\theta_1;\utilde{x})>c\cdot L(\theta_0;\utilde{x})\\
+    \iff &\frac{L(\theta_0;\utilde{x})}{L(\theta_1;\utilde{x})}<\frac{1}{c}=c'\\
+    \iff &\frac{L(\theta_0;\utilde{x})}{\max\set{L(\theta_0;\utilde{x}), L(\theta_1;\utilde{x})}}<k\quad\text{some } k\in[0,1]\\
+    &=\begin{cases}
+        \frac{L(\theta_0;\utilde{x})}{L(\theta_1;\utilde{x})} &\text{if } L(\theta_1;\utilde{x}) \ge L(\theta_0;\utilde{x})\\
+        1 &\text{if } L(\theta_1;\utilde{x})<L(\theta_0;\utilde{x})
+    \end{cases}\\
+    \iff &\frac{\sup_{\theta\in\omega_0 L(\theta;\utilde{x})}}{\sup_{\theta\in\Omega L(\theta;\utilde{x})}}<k \quad \Omega=\omega_0\cup\omega_1\text{ and } \omega_0=\set{\theta_0}, \omega_1=\set{\theta_1}
+\end{align*}
+$$
+
+:::info[Definition]
+1. For testing $H_0:\theta\in\omega_0$ v.s. $H_1:\theta\in\omega_1$, a LRT is a test which $\phi$ rejects $H_0$ if $\lambda(\utilde{x})<k$
+   $$
+   \text{with }k\in[0,1]\text{ and }\lambda(\utilde{x})=\frac{\sup_{\theta\in\omega_0}L(\theta;\utilde{x})}{\sup_{\theta\in\Omega}L(\theta;\utilde{x})}\text{ where }\Omega=\omega_0\cup\omega_1
+   $$
+2. A level $\alpha$ LRT $\implies$ k is determined by $\sup_{\theta\in\omega_0}E_\theta\phi(\utilde{x})=\alpha$
+:::
+
+
+**EX** $X\sim f(x;\theta)$
+
+$$
+H_0:\theta\in\set{\theta_1,\theta_2} \text{ v.s. }H_1:\theta\in\set{\theta_3,\theta_4}
+$$
+
+with level 0.05
+
+| x          | 2              | 3              | 4             | 5              | 6             | 7             | 8             | 9             | 10            | 11            | 12        |
+| ---------- | -------------- | -------------- | ------------- | -------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | --------- |
+| $\theta_1$ | (0.01)         | (0.01)         | (0.01)        | (0.01)         | (0.01)        | (0.01)        | (0.01)        | (0.01)        | (0.01)        | (0.01)        | 0.90      |
+| $\theta_2$ | (0.01)         | 0.009          | 0.008         | 0.007          | 0.006         | 0.005         | 0.006         | 0.007         | 0.008         | 0.009         | [(0.925)] |
+| $\theta_3$ | 0.20           | [0.10]         | [0.09]        | 0.08           | 0.06          | 0.05          | [0.07]        | 0.05          | 0.05          | [0.05]        | 0.20      |
+| $\theta_4$ | [0.26]         | [0.10]         | [0.09]        | [0.11]         | [0.07]        | [0.08]        | [0.07]        | [0.06]        | [0.06]        | [0.05]        | 0.05      |
+| $\lambda=$ | $\frac{1}{26}$ | $\frac{1}{10}$ | $\frac{1}{9}$ | $\frac{1}{11}$ | $\frac{1}{7}$ | $\frac{1}{8}$ | $\frac{1}{7}$ | $\frac{1}{6}$ | $\frac{1}{6}$ | $\frac{1}{5}$ | $1$       |
+
+$$
+\lambda(x)=\frac{\sup_{\theta\in\omega_0}L(\theta;x)}{\sup_{\theta\in\Omega}L(\theta;x)}<k\implies k=\frac{1}{7}\quad\text{i.e. }x=2,3,4,5,7
+$$
+
+$$
+P_{\theta_1}(x=2\text{ or }3\text{ or }4\text{ or }5\text{ or }7)=0.05
+$$
+
+---
+
+**Note**: 
+
+1. Let $\widehat{\theta_\Omega}=\arg\sup_{\theta\in\Omega}L(\theta;\utilde{x}), \widehat{\theta_{\omega_0}}=\arg\sup_{\theta\in\omega_0}L(\theta;\utilde{x})$
+
+   $$
+   \implies\lambda(\utilde{x})=\frac{\sup_{\theta\in\omega_0}L(\theta;x)}{\sup_{\theta\in\Omega}L(\theta;x)}=\frac{L(\widehat{\theta_{\omega_0}};\utilde{x})}{L(\widehat{\theta_\Omega};\utilde{x})}
+   $$
+2. $T=T(\utilde{X})$ is sufficient for $\theta$
+   $\implies f(\utilde{x};\theta)=g(t;\theta)h(\utilde{x})$
+
+   如果最大值發生在 $\omega_0$，那麼 $\lambda(\utilde{x})=1$；如果最大值發生在 $\omega_1$，那麼 $\omega_0$ 的最大值會發生在邊界 $\partial(\omega_0)$ 上。
+
+   $$
+    \begin{align*}
+       \lambda(\utilde{x})&=\frac{g(t;\widehat{\theta_{\omega_0}})}{g(t;\widehat{\theta_\Omega})}\\
+       &=\begin{cases}
+         1 &\text{if } \widehat{\theta_\Omega}\in\omega_0\\
+         \frac{g(t;\partial(\omega_0))}{g(t;\widehat{\theta_\Omega})} &\text{if } \widehat{\theta_\Omega}\in\omega_1
+       \end{cases}
+    \end{align*}
+   $$
