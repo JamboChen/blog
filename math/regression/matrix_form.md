@@ -893,3 +893,159 @@ $$
     &\frac{\text{SSE}}{\sigma^2}=\frac{\utilde{Y}^t(I-H)\utilde{Y}}{\sigma^2}\sim\chi^2_{n-r, \delta} \text{ with }\delta = \frac{\utilde{\theta}^t(I-H)\utilde{\theta}}{\sigma^2}
 \end{align*}
 $$
+
+我們知道互相獨立的 $\chi^2$ 分配的和也是 $\chi^2$ 分配。對於 non-central $\chi^2$ 分配，我們也可以得到類似的結論。相加得到的 $\chi^2$ 分佈的兩個參數等於原本兩個分佈的參數的和。
+
+這裡我們發現 SSTO, SSR, SSE 都是 $\chi^2$ 分配，SSTO 的兩個參數也剛好是 SSR 和 SSE 的參數的和。那麼他們真的是獨立的嗎？
+
+:::tip[Theorem]
+**Cochran's Theorem**:
+
+$\utilde{Y}\sim N_n(\utilde{\theta},\sigma^2 I)$
+
+Let $P_j, j=1,2,\cdots, m: n\times n$ symmetric matrix of rank $r_j$ s.t. $I=\sum_{j=1^m}P_j$
+
+Hence $\utilde{Y}^tI\utilde{Y}=\sum_{j=1}^m\utilde{Y}^tP_j\utilde{Y}$
+
+$$
+\implies j=1,2,\cdots,m \quad\frac{\utilde{Y}^tP\utilde{Y}}{\sigma^2}\sim\chi^2_{r_j,\delta_j}\text{ with }\delta_j=\frac{\utilde{\theta}^tP_j\utilde{\theta}}{\sigma^2} \text{ are independent}\iff \sum_{j=1}^m r_j=n
+$$
+:::
+
+**Note**:
+
+If $(D^tD)^{-1}$ exists, then $\text{rank}(D)=p=\dim(\Omega)=\text{tr}(H)$
+
+1. rank:
+   $$
+   \begin{alignat*}{3}
+      &n &p& &n-p\\
+      &I=&H&+&(I-H)
+   \end{alignat*}
+   $$
+
+   $$
+   \implies \begin{align*}
+      &\frac{\utilde{Y}^tH\utilde{Y}}{\sigma^2}=\frac{||\hat{Y}||^2}{\sigma^2}\sim\chi^2_{p,\frac{\utilde{\theta}^tH\utilde{\theta}}{\sigma^2}}=\chi^2_{p,\frac{||\theta||^2}{\sigma^2}}\\
+      &\frac{\utilde{Y}^tM\utilde{Y}}{\sigma^2}=\frac{\text{SSE}}{\sigma^2}\sim\chi_{n-p,\frac{\utilde{\theta}^tM\utilde{\theta}}{\sigma^2}}=\chi^2_{n-p}
+   \end{align*}
+   $$
+
+2. rank:
+   $$
+   \begin{alignat*}{4}
+       &n&=&n-p&&p-1&&1\\
+       &I&=&(I-H)&+&(H-\frac{J}{n})&+&\frac{J}{n}
+   \end{alignat*}
+   $$
+
+   $$
+   \implies\begin{alignat*}{2}
+      &\frac{\utilde{Y}^t(I-H)\utilde{Y}}{\sigma^2}&=&\frac{\text{SSE}}{\sigma^2}\sim\chi^2_{n-p}\quad\because\utilde{\theta}^t(I-H)\utilde{\theta}=0 \because \utilde{\theta}\in\Omega\\
+      &\frac{\utilde{Y}^t(H-\frac{J}{n})\utilde{Y}}{\sigma^2}&=&\frac{\text{SSR}}{\sigma^2}\sim\chi^2_{p-1,\frac{\utilde{\theta}^t(H-\frac{J}{n})\utilde{\theta}}{\sigma^2}=\frac{\sum(\theta_i-\bar{\theta})^2}{\sigma^2}=\frac{||\theta||^2-n\bar{\theta}^2}{\sigma^2}}\\
+      &\frac{\utilde{Y}^t\frac{J}{n}\utilde{Y}}{\sigma^2}&=&\frac{n\bar{Y}^2}{\sigma^2}\sim\chi^2_{1, \frac{\utilde{\theta}^t\frac{J}{n}\utilde{\theta}}{\sigma^2}=\frac{n\bar{\theta}^2}{\sigma^2}}
+   \end{alignat*}
+   $$
+
+---
+
+**Remark**:
+
+$$
+\utilde{Y}_{n\times 1}=D_{n\times p}\utilde{\beta}_{p\times 1}+\utilde{\varepsilon}_{n\times 1}\quad\text{where }\utilde{\beta}=(\beta_0, \beta_1, \cdots, \beta_k)^t,p=k+1<n,\utilde{\varepsilon}\sim N_n(\utilde{0}, \sigma^2I)
+$$
+
+- $E[\utilde{Y}]=D\utilde{\beta}\triangleq\utilde{\theta}\in\Omega$, where $\Omega=$ column space of $D$.
+
+If $D$ is full rank $\iff \text{rank}(D)=p=\dim(\Omega)\iff (D^tD)^{-1}_{p\times p}$ exists
+- $\utilde{b}=(D^tD)^{-1}D^tY$
+- $\utilde{\hat{Y}}=D\utilde{b}=D(D^tD)^{-1}D^t\utilde{Y}=H\utilde{Y}$
+
+$$
+\begin{align*}
+    &\frac{\text{SSR}}{\sigma^2}=\frac{\utilde{Y}^t(H-\frac{J}{n}\utilde{Y})}{\sigma^2}\sim\chi^2_{p-1, \frac{\utilde{\theta}^t(H-\frac{J}{n})\utilde{\theta}}{\sigma^2}=\frac{\sum(\theta_i-\bar{\theta})^2}{\sigma^2}}\\
+    &\frac{\text{SSE}}{\sigma^2}=\frac{\utilde{Y}^t(I-H)\utilde{Y}}{\sigma^2}\sim\chi^2_{n-p, \frac{\utilde{\theta}^t(I-H)\utilde{\theta}}{\sigma^2}=0}\\
+\end{align*}
+$$
+
+$$
+\implies \frac{\text{SSTO}}{\sigma^2}=\frac{\text{SSR}}{\sigma^2}+\frac{\text{SSE}}{\sigma^2}\sim\chi^2_{n-1,\frac{(\theta_i-\bar{\theta})^2}{\sigma^2}=\frac{||\utilde{\theta}||^2-n\bar{\theta}^2}{\sigma^2}}
+$$
+
+Let MS $\triangleq\frac{\text{SS}}{\text{df}}$ e.g. MSE=$\frac{\text{SSE}}{n-p}$, MSR=$\frac{\text{SSR}}{p-1}$
+
+- 
+  $$
+  E[\text{MSE}]=E[\frac{\text{SSE}}{n-p}]=\frac{\sigma^2}{n-p}E[\underbrace{\frac{\text{SSE}}{\sigma^2}}_{\sim\chi^2_{n-p}}]=\frac{\sigma^2}{n-p}(n-p)=\sigma^2
+  $$
+- 
+  $$
+  \begin{align*}
+    E[\text{MSR}]&=\frac{\sigma^2}{p-1}E[\frac{\text{SSR}}{\sigma^2}]\quad \frac{\text{SSR}}{\sigma^2}\sim\chi^2_{p-1,\frac{\sum(\theta_i-\bar{\theta})^2}{\sigma^2}}\\
+    &=\frac{\sigma^2}{p-1}(p-1+\frac{\sum(\theta_i-\bar{\theta})^2}{\sigma^2})\\
+    &=\sigma^2+\frac{1}{p-1}\sum(\theta_i-\bar{\theta})^2\ge 0
+  \end{align*}
+  $$
+
+**Note**:
+
+$$
+E[\text{MSR}]=\sigma^2+\frac{1}{p-1}\sum(\theta_i-\bar{\theta})^2\ge 0\quad "="\text{ holds }\iff\theta_i=\bar{\theta}\forall i
+$$
+
+$$
+\text{Hence } E[\text{MSE}]=\sigma^2\le\sigma^2+\frac{1}{p-1}\sum(\theta_i-\bar{\theta})^2=E[\text{MSR}]
+$$
+
+with "=" hold $\iff \beta_1=\beta_2=\cdots=\beta_k=0$, i.e. $\utilde{Y}$ 和 $\utilde{X}$ 之間沒有線性關係 $\iff Y_i=\beta_0+\varepsilon_i$
+
+因為我們通常會關注解釋變數和反應變數之間是否真的有線性關係，所以我們會做假設檢定：
+
+$$
+H_0:\beta_1=\beta_2=\cdots=\beta_k=0\quad\text{ v.s. }\quad H_1:\beta_j\ne 0\text{ for some }j=1,2,\cdots,k
+$$
+
+注：$\beta_0$ 通常不會被檢定，因為他是截距項，通常我們只會關注解釋變數和反應變數之間的關係。
+
+- Under $H_0:\beta_1=\beta_2=\cdots=\beta_k=0$
+  $$
+  E[\text{MSE}]=\sigma^2=E[\text{MSR}]\implies \frac{\text{MSR}}{\text{MSE}}\text{ 傾向接近 }1
+  $$
+
+- Under $H_1:\beta_j\ne 0\text{ for some }j=1,2,\cdots,k$
+  $$
+  E[\text{MSE}]=\sigma^2<E[\text{MSR}]\implies \frac{\text{MSR}}{\text{MSE}}\text{ 傾向大於 }1
+  $$
+
+:::info[Definition]
+**Test Statistic**:
+$$
+F^*\triangleq\frac{\text{MSR}}{\text{MSE}}
+$$
+
+reject $H_0\iff F^*>c$ where $c$ is a critical value s.t. $P(F^*>c|H_0)=\alpha$
+:::
+
+**Note**: Under $H_0:\beta_1=\beta_2=\cdots=\beta_k=0$
+
+$$
+\perp\left<\begin{align*}
+    &\frac{\text{SSR}}{\sigma^2}\sim\chi^2_{p-1,\frac{\sum(\theta_i-\bar{\theta})^2}{\sigma^2}\xlongequal{H_0}0}\\
+    &\frac{\text{SSE}}{\sigma^2}\sim\chi^2_{n-p}
+\end{align*}
+\right.
+$$
+
+$$
+\implies F^*=\frac{\text{MSR}}{\text{MSE}}=\frac{\text{SSR}/p-1}{\text{SSER}/n-p}=\frac{\frac{1}{p-1}\overbrace{\frac{\text{SSR}}{\sigma^2}}^{\chi^2_{p-1}}}{\frac{1}{n-p}\underbrace{\frac{\text{SSE}}{\sigma^2}}_{\chi^2_{n-p}}}\Bigg>\perp \overset{\text{d}}{=}\frac{\chi^2_{p-1}/p-1}{\chi^2_{n-p}/n-p}\Big>\perp\overset{\text{d}}{=}F_{p-1,n-p}
+$$
+
+If $D$ is full rank, to test *if there is a linear relationship between $\utilde{X}$ and $\utilde{Y}$*, i.e.
+
+$$
+H_0:\beta_1=\beta_2=\cdots=\beta_k=0\quad\text{ v.s. }\quad H_1:\beta_j\ne 0\text{ for some }j=1,2,\cdots,k
+$$
+
+We reject $H_0$ at level $\alpha$ if $F^*>F_{p-1,n-p,\alpha}$
+
+而我們得到數據後，計算出 $f^*=$ MSR/MSE，並且得到 P-value $=P_{H_0}(F_{p-1,n-p}>f^*)$。如果 P-value 小於顯著水平 $\alpha$，則拒絕虛無假設。
