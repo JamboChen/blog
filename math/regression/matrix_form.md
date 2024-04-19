@@ -782,12 +782,8 @@ Note:
 $$
 \begin{align*}
     u&=||\utilde{W}||^2\sim\chi^2_{n,\delta}\text{ where }\delta=||\utilde{\theta}||^2\\
-    &\overset{\text{d}}{=}\sum_{i=1}^nN(\theta_i, 1)^2\overset{\text{d}}{=}\sum_{i=1}^n(N(0,1)+\theta_i)^2\\
-    &\overset{\text{d}}{=}\sum_{i=1}^nZ^2+\sum_{i=1}^n2Z\theta_i+\sum_{i=1}^n\theta_i^2\\
-    &\overset{\text{d}}{=}Z^2+N(0,4\sum_{i=1}^n\theta_i^2)+\sum_{i=1}^n\theta_i^2+\sum_{i=2}^nZ^2\\
-    &\overset{\text{d}}{=}\left(N(0,1)^2+N(0,1)\cdot 2\sqrt{\sum_{i=1}^n\theta_i^2}+\sum_{i=1}^n\theta_i^2\right)+\chi^2_{n-1}\\
-    &\overset{\text{d}}{=}\left(N(0,1)+\sqrt{\sum_{i=1}^n\theta_i^2}\right)^2+\chi^2_{n-1}\\
-    &\overset{\text{d}}{=}N(||\utilde{\theta}||, 1)^2+\chi^2_{n-1}\text{ where } ||\utilde{\theta}||=\sqrt{\sum_{i=1}^n\theta_i^2}\\
+    &\overset{\text{d}}{=}\sum_{i=1}^nN(\theta_i, 1)^2\quad\delta=\sum_{i=1}^n\theta_i^2=\left(\sqrt{\sum_{i=1}^n\theta_i^2}\right)^2\\
+    &\overset{\text{d}}{=}N(||\utilde{\theta}||, 1) + \sum_{i=1}^{n-1}N(0,1)^2\\
     &\overset{\text{d}}{=}\chi^2_{1, \delta}+\chi^2_{n-1} 
 \end{align*}
 $$
