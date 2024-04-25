@@ -1062,3 +1062,122 @@ $$
        \end{cases}
     \end{align*}
    $$
+
+---
+
+**EX**: $X_1, \cdots, X_n\overset{\text{iid}}{\sim} N(\theta, \sigma^2_0)$, to test
+
+$$
+H_0:\theta=\theta_0\quad\text{ v.s. }\quad H_1:\theta\ne\theta_0
+$$
+
+note that $\omega_0=\set{\theta_0}\implies\widehat{\theta_{\omega_0}}=\theta_0$ and $\Omega=\set{\theta_0}\cup\set{\theta:\theta\neq\theta}=\R\implies\widehat{\theta_\Omega}=\bar{x}$ 因為 $\bar{x}$ 是平均的 MLE。
+
+$\implies$ reject $H_0$
+
+$$
+\begin{align*}
+    \iff &\lambda(\utilde{x})=\frac{L(\theta_0;\utilde{x})}{L(\bar{x};\utilde{x})}<k\\
+    \iff&\exp\left(-\frac{n(\bar{x}-\theta_0)^2}{2\sigma^2_0}\right)<k'\\
+    \iff&-\frac{n(\bar{x}-\theta_0)^2}{2\sigma^2_0}<\ln k'\\
+    \iff&\frac{n(\bar{x}-\theta_0)^2}{2\sigma^2_0}>C\\
+    \iff& \left|\frac{\sqrt{n}(\bar{x}-\theta_0)}{\sigma_0}\right|>D
+\end{align*}
+$$
+
+and
+
+$$
+\alpha=P_{\theta_0}\left(\left|\frac{\sqrt{n}(\bar{x}-\theta_0)}{\sigma_0}\right|>D\right)=P(|Z|>D)
+$$
+
+I.e., A level $\alpha$ LRT is reject $H_0$ if $|\frac{\sqrt{n}(\bar{x}-\theta_0)}{\sigma_0}|>Z_{\alpha/2}$
+
+---
+
+**EX**: $X_1, \cdots, X_n\overset{\text{iid}}{\sim}N(\theta, \sigma^2)$ with $\theta, \sigma^2$ are both unknown.
+
+To test$H_0:\theta=\theta_0$ v.s. $H_1:\theta\neq\theta_0$
+
+$$
+\omega_0=\set{(\theta, \sigma^2):\theta=\theta_0, \sigma^2>0}\implies \widehat{\theta_{\omega_0}}=\theta_0, \widehat{\sigma^2_{\omega_0}}=\frac{1}{n}\sum_{i=1}^n(x_i-\theta_0)^2
+$$
+
+$$
+\Omega=\set{(\theta, \sigma^2):\theta\neq\theta_0, \sigma^2>0}\implies \widehat{\theta_\Omega}=\bar{x}, \widehat{\sigma^2_\Omega}=\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2
+$$
+
+$$
+\begin{align*}
+    &\begin{align*}
+        L(\widehat{\theta_{\omega_0}}, \widehat{\sigma^2_{\omega_0}};\utilde{x})&=\left(\frac{1}{2\pi\widehat{\sigma^2_{\omega_0}}}\right)^{n/2}\exp\left(-\frac{1}{2\widehat{\sigma^2_{\omega_0}}}\sum_{i=1}^n(x_i-\theta_0)^2\right)\\
+        &=\left(\frac{1}{2\pi}\right)^{n/2}\left(\frac{1}{\widehat{\sigma^2_{\omega_0}}}\right)^{n/2}\exp\left(-\frac{n}{2}\right)
+    \end{align*}\\
+    &\begin{align*}
+        L(\widehat{\theta_\Omega}, \widehat{\sigma^2_\Omega};\utilde{x})&=\left(\frac{1}{2\pi\widehat{\sigma^2_\Omega}}\right)^{n/2}\exp\left(-\frac{1}{2\widehat{\sigma^2_\Omega}}\sum_{i=1}^n(x_i-\bar{x})^2\right)\\
+        &=\left(\frac{1}{2\pi}\right)^{n/2}\left(\frac{1}{\widehat{\sigma^2_\Omega}}\right)^{n/2}\exp\left(-\frac{n}{2}\right)
+    \end{align*}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    \text{reject }H_0&\iff\lambda(\utilde{x})=\frac{L(\widehat{\theta_{\omega_0}}, \widehat{\sigma^2_{\omega_0}};\utilde{x})}{L(\widehat{\theta_\Omega}, \widehat{\sigma^2_\Omega};\utilde{x})}=\left(\frac{\widehat{\sigma^2_\Omega}}{\widehat{\sigma^2_{\omega_0}}}\right)^{n/2}<k\\
+    &\iff\left(\frac{\sum_{i=1}^n(x_i-\bar{x})^2}{\sum_{i=1}^n(x_i-\theta_0)^2}\right)^{n/2}<k\\
+    &\iff\frac{\sum(x_i-\bar{x})^2}{\sum(x_i-\bar{x}+\bar{x}-\theta_0)^2}=\frac{\sum(x_i-\bar{x})^2}{\sum(x_i-\bar{x})^2+n(\bar{x}-\theta_0)^2}=\frac{1}{1+\frac{n(\bar{x}-\theta_0)^2}{\sum(x_i-\bar{x})^2}}<k'\\
+    &\iff\frac{n(\bar{x}-\theta_0)^2}{\frac{\sum(x_i-\bar{x})^2}{n-1}}>C\\
+    &\iff\frac{n(\bar{x}-\theta_0)^2}{s^2}>C\qquad \bar{X}\sim N(\theta, \sigma^2/n)\perp \frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}\\
+    &\iff\left|\frac{\sqrt{n}(\bar{x}-\theta_0)}{s}\right|>D \qquad \left|\frac{\sqrt{n}(\bar{x}-\theta_0)}{s}\right| \sim t_{n-1}
+\end{align*}
+$$
+
+I.e. a level $\alpha$ LRT is reject $H_0$ if $|\frac{\sqrt{n}(\bar{x}-\theta_0)}{s}|>t_{n-1,\alpha/2}$
+
+---
+
+**EX**: $X_1, \cdots, X_n\overset{\text{iid}}{\sim}f(x;\theta)=e^{-(x-\theta)}, x\ge\theta$
+
+A level $\alpha$ for $H_0:\theta\le\theta_0$ v.s. $H_1:\theta>\theta_0$
+
+Note $L(\theta;\utilde{x})=\prod_{i=1}^n\left(e^{-(x_i-\theta)}I(x_i\ge\theta)\right)=e^{-\sum x_i}e^{n\theta}I(x_{(1)}\ge\theta)$.
+
+在 $\theta\le x_{(1)}$ 時，$L(\theta;\utilde{x})$ 是沿著 $\theta$ 遞增的，而在 $\theta>x_{(1)}$ 時，$L(\theta;\utilde{x})=0$。如果 $\theta_0>x_{1}$，那麼在 $\theta<\theta_0$ 的範圍內，$L(\theta=x_{(1)},\utilde{x})$ 會是最大值。如果 $\theta_0\le x_{(1)}$，那麼 $L(\theta_0,\utilde{x})$ 會是最大值。
+
+$$
+\begin{align*}
+    &\implies\sup_{\theta\le\theta_0}L(\theta;\utilde{x})=\begin{cases}
+        e^{-\sum x_i}e^{nx_{(1)}} &\text{if }\theta_0 > x_{(1)}\\
+        e^{-\sum x_i}e^{n\theta_0} &\text{if }\theta_0\le x_{(1)}
+    \end{cases}\\
+    &\implies\sup_{\theta\in\Omega}L(\theta;\utilde{x})=e^{-\sum x_i}e^{nx_{(1)}}\\
+\end{align*}
+$$
+
+$\implies$ LRT is reject $H_0$ if
+
+$$
+\begin{align*}
+    &\lambda(\utilde{x})=\frac{\sup_{\theta\le\theta_0}L(\theta;\utilde{x})}{\sup_{\theta\in\Omega}L(\theta;\utilde{x})}=\begin{cases}
+        1 &\text{if }\theta_0>x_{(1)}\\
+        e^{n(\theta_0-x_{(1)})} &\text{if }\theta_0\le x_{(1)}
+    \end{cases}<k\in(0,1)\\
+    \iff & e^{n(\theta_0-x_{(1)})}<k\quad\text{and }\theta_0\le x_{(1)}\\
+    \iff & \theta_0\le c < x_{(1)}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    \alpha&=P_{\theta_0}(X_(1)>c)\\
+    &=\left(P_{\theta_0}(X_1>c)\right)^n\\
+    &=\left(\int_c^\infty e^{-(x-\theta_0)}dx\right)^n\\
+    &=\left(e^{-(c-\theta_0)}\right)^n\\
+    &=e^{n(\theta_0-c)}\\
+\end{align*}
+$$
+
+$$
+\implies c = \theta_0-\frac{\ln\alpha}{n} > \theta_0
+$$
+
+這與我們用 MLR 得到的 UMP test 是一樣的。
