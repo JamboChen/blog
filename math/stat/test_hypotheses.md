@@ -1181,3 +1181,298 @@ $$
 $$
 
 這與我們用 MLR 得到的 UMP test 是一樣的。
+
+---
+
+**EX**: 
+
+$$
+\perp\Big < \begin{align*}
+    X_1, \cdots, X_n\overset{\text{iid}}{\sim}N(\theta_1, \sigma^2)\\
+    Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}N(\theta_2, \sigma^2)
+\end{align*}
+$$
+
+$$
+L(\theta_1, \theta_2;\utilde{x}, \utilde{y})=f_{\utilde{X}}(\utilde{x};\theta_1)\cdot f_{\utilde{Y}}(\utilde{y};\theta_2)=\theta_1^ne^{-\theta_1\sum x_i}\cdot\theta_2^me^{-\theta_2\sum y_i}
+$$
+
+$$
+\omega_0=\set{(\theta_1, \theta_2);\theta_1=\theta_2>0}\qquad\Omega=\set{(\theta_1, \theta_2);\theta_1>0, \theta_2>0}
+$$
+
+Note
+
+$$
+\begin{align*}
+    &W\sim\theta^ke^{-\theta \sum w_i}\qquad\ln W\sim k\ln\theta-\theta\sum w_i\\
+    \implies&\frac{\partial}{\partial\theta}(k\ln\theta-\theta\sum w_i)=0\implies\frac{k}{\theta}-\sum w_i=0\implies\theta=\frac{k}{\sum w_i}=\frac{1}{\bar{W}}
+\end{align*}
+$$
+
+在 $\omega_0$ 下
+
+$$
+\begin{align*}
+    &L(\theta_1, \theta_2, \utilde{x}, \utilde{y})=L(\theta, \theta;\utilde{x}, \utilde{y})=\theta^{n+m}e^{-\theta(\sum x_i+\sum y_i)}\\
+    \implies&\widehat{\theta_{\omega_0}}=\frac{n+m}{\sum_{i=1}^{n}x_i+\sum_{i=1}^{m}y_i}\\
+    \implies&L(\widehat{\theta_{\omega_0}}, \widehat{\theta_{\omega_0}};\utilde{x}, \utilde{y})=\left(\frac{n+m}{\sum_{i=1}^{n}x_i+\sum_{i=1}^{m}y_i}\right)^{n+m}e^{-(n+m)}\\
+\end{align*}
+$$
+
+在 $\Omega$ 下
+
+$$
+L(\widehat{\theta_{\Omega}}, \widehat{\theta_{\Omega}};\utilde{x}, \utilde{y})=\left(\frac{n}{\sum_{i=1}^{n}x_i}\right)^n\left(\frac{m}{\sum_{i=1}^{m}y_i}\right)^me^{-n}e^{-m}
+$$
+
+$\implies$ LRT is reject $H_0$ if
+
+$$
+\begin{align*}
+    &\begin{align*}
+        k>\lambda(\utilde{x}, \utilde{y})&=\frac{L(\widehat{\theta_{\omega_0}}, \widehat{\theta_{\omega_0}};\utilde{x}, \utilde{y})}{L(\widehat{\theta_{\Omega}}, \widehat{\theta_{\Omega}};\utilde{x}, \utilde{y})}\\
+        &=\left(\frac{n+m}{\sum x_i+\sum y_i}\right)^{n+m}\left(\frac{\sum x_i}{n}\right)^n\left(\frac{\sum y_i}{m}\right)^me^{n+m}\\
+        &=\left(\underbrace{\frac{\sum x_i}{\sum x_i+\sum y_i}}_{=T\in(0,1)}\right)^n\left(\underbrace{\frac{\sum y_i}{\sum x_i+\sum y_i}}_{=1-T}\right)^m(n+m)^{n+m}\frac{1}{n^n}\frac{1}{m^m}\\
+    \end{align*}\\
+    \iff& T^n(1-T)^m<c\\
+    \iff& T<k_1\text{ or }T>k_2
+\end{align*}
+$$
+
+Note $X\sim \exp(\theta_1)\xlongequal{\text{d}}\text{Gamma}(1, \frac{1}{\theta_1})\implies\sum^n x_i\sim \text{G}(n,\frac{1}{\theta_1})\implies 2\theta_1\sum^n x_i\sim\text{G}(n,2)\xlongequal{\text{d}}\chi^2_{2n}$
+
+$$
+\begin{align*}
+    T&=\frac{\sum x_i}{\sum x_i+\sum y_i}=\frac{2\theta\sum x_i}{2\theta\sum x_i+2\theta\sum y_i}\\
+    &=\frac{1}{1+\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}}\quad\text{where }\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}\xlongequal{\text{d}}\frac{\chi^2_{2m}/2m}{\chi^2_{2n}/2n}\sim F_{2m, 2n}
+\end{align*}
+$$
+
+$$
+\implies T<k_1\text{ or }T>k_2\iff \frac{\bar{Y}}{\bar{X}}<C_1 \text{ or }\frac{\bar{Y}}{\bar{X}}>C_2
+$$
+
+I.e. LRT is reject H_0 at level $\alpha$ if $\frac{\bar{Y}}{\bar{X}}<F_{2m,2n,1-\alpha/2}$ or $\frac{\bar{Y}}{\bar{X}}>F_{2m,2n,\alpha/2}$
+
+## 單 normal distribution 的參數檢定
+
+$$
+X_1,\cdots, X_n\overset{\text{iid}}{\sim}N(\theta, \sigma^2)\in\text{ 2-par exp family with }\theta, \sigma^2\text{ unknown}
+$$
+
+**Recall**
+
+$$
+\perp\Bigg < \begin{align*}
+    \hat{\theta}=\bar{X}&=\frac{1}{n}\sum_{i=1}^nX_i\sim N(\theta, \frac{\sigma^2}{n})\\
+    \hat{\sigma^2}=S^2&=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\sim\chi^2_{n-1}\quad\text{with }\frac{(n-1)S^2}{\sigma^2}=\frac{\sum(X_i-\bar{X})^2}{\sigma^2}\sim\chi^2_{n-1}
+    \end{align*}
+$$
+
+---
+
+$$
+H_0:\theta\overset{=}{\le}\theta_0\quad\text{ v.s. }\quad H_1:\theta>\theta_0
+$$
+
+UMPU level $\alpha$ test is rejects $H_0$ if 
+
+$$
+\underbrace{\frac{\bar{x}-\theta_0}{\sqrt{S^2/n}}}_{\overset{\theta=\theta_0}{\sim}t_{n-1}}=\frac{\sqrt{n}(\bar{x}-\theta_0)}{S}>t_{n-1,\alpha}
+$$
+
+事實上，這就是 LRT。
+
+Note
+
+$$
+t_k=\frac{N(0,1)}{\sqrt{\chi^2_k/k}}\Big>\perp\text{ and }\chi^2_k=\sum^k \chi^2_1
+$$
+
+$$
+\xRightarrow{\text{LLN}}\bar{X}\xrightarrow[k\to\infty]{P}1\implies t_k\xrightarrow[k\to\infty]{P}N(0,1)\implies t_{k,\alpha}\xrightarrow[k\to\infty]{P}Z_{\alpha}
+$$
+
+---
+
+$$
+H_0:\theta\ge\theta_0 \text{ v.s. } H_1:\theta<\theta_0
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\frac{\sqrt{n}(\bar{x}-\theta_0)}{S}<-t_{n-1,\alpha}=t_{n-1,1-\alpha}
+$$
+
+事實上，這就是 LRT。
+
+---
+
+$$
+H_0:\theta=\theta_0\quad\text{ v.s. }\quad H_1:\theta\neq\theta_0
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\frac{\sqrt{n}(\bar{x}-\theta_0)}{S}>t_{n-1,\alpha/2}\text{ or }\frac{\sqrt{n}(\bar{x}-\theta_0)}{S}<-t_{n-1,\alpha/2}
+$$
+
+$$
+\iff \left|\frac{\sqrt{n}(\bar{x}-\theta_0)}{S}\right|>t_{n-1,\alpha/2}
+$$
+
+---
+
+$$
+H_0:\sigma^2\overset{=}{\le}\sigma^2_0\quad\text{ v.s. }\quad H_1:\sigma^2>\sigma^2_0
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\underbrace{\frac{(n-1)S^2}{\sigma^2_0}}_{\overset{\sigma^2=\sigma^2_0}{\sim}\chi^2_{n-1}}>\chi^2_{n-1,\alpha}
+$$
+
+事實上，它會是 UMP, LRT。
+
+---
+
+$$
+H_0:\sigma^2\ge\sigma^2_0\quad\text{ v.s. }\quad H_1:\sigma^2<\sigma^2_0
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\frac{(n-1)S^2}{\sigma^2_0}<\chi^2_{n-1,1-\alpha}
+$$
+
+---
+
+$$
+H_0:\sigma^2=\sigma^2_0\quad\text{ v.s. }\quad H_1:\sigma^2\neq\sigma^2_0
+$$
+
+UMPU level $\alpha$ test is 
+
+$$
+\phi(\utilde{x})=\begin{cases}
+    1 & \text{if }\frac{(n-1)S^2}{\sigma^2_0}>k_1\text{ or }\frac{(n-1)S^2}{\sigma^2_0}<k_2\\
+    0 & \text{otherwise}
+\end{cases}
+$$
+
+with $k_1, k_2$ s.t. $E_{\sigma^2_0}\phi(\utilde{x})=\alpha$ and $E_{\sigma^2_0}[T\phi(\utilde{x})]=\alpha\cdot E_{\sigma^2_0}T=(n-1)\alpha$
+
+$$
+\text{i.e.}\qquad\int_{k_2}^{k_1}g_{n-1}(t) dt=1-\alpha \text{ and } \int_{k_2}^{k_1}tg_{n-1}(t) dt=(n-1)(1-\alpha) \text{ where }g_{n-1}\text{ is pdf of }\chi^2_{n-1}
+$$
+
+$\implies$ 只有數值解。此時我們通常會用 *equal-tailed test*，即左右拒絕區域面積都是 $\alpha/2$ （$\chi^2$ 不對稱）。
+
+$$
+\text{i.e.}\qquad\phi^*=\begin{cases}
+    1 &\text{ if }\frac{(n-1)S^2}{\sigma^2_0}>\chi^2_{n-1,\alpha/2}\text{ or }\frac{(n-1)S^2}{\sigma^2_0}<\chi^2_{n-1,1-\alpha/2}\\
+    0 &\text{ otherwise}
+\end{cases}
+$$
+
+Fact: $\phi^*\rightarrow[n\to\infty]{D}\phi$
+
+## 雙 normal distribution 的參數檢定
+
+$$
+\perp\Big<\begin{align*}
+    X_1, \cdots, X_n\overset{\text{iid}}{\sim}N(\theta_x, \sigma^2_x)\\
+    Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}N(\theta_y, \sigma^2_y)
+\end{align*}
+$$
+
+$$
+\implies \perp\Bigg<\begin{align*}
+    &\bar{X}-\bar{Y}\sim N(\theta_x-\theta_y, \frac{\sigma^2_x}{n}+\frac{\sigma^2_y}{m})\\
+    &\frac{\sum^n(X_i-\bar{X})^2}{\sigma^2_x}+\frac{\sum^m(Y_i-\bar{Y})^2}{\sigma^2_y}\sim\chi^2_{n+m-2}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    \implies& \frac{\bar{X}-\bar{Y}-(\theta_x-\theta_y)}{\sqrt{\frac{\sigma^2_x}{n}+\frac{\sigma^2_y}{m}}\sqrt{\left[\frac{\sum^n(X_i-\bar{X})^2}{\sigma^2_x}+\frac{\sum^m(Y_i-\bar{Y})^2}{\sigma^2_y}\right]/(n+m-2)}}\xlongequal{\text{d}}\perp\Big<\frac{N(0,1)}{\sqrt{\frac{\chi^2_{n+m-2}}{n+m-2}}}\sim t_{n+m-2}\\
+    \xlongequal{\sigma^2_x=\sigma^2=\sigma^2_y}&\frac{\bar{X}-\bar{Y}-(\theta_x-\theta_y)}{\sqrt{(\frac{1}{n}+\frac{1}{m})S^2_p}}\sim t_{n+m-2}\quad S^2_p=\frac{(n-1)S^2_x+(m-1)S^2_y}{n+m-2}
+\end{align*}
+$$
+
+---
+
+$$
+H_0:\sigma^2_x\le\tau_0\sigma^2_y\quad\text{ v.s. }\quad H_1:\sigma^2_x>\tau_0\sigma^2_y\iff H_0:\sigma^2_x/\sigma^2_y\le\tau_0\quad\text{ v.s. }\quad H_1:\sigma^2_x/\sigma^2_y>\tau_0
+$$
+
+$$
+\frac{\hat{\sigma^2_x}}{\hat{\sigma^2_y}}=\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}\overset{\text{d}}{=}\frac{\chi^2_{n-1}/(n-1)}{\chi^2_{m-1}/(m-1)}\sim F_{n-1, m-1}
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if $\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}>F_{n-1,m-1,\alpha}\iff \frac{S^2_x}{S^2_y}>\tau_0\cdot F_{n-1,m-1,\alpha}$ with
+
+$$
+\beta(\frac{\sigma^2_x}{\sigma^2_y}=\tau>\tau_0)=P(\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}>\frac{\sigma^2_y}{\sigma^2_x}\tau_0\cdot F_{n-1,m-1,\alpha})=P(F_{n-1,m-1}>\frac{\tau_0}{\tau}\cdot F_{n-1,m-1,\alpha})
+$$
+
+---
+
+$$
+H_0:\sigma^2_x\ge\tau_0\sigma^2_y\quad\text{ v.s. }\quad H_1:\sigma^2_x<\tau_0\sigma^2_y
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if $\frac{S^2_x}{S^2_y}<\tau_0\cdot F_{n-1,m-1,1-\alpha}$
+
+---
+
+$$
+H_0:\sigma^2_x=\tau_0\sigma^2_y\quad\text{ v.s. }\quad H_1:\sigma^2_x\neq\tau_0\sigma^2_y
+$$
+
+Usually, we use equal-tailed test. I.e. Reject $H_0$ if
+
+$$
+\frac{S^2_y}{S^2_x}>\frac{1}{\tau_0}\cdot F_{n-1,m-1,\alpha/2}\text{ or }\frac{S^2_y}{S^2_x}<\frac{1}{\tau_0}\cdot F_{n-1,m-1,1-\alpha/2}
+$$
+
+---
+
+Assume $\sigma^2_x=\sigma^2_y=\sigma^2$
+
+$$
+H_0:\theta_x\le\theta_y\quad\text{ v.s. }\quad H_1:\theta_x>\theta_y
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\underbrace{\frac{\bar{x}-\bar{y}}{\sqrt{S^2_p(\frac{1}{n}+\frac{1}{m})}}}_{\sim t_{n+m-2}}>t_{n+m-2,\alpha}
+$$
+
+---
+
+$$
+H_0:\theta_x=\theta_y\quad\text{ v.s. }\quad H_1:\theta_x\neq\theta_y
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\left|\frac{\bar{x}-\bar{y}}{\sqrt{S^2_p(\frac{1}{n}+\frac{1}{m})}}\right|>t_{n+m-2,\alpha/2}\qquad\text{Called two-sample t-test}
+$$
+
+**Remark**:
+1. 當 $\sigma^2_x\neq\sigma^2_y$ 時，目前還沒有結論。
+2. $\sigma^2_x=\sigma^2=\sigma^2\implies X\sim N(\theta_x, \sigma^2)\perp Y\sim N(\theta_y, \sigma), E[S^2_x]=\sigma^2=E[S^2_y]=E[S^2_p]$, and
+   $$
+   \frac{(n-1)S^2_x}{\sigma^2}\sim\chi^2_{n-1}\quad\frac{(m-1)S^2_y}{\sigma^2}\sim\chi^2_{m-1}\quad\frac{(n+m-2)S^2_p}{\sigma^2}\sim\chi^2_{n+m-2}
+   $$
+
+   $\implies S^2_p$ 的方差會是三個中最小的。
+
