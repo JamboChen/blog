@@ -1188,8 +1188,8 @@ $$
 
 $$
 \perp\Big < \begin{align*}
-    X_1, \cdots, X_n\overset{\text{iid}}{\sim}N(\theta_1, \sigma^2)\\
-    Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}N(\theta_2, \sigma^2)
+    X_1, \cdots, X_n\overset{\text{iid}}{\sim}\theta_1e^{-\theta_1x}, x>0\\
+    Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}\theta_2e^{-\theta_2y}, y>0
 \end{align*}
 $$
 
@@ -1245,7 +1245,7 @@ Note $X\sim \exp(\theta_1)\xlongequal{\text{d}}\text{Gamma}(1, \frac{1}{\theta_1
 $$
 \begin{align*}
     T&=\frac{\sum x_i}{\sum x_i+\sum y_i}=\frac{2\theta\sum x_i}{2\theta\sum x_i+2\theta\sum y_i}\\
-    &=\frac{1}{1+\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}}\quad\text{where }\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}\xlongequal{\text{d}}\frac{\chi^2_{2m}/2m}{\chi^2_{2n}/2n}\sim F_{2m, 2n}
+    &=\frac{1}{1+\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}\frac{m}{n}}\quad\text{where }\frac{2\theta\sum^m y/2m}{2\theta\sum^n x/2n}\xlongequal{\text{d}}\frac{\chi^2_{2m}/2m}{\chi^2_{2n}/2n}\sim F_{2m, 2n}
 \end{align*}
 $$
 
@@ -1412,7 +1412,7 @@ H_0:\sigma^2_x\le\tau_0\sigma^2_y\quad\text{ v.s. }\quad H_1:\sigma^2_x>\tau_0\s
 $$
 
 $$
-\frac{\hat{\sigma^2_x}}{\hat{\sigma^2_y}}=\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}\overset{\text{d}}{=}\frac{\chi^2_{n-1}/(n-1)}{\chi^2_{m-1}/(m-1)}\sim F_{n-1, m-1}
+\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}\overset{\text{d}}{=}\frac{\chi^2_{n-1}/(n-1)}{\chi^2_{m-1}/(m-1)}\sim F_{n-1, m-1}
 $$
 
 UMPU level $\alpha$ test is reject $H_0$ if $\frac{S^2_x/\sigma^2_x}{S^2_y/\sigma^2_y}>F_{n-1,m-1,\alpha}\iff \frac{S^2_x}{S^2_y}>\tau_0\cdot F_{n-1,m-1,\alpha}$ with
