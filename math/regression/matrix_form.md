@@ -1390,41 +1390,79 @@ $$
 - 預測值 > m 個預測值平均 > 期望值 < 回歸線
 - 當 m 越大時，預測值平均的方差會趨近於期望值的方差，因此兩者的區間會趨近於相等。
 
+## General Linear Test Approach
+
+當我們在做例如 $H_1:\beta_1=\beta_3=\beta_9=0$ v.s. $H_1: $ not $H_0$ 的檢定時，*Bonferroni joint confidence interval* 可以給我們一個方法得到 level $\le \alpha$ 的信賴區間。但這種方法可能會太保守。而 *General Linear Test Approach* 可以給我們一個方法得到 level $= \alpha$ 的檢定。
+
+Recall: SLR, $p=2, i=1,2,\cdots,n$
+
+$$
+Y_i=\beta_0+\beta_1x_i+\varepsilon_i \quad \varepsilon_i\overset{\text{iid}}{\sim} N(0, \sigma^2)
+$$
+
+To test $H_0:\beta_1=0$ v.s. $H_1:\beta_1\ne 0$
+
+$$
+\begin{align*}
+    &\text{test stat is } F^*=\frac{MSR}{MSE}=\frac{SSR/p-1}{SSE/(n-p)}=\frac{\frac{\text{SSTO-SSE}}{n-1-(n-p)}}{\frac{\text{SSE}}{n-p}}\\
+    &\text{reject } H_0\iff F^*>F_{p-1,n-p,\alpha}
+\end{align*}
+$$
+
+一般來說，$H_0$ 會假設模型是一個 reduced model ($\beta_1=0$)，而 $H_1$ 會假設模型是一個 full model。
+
+- $H_0: Y_i=\beta_0+\varepsilon_i$
+  - $b_0^*=$ LSE of $\beta_0=\bar{Y}$
+  - $\hat{Y}_i=b_0^*=\bar{Y}$ && $e_i=Y_i-\hat{Y}_i=Y_i-\bar{Y}$
+  - $\text{SSR}_{\text{R}}\triangleq\sum e_i^2=\sum(Y_i-\bar{Y})^2\triangleq$ SSTO with df=$\text{df}_\text{R}=n-1$
+- $H_1:Y_i=\beta_0+\beta_1x_i+\varepsilon_i$
+  - $b_0,b1$ are LSE of $\beta_0,\beta_1$ respectively
+  - $\hat{Y}_i=b_0+b_1x_i$ && $e_i=Y_i-\hat{Y}_i$
+  - SSTO = SSR + $\text{SSE}_\text{F}$ with $\text{df}_\text{F}=n-2$
+  
+$$
+\implies \text{SSR}=\text{SSTO}-\text{SSE}_\text{F}=\text{SSE}_\text{R}-\text{SSE}_\text{F}
+$$
+
+通常來說 $\text{SSR}_\text{R}\le\text{SSR}_\text{F}$，因為 full model 通常會比 reduced model 擁有更多參數。
+
+因為我們認為越簡單的模型越好。如果一個參數少的模型和參數多的模型有接近的解釋能力，我們會選擇參數少的模型。因此這裡的想法是，如果 $\text{SSR}_\text{R}\approx\text{SSR}_\text{F}$，那麼我們就會選擇 reduced model。i.e.
+
+$$
+\begin{align*}
+    \text{Reject }H_0&\iff \text{SSR}_\text{R}-\text{SSR}_\text{F}\text{ is large}\\
+    &\iff F^{**}=\frac{\frac{\text{SSE}_\text{R}-\text{SSE}_\text{F}}{\text{df}_\text{R}-\text{df}_\text{F}}}{\frac{\text{SSE}_\text{F}}{\text{df}_\text{F}}}>F(\text{df}_\text{R}-\text{df}_\text{F}, \text{df}_\text{F}, \alpha)
+\end{align*}
+$$
+
+其中 $\text{df}_\text{R}-\text{df}_\text{F}$ 代表了固定參數的數量，而 $\text{df}_\text{F}$ 代表了自由參數的數量。
+
+在 SLR 中：
+
+$$
+F^{**}=\frac{\frac{\text{SSTO}-\text{SSE}}{(n-1)-(n-p)}}{\frac{\text{SSE}}{\text{df}}=\frac{\frac{\text{SSR}}{p-1}}{\frac{\text{SSE}}{n-p}}}=\frac{\text{MSR}}{\text{MSE}}=F^*
+$$
+
+GLT 3 steps:
+1. Fit the full model and obtain $\text{SSE}_\text{F}, \text{df}_\text{F}$
+2. Fit the reduced model and obtain $\text{SSE}_\text{R}, \text{df}_\text{R}$
+3. $$
+    F^{**}=\frac{\frac{\text{SSE}_\text{R}-\text{SSE}_\text{F}}{\text{df}_\text{R}-\text{df}_\text{F}}}{\frac{\text{SSE}_\text{F}}{\text{df}_\text{F}}}\overset{H_0}{\sim} F(\text{df}_\text{R}-\text{df}_\text{F}, \text{df}_\text{F})
+   $$
+
+**Remark**:
+1. $\text{df}_\text{R}-\text{df}_\text{F}$ 代表了 $H_0$ 下被假設為 0 的參數的數量。
+2. SSTO 在任何假設下都是一樣的 $\implies \text{SSE}_\text{R}-\text{SSE}_\text{F}=\text{SSR}_\text{F}-\text{SSR}_\text{R}$
+
 ---
 
-**Paired Data**:
+**EX**: $Y=\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3+\beta_4x_4+\varepsilon$
 
-有時資料成對出現的，比如同一個人在不同時間的數據。此時，每對之間的數據可能會是相關的，而不同對之間的數據仍然會是獨立的。
-
-$$
-\begin{pmatrix}
-    X_1\\ Y_1
-\end{pmatrix}, \begin{pmatrix}
-    X_2\\ Y_2
-\end{pmatrix}, \cdots, \begin{pmatrix}
-    X_n\\ Y_n
-\end{pmatrix}
-\overset{\text{iid}}{\sim} N(\theta_x, \theta_y, \sigma^2_x, \sigma^2_y, \rho)
-$$
+To test $H_0:\beta_1=\beta_2=0$ v.s. $H_1:$ not $H_0$
 
 $$
-H_0:\theta_x=\theta_y\quad\text{ v.s. }\quad H_1:\theta_x\ne\theta_y
+F^*=\frac{\frac{\text{SSE}_{\text{fm34}}-\text{SSE}_{\text{fm1234}}}{n-3-(n-5)}}{\frac{\text{SSE}_{\text{fm1234}}}{n-5}}>F(2,5,\alpha)\begin{cases}
+    \text{Yes: reject }H_0\\
+    \text{No: not reject }H_0
+\end{cases}
 $$
-
-$$
-\implies D_i=Y_i-X_i, i=1,2,\cdots,n\overset{\text{id}}{\sim} N(\theta_x-\theta_y, \sigma^2)
-$$
-
-這樣我們就把問題轉換成了單樣本的問題。其中 $\sigma^2=\sigma^2(\sigma^2_x, \sigma^2_y, \rho)$ 的函數，但因為 $\sigma^2_x, \sigma^2_y, \rho$ 都是未知的，所以 $\sigma^2$ 也是未知的。
-
-$$
-\implies H_0:\mu=0\quad\text{ v.s. }\quad H_1:\mu\ne 0
-$$
-
-UMPU level $\alpha$ test reject $H_0$ if
-
-$$
-\left|\frac{\sqrt{n}(\bar{Y}-\bar{X})}{S_p}\right|>t_{n-1,1-\frac{\alpha}{2}}\quad\text{ where }S_p^2=\frac{\sum^n_1(D_i-\bar{D})}{n-1}
-$$
-
-稱為 *paired t-test*。

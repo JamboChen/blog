@@ -1476,3 +1476,41 @@ $$
 
    $\implies S^2_p$ 的方差會是三個中最小的。
 
+---
+
+**Paired Data**:
+
+有時資料成對出現的，比如同一個人在不同時間的數據。此時，每對之間的數據可能會是相關的，而不同對之間的數據仍然會是獨立的。
+
+$$
+\begin{pmatrix}
+    X_1\\ Y_1
+\end{pmatrix}, \begin{pmatrix}
+    X_2\\ Y_2
+\end{pmatrix}, \cdots, \begin{pmatrix}
+    X_n\\ Y_n
+\end{pmatrix}
+\overset{\text{iid}}{\sim} N(\theta_x, \theta_y, \sigma^2_x, \sigma^2_y, \rho)
+$$
+
+$$
+H_0:\theta_x=\theta_y\quad\text{ v.s. }\quad H_1:\theta_x\ne\theta_y
+$$
+
+$$
+\implies D_i=Y_i-X_i, i=1,2,\cdots,n\overset{\text{id}}{\sim} N(\theta_x-\theta_y, \sigma^2)
+$$
+
+這樣我們就把問題轉換成了單樣本的問題。其中 $\sigma^2=\sigma^2(\sigma^2_x, \sigma^2_y, \rho)$ 的函數，但因為 $\sigma^2_x, \sigma^2_y, \rho$ 都是未知的，所以 $\sigma^2$ 也是未知的。
+
+$$
+\implies H_0:\mu=0\quad\text{ v.s. }\quad H_1:\mu\ne 0
+$$
+
+UMPU level $\alpha$ test reject $H_0$ if
+
+$$
+\left|\frac{\sqrt{n}(\bar{Y}-\bar{X})}{S_p}\right|>t_{n-1,1-\frac{\alpha}{2}}\quad\text{ where }S_p^2=\frac{\sum^n_1(D_i-\bar{D})}{n-1}
+$$
+
+稱為 *paired t-test*。
