@@ -1514,3 +1514,44 @@ $$
 $$
 
 稱為 *paired t-test*。
+
+## 信賴集合估計（Confidence Sets Estimation）
+
+我們有 $n$ 個數據 $\utilde{X}=(X_1, \cdots, X_n)\sim f(\utilde{x};\theta)$  with $\theta\in\Omega\subset\R^r, r\ge 1$，並且我們對 $\eta(\theta):\Omega\to\R^m,m\le r$ (通常 $m=1$) 感興趣。
+
+e.g. $N(\mu, \sigma^2), \theta=(\mu, \sigma^2)$
+
+$$
+\begin{alignat*}{3}
+    \implies &\eta(\theta)=\mu&\qquad&\eta(\theta)=\sigma &\qquad& \eta(\theta)=\log|\mu|\\
+    &\eta(\theta)=\sigma^2&\qquad&\eta(\theta)=\frac{\mu}{\sigma} &\qquad& \cdots
+\end{alignat*}
+$$
+
+在數據 $\utilde{X}$ (r.v) 下，$\eta(\theta)$ 的集合估計是指在 $\R^m(=\eta(\Omega))$ 下找到一個子集 $C(\utilde{X})$ 使得
+
+$$
+\forall \theta \quad P_\theta\left(\eta(\theta)\in C(\utilde{X})\right)=r\in[0,1]
+$$
+
+而當得到實際數據 $\utilde{X}=\utilde{x}$ 時，我們稱有 r 的信心，未知量 $\eta(\theta)\in C(\utilde{x})$ 。因為當數據確定下來時，$\eta(\theta)$ 是否在 $C(\utilde{x})$ 也是確定的，只是我們不知道。
+
+---
+
+**EX** $X_1,\cdots, X_n\overset{\text{iid}}{\sim}N(\mu, \sigma^2_0)$
+
+$$
+\implies\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma_0}\sim N(0,1)
+$$
+
+$$
+\begin{align*}
+    \implies \forall \mu\in\R\quad 1-\alpha&=P_\mu\left(-z_{\alpha/2}<\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma_0}<z_{\alpha/2}\right)\\
+    &=P_\mu\left(\bar{X}-\frac{z_{\alpha/2}\sigma_0}{\sqrt{n}}<\mu<\bar{X}+\frac{z_{\alpha/2}\sigma_0}{\sqrt{n}}\right)
+    &=P_\mu\left(\mu\in(\bar{X}-\frac{z_{\alpha/2}\sigma_0}{\sqrt{n}}, \bar{X}+\frac{z_{\alpha/2}\sigma_0}{\sqrt{n}})\right)
+\end{align*}
+$$
+
+$$
+\implies P_\mu(\mu\in C(\utilde{X}))=1-\alpha\quad \forall\mu\text{ where }C(\utilde{X})=[\bar{X}\pm\frac{z_{\alpha/2}\sigma_0}{\sqrt{n}}]
+$$
