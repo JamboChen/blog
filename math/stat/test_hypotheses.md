@@ -1478,7 +1478,19 @@ $$
 
 ---
 
-**Paired Data**:
+當 X 和 Y 的資料量都為 n 時
+
+$$
+H_0:\theta_x=\theta_y\quad\text{ v.s. }\quad H_1:\theta_x\neq\theta_y
+$$
+
+UMPU level $\alpha$ test is reject $H_0$ if
+
+$$
+\left|\frac{\bar{x}-\bar{y}}{S_p\sqrt{2/n}}\right|>t_{2n-2,\alpha/2}
+$$
+
+### Paired Data
 
 有時資料成對出現的，比如同一個人在不同時間的數據。此時，每對之間的數據可能會是相關的，而不同對之間的數據仍然會是獨立的。
 
