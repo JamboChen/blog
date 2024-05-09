@@ -228,7 +228,7 @@ $$
 因此 $\hat{Y}_h$ 是線性估計，並且
 
 $$
-E[\hat{Y}_h]=E[b_0]+E[b_1]X_h=\beta_0+\beta_1X_h=Y_h
+E[\hat{Y}_h]=E[b_0]+E[b_1]X_h=\beta_0+\beta_1X_h=E[Y_h]
 $$
 
 所以 $\hat{Y}_h$ 是 $E[Y_h]$ 的線性無偏估計（Linear Unbiased Estimator）。並且 $\hat{Y}_h$ 同樣是獨立的常態分佈之和，所以
