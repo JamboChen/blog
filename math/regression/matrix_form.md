@@ -1392,7 +1392,7 @@ $$
 
 ## General Linear Test Approach
 
-當我們在做例如 $H_1:\beta_1=\beta_3=\beta_9=0$ v.s. $H_1: $ not $H_0$ 的檢定時，*Bonferroni joint confidence interval* 可以給我們一個方法得到 level $\le \alpha$ 的信賴區間。但這種方法可能會太保守。而 *General Linear Test Approach* 可以給我們一個方法得到 level $= \alpha$ 的檢定。
+當我們在做例如 $H_1:\beta_1=\beta_3=\beta_9=0$ v.s. $H_1: $ not $H_0$ 的檢定時，*Bonferroni joint confidence interval* 可以給我們一個方法得到 level $\le \alpha$ 的信賴區間。但這種方法可能會太保守。而 *General Linear Test Approach* 可以給我們一個方法得到 level $=\alpha$ 的檢定。並且 GLT 在有計算機的情況下是很容易計算的。
 
 Recall: SLR, $p=2, i=1,2,\cdots,n$
 
@@ -1409,22 +1409,41 @@ $$
 \end{align*}
 $$
 
-一般來說，$H_0$ 會假設模型是一個 reduced model ($\beta_1=0$)，而 $H_1$ 會假設模型是一個 full model。
+一般來說，$H_1$ 會假設模型是一個 full model，$H_0$ 會假設模型是一個 reduced model i.e. full model 中的某些參數被假設為 0。因此
 
-- $H_0: Y_i=\beta_0+\varepsilon_i$
-  - $b_0^*=$ LSE of $\beta_0=\bar{Y}$
-  - $\hat{Y}_i=b_0^*=\bar{Y}$ && $e_i=Y_i-\hat{Y}_i=Y_i-\bar{Y}$
-  - $\text{SSR}_{\text{R}}\triangleq\sum e_i^2=\sum(Y_i-\bar{Y})^2\triangleq$ SSTO with df=$\text{df}_\text{R}=n-1$
-- $H_1:Y_i=\beta_0+\beta_1x_i+\varepsilon_i$
-  - $b_0,b1$ are LSE of $\beta_0,\beta_1$ respectively
-  - $\hat{Y}_i=b_0+b_1x_i$ && $e_i=Y_i-\hat{Y}_i$
-  - SSTO = SSR + $\text{SSE}_\text{F}$ with $\text{df}_\text{F}=n-2$
-  
 $$
-\implies \text{SSR}=\text{SSTO}-\text{SSE}_\text{F}=\text{SSE}_\text{R}-\text{SSE}_\text{F}
+\text{Reduced model }\subset\text{ Full model}
 $$
 
-通常來說 $\text{SSR}_\text{R}\le\text{SSR}_\text{F}$，因為 full model 通常會比 reduced model 擁有更多參數。
+$$
+\implies \Omega_0=\text{ col space of reduced model}\subset\Omega_1=\text{ col space of full model}
+$$
+
+無論哪種假設，對 $\utilde{Y}$ 做估計都是把 $\utilde{Y}$ 投影到 col space 上。假設
+- $\utilde{\hat{Y}}_{\Omega_1}: \utilde{Y}$'s projection onto $\Omega_1$
+- $\utilde{\hat{Y}}_{\Omega_0}: \utilde{Y}$'s projection onto $\Omega_0$
+
+e.g. 
+
+$$
+H_0:Y=\beta_0+\beta_2x_2+\epsilon\text{ v.s. }H_1:Y=\beta_0+\beta_1x_1+\beta_2x_2+\epsilon
+$$
+$$
+\implies D = [\utilde{1}, \utilde{x_2}] \text{ for } H_0\text{ and } D=[\utilde{1}, \utilde{x_1}, \utilde{x_2}] \text{ for } H_1
+$$
+
+$\implies ||\utilde{\hat{\utilde{Y}}}_{\Omega_1}||^2\ge||\utilde{\hat{\utilde{Y}}}_{\Omega_0}||^2$，因為 $\utilde{\hat{Y}}_{\Omega_1}$ 在某些方向上的投影會比 $\utilde{\hat{Y}}_{\Omega_0}$ 更長。因為兩種假設是在同一個 $\utilde{Y}$ 上做估計，所以
+
+$$
+\begin{align*}
+    ||\utilde{Y}||^2&=||\utilde{\hat{Y}}_{\Omega_1}||^2+||e_{\Omega_1}||^2\\
+    &=||\utilde{\hat{Y}}_{\Omega_0}||^2+||e_{\Omega_0}||^2
+\end{align*}
+$$
+
+$$
+\implies \text{SSE}_{\text{F}}=||e_{\Omega_1}||^2\le ||e_{\Omega_0}||^2=\text{SSE}_{\text{R}}
+$$
 
 因為我們認為越簡單的模型越好。如果一個參數少的模型和參數多的模型有接近的解釋能力，我們會選擇參數少的模型。因此這裡的想法是，如果 $\text{SSR}_\text{R}\approx\text{SSR}_\text{F}$，那麼我們就會選擇 reduced model。i.e.
 
@@ -1435,7 +1454,7 @@ $$
 \end{align*}
 $$
 
-其中 $\text{df}_\text{R}-\text{df}_\text{F}$ 代表了固定參數的數量，而 $\text{df}_\text{F}$ 代表了自由參數的數量。
+其中 $\text{df}_\text{R}-\text{df}_\text{F}$ 代表了 $H_0$ 下被假設為 0 的參數的數量。
 
 在 SLR 中：
 
