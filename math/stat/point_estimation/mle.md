@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # 最大概式估計量（Maximum Likelihood Estimation, MLE）
 
 給定一組從母體得到的樣本。MLE 的目標是找到那個最有可能得到這組樣本的母體參數。
@@ -26,7 +30,6 @@ X\stackrel{\text{iid}}{\sim} f(x;\theta)=
    2x & \theta=1
 \end{cases}
 $$
-![alt text](img/Snipaste_2024-02-14_11-03-10.png)
 
 因为当 $x\in(\frac{1}{2},1)$ 时，$\theta=1$ 的概率密度函数比 $\theta=0$ 的大，而 $x\in(0,\frac{1}{2})$ 时，$\theta=0$ 的概率密度函数比 $\theta=1$ 的大。
 

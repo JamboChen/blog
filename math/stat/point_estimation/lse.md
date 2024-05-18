@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # 最小平方估計（Least Square Estimation，LSE）
 
 Let $X_i$ with $E_\theta[X_i]$ exists

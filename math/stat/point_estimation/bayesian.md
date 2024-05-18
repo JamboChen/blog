@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Bayesian Estimation & Minimax Estimation
 
 ## 損失函數

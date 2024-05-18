@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # 統計推論（Statistical Inferences）
 
 ## 統計量（Statistics）

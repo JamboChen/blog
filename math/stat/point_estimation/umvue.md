@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # 最小方差无偏估计（UMVUE）
 
 :::note[Recall]

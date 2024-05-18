@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # 假設檢定（Testing Hypotheses）
 
 在得到數據 $\utilde{X}=(X_1, \cdots, X_n)\sim f(\utilde{x};\theta)$ with $\theta\in\Omega\subseteq\R^n$ 時，假設檢定問題旨在決定是否要拒絕 $H_0$ 虛無假設（null hypothese）。

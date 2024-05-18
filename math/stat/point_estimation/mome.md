@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # 動差估計（Method Of Moments Estimation, MOME）
 
 得到樣本 $X_1,\cdots,X_n\stackrel{\text{iid}}{\sim} X$ with $X\stackrel{\text{iid}}{\sim} f(x;\theta), \theta\in\Omega\subseteq\R^r$
