@@ -176,7 +176,24 @@ $$
 \frac{\partial}{\partial\utilde{\beta}}Q(\utilde{\beta})=-2D^t\utilde{Y}+2D^tD\utilde{\beta}
 $$
 
-如果 $\utilde{b}$ 是 $\utilde{\beta}$ 的 LSE $\iff$ $\frac{\partial}{\partial\utilde{\beta}}Q(\utilde{\beta})|_{\utilde{b}}=0 \iff -2D^t\utilde{Y}+2D^tD\utilde{b}=0$
+如果 $\utilde{b}$ 是 $\utilde{\beta}$ 的 LSE $\implies$ $\frac{\partial}{\partial\utilde{\beta}}Q(\utilde{\beta})|_{\utilde{b}}=0 \iff -2D^t\utilde{Y}+2D^tD\utilde{b}=0$
+
+
+
+如果 $\utilde{b}$ 滿足 $D^tD\utilde{b}=D^t\utilde{Y}$，那麼對於所有其他的 $\utilde{\beta}$
+
+$$
+\begin{align*}
+    Q(\utilde{\beta})=||\utilde{Y}-D\utilde{\beta}||^2&=||\utilde{Y}-D\utilde{b}+D\utilde{b}-D\utilde{\beta}||^2\\
+    &=||\utilde{Y}-D\utilde{b}||^2+||D\utilde{b}-D\utilde{\beta}||^2+2\underbrace{(\utilde{Y}-D\utilde{b})^t(D\utilde{b}-D\utilde{\beta})}_{=(D^t\utilde{Y}-D^tD\utilde{b})(\utilde{b}-\utilde{\beta})=0}\\
+    &=||\utilde{Y}-D\utilde{b}||^2+\underbrace{||D\utilde{b}-D\utilde{\beta}||^2}_{\ge 0}\\
+    &\ge Q(\utilde{b})  
+\end{align*}
+$$
+
+i.e. $\utilde{b}$ 是 $\utilde{\beta}$ 的 LSE。並且等號成立 $\iff D^tD\utilde{b}=D^t\utilde{Y}$ i.e. $\utilde{\beta}$ 滿足 normal equation
+
+因此我們可以得到的結論：$\utilde{b}$ 是 $\utilde{\beta}$ 的 LSE $\iff D^tD\utilde{b}=D^t\utilde{Y}$
 
 :::info[Definition]
 **Normal Equation**:
