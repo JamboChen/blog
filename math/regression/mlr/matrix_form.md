@@ -242,7 +242,7 @@ i.e. $\utilde{\hat{Y}}\in\Omega$ s.t. $||\utilde{Y}-\utilde{\hat{Y}}||^2=\min_{\
 
 之前我們討論過 $\utilde{Y}$ 和 $\utilde{\hat{Y}}$ 的關係：
 
-![alt text](img/1-1.png)
+![alt text](../img/1-1.png)
 
 這裡 $\utilde{Y}\in V_n$，$\utilde{\hat{Y}}\in\Omega$。因此 $\utilde{\hat{Y}}$ 可以看作為 $\utilde{Y}$ 在 $\Omega$ 上的投影。而 $\utilde{e}$ 所在的空間垂直於 $\Omega$，記作 $V_r^\perp=\Omega^\perp$。
 

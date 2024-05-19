@@ -93,7 +93,7 @@ $\implies e_i=Y_i-\bar{Y_i}=Y_i-\bar{Y}-b_1(X_i-\bar{X})$
    
    since $\utilde{e}=\utilde{Y}-\utilde{\hat{Y}}\implies\utilde{\hat{Y}}\perp\utilde{Y}-\utilde{\hat{Y}}$
 
-   ![alt text](img/1-1.png)
+   ![alt text](../img/1-1.png)
 
    所以預測值 $\utilde{\hat{Y_i}}$ 是 $\utilde{Y}$ 的投影。
 
@@ -105,19 +105,19 @@ $\implies e_i=Y_i-\bar{Y_i}=Y_i-\bar{Y}-b_1(X_i-\bar{X})$
 
 1. 在下圖情況中，如果我們計算殘差 $e_i$，雖然可能會得到和為 0 的結果，但殘差的分佈有很明顯的正負聚集現象。而我們希望殘差的正負隨機分佈的。
    
-   ![alt text](img/1-2.png)
+   ![alt text](../img/1-2.png)
 
    為了避免這種情況，我們需要誤差的期望為 0，即 $E[\utilde{\varepsilon}]=0$。
 
 2. 下圖中的數據，隨著 $X$ 的增加，數據也越分散。
    
-   ![alt text](img/1-3.png)
+   ![alt text](../img/1-3.png)
 
    為了避免這種情況，我們需要所有誤差的方差是一樣的，即 $Var[\utilde{e}]=\sigma^2$，其中 $\sigma^2$ 是一個常數。
 
 4. 當沒有按照正規的程序獲取數據時，可能會出現下圖的情況。各個數據之間可能存在著相互關聯的情況。那麼擬合出來的回歸線會存在誤導性。
    
-   ![alt text](img/1-4.png)
+   ![alt text](../img/1-4.png)
 
    為了避免這種情況，我們需要所有誤差之間是沒有線性關係的，即 $Cov[e_i, e_j]=0, \forall i\neq j$。
 
@@ -212,7 +212,7 @@ $$
 
 **Note**:
 
-![alt text](img/1-5.png)
+![alt text](../img/1-5.png)
 
 $\utilde{\bar{Y}}\perp \utilde{e}=\utilde{Y}-\utilde{\bar{Y}} \implies ||\utilde{Y}||^2=||\utilde{\bar{Y}}||^2+||\utilde{e}||^2$
 

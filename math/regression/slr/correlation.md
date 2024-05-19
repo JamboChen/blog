@@ -76,7 +76,7 @@ $$
 \text{Def } t_{m, \alpha_0} \text{ s.t. } P(t_{m}>t_{m, \alpha_0})=\alpha_0
 $$
 
-![alt text](img/2-1.jpg)
+![alt text](../img/2-1.jpg)
 :::
 
 在上面的定義中，我們只是計算可以讓右端的面積是 $\alpha_0$ 的點。我們還可以考慮左右兩端的面積加起來會是 $\alpha_0$ 的兩個點。
@@ -103,7 +103,7 @@ $$
 
 **Fact**: 
 
-![alt text](img/2-2.png)
+![alt text](../img/2-2.png)
 
 在任何滿足 $\alpha_1+\alpha_2=\alpha_0$ 的組合中，$\alpha_1=\frac{\alpha_0}{2}=\alpha_2$ 會是最好的。$\implies CI(\beta; \alpha)$ 是 UMAU $1-\alpha$ 信賴區間。 
 
@@ -469,7 +469,7 @@ $R^2$ 可以衡量 $Y$ 中的變異量有多少可以被 $X$ 解釋。也就是 
    
    i.e. 無論 $X$ 如何變動，$Y$ 的預測值都是一樣的 $\implies X$ 和 $Y$ 之間沒有**線性**關係。
 
-   ![alt text](img/2-3.png)
+   ![alt text](../img/2-3.png)
 
 注意到：
 $$
