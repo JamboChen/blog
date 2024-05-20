@@ -328,7 +328,7 @@ $$
 \end{align*}
 $$
 
-with $C_{a,b}(X_{(1)})=\left[X_{(1)}-\frac{b}{2n}, X_{(1)-\frac{a}{2n}}\right]$ are $1-\alpha$ conf. int. for $\theta$.
+with $C_{a,b}(X_{(1)})=\left[X_{(1)}-\frac{b}{2n}, X_{(1)}-\frac{a}{2n}\right]$ are $1-\alpha$ conf. int. for $\theta$.
 
 為了找到最短的 confidence set，我們要找到最小的 $b-a$ s.t. $G(b)-G(a)=1-\alpha$ with $G$: cdf of $\chi^2_2$。
 
@@ -347,6 +347,122 @@ $$
 \int_0^b \frac{1}{2}e^{-\frac{y}{2}}dy=1-\alpha\implies 1-e^{-\frac{b}{2}}=1-\alpha\implies b=-2\log(1-\alpha)
 $$
 
-i.e. $[X_{(1)}+\frac{2\log(1-\alpha)}{2n}, X_{(1)}]$ is $1-\alpha$ UMAU for $\theta$. 並且對於假設檢定 $H_0:\theta=\theta_0$ vs. $H_1:\theta\neq\theta_0$，我們會 reject $H_0\iff\theta_0\notin C_{a,b}(X_{(1)})\iff \theta_0<X_{(1)}-\frac{a}{2n}$ or $\theta_0>X_{(1)}-\frac{b}{2n}$。事實上這個檢定是 **UMP**。
+i.e. $[X_{(1)}+\frac{2\log(1-\alpha)}{2n}, X_{(1)}]$ is $1-\alpha$ conf. int. for $\theta$. 並且對於假設檢定 $H_0:\theta=\theta_0$ vs. $H_1:\theta\neq\theta_0$，我們會 
+
+$$
+\text{reject } H_0\iff\theta_0\notin C_{a,b}(X_{(1)})\iff \theta_0<X_{(1)}-\frac{a}{2n} \text{ or } \theta_0>X_{(1)}-\frac{b}{2n}
+$$
+
+事實上這個檢定是 **UMP**，因此這個信賴區間是 **UMA**。
+
+:::danger
+信賴區間的長度最短並不代表是 UMA 或 UMAU 的。
+
+要說明一個信賴區間是 UMA 或 UMAU 的，我們需要通過檢定的結果來說明。
+:::
+
+**EX** $X_1, \cdots, X_n\overset{\text{iid}}{\sim}U(0, \theta)$. i.e. $f(x;\theta)=\frac{1}{\theta}\cdot I(0\le\frac{x}{\theta}\le 1)$
+
+$T=X_{(n)}$ is suff for $\theta\implies$ use $W=\frac{X_{(n)}}{\theta}\in[0,1]$ as pivot. Let $0\le a<b\le 1$ s.t.
+
+$$
+\begin{align*}
+    1-\alpha&=P(a\le W\le b)\\
+    &=P_\theta(a\le\frac{X_{(n)}}{\theta}\le b)\\
+    &=P_\theta(a\theta\le X_{(n)}\le b\theta)=\left(\frac{b\theta}{\theta}\right)^n-\left(\frac{a\theta}{\theta}\right)^n=b^n-a^n\\
+    &=P_\theta\left(\frac{X_{(n)}}{b}\le\theta\le\frac{X_{(n)}}{a}\right)\\
+\end{align*}
+$$
+
+Let $C_{a,b}(X_{(n)})=[\frac{X_{(n)}}{b}, \frac{X_{(n)}}{a}]\implies \forall 0\le a<b\le 1$ with $b^n-a^n=1-\alpha$, $C_{a,b}(X_{(n)})$ are $1-\alpha$ conf. int. for $\theta$.
+
+接下來，為了得到最短的信賴區間，我們要最小化 $\frac{1}{a}-\frac{1}{b}$ s.t. $b^n-a^n=1-\alpha$。而此時 Lagrange multiplier method 就不適用了。
+
+$\because b^n-a^n=1-\alpha\implies a = a(b)$, let $l(b)=\frac{1}{a(b)}-\frac{1}{b}$ 
+
+$$
+\begin{align*}
+    n\cdot b^{n-1}-n\cdot a^{n-1}\cdot a'(b)&=0\\
+    a'(b)&=\frac{b^{n-1}}{a^{n-1}}\\
+\end{align*}
+\implies 
+\begin{align*}
+    l'(b)&=-\frac{a'(b)}{a^2}+\frac{1}{b^2}=-\frac{1}{a^2}\frac{b^{n-1}}{a^{n-1}}+\frac{1}{b^2}\\
+    &=\frac{a^{n+1}-b^{n+1}}{a^{n+1}b^2}<0
+\end{align*}
+$$
+
+$\implies l(b) \searrow$ in $b\le 1\implies l(b)$ is min when $b=1\implies a=\alpha^{\frac{1}{n}}$. I.e, the shortest one is $[X_{(n)}, X_{(n)}\alpha^{-\frac{1}{n}}]$.
+
+For testing $H_0:\theta=\theta_0$ vs. $H_1:\theta\neq\theta_0$
+
+$$
+\begin{align*}
+    \implies\text{reject }H_0 &\iff \theta_0\notin [X_{(n)}, X_{(n)}\alpha^{-\frac{1}{n}}]\\
+    &\iff \theta_0<X_{(n)}\text{ or }\theta_0>X_{(n)}\alpha^{-\frac{1}{n}}\\
+    &\iff X_{(n)} > \theta_0 \text{ or } X_{(n)} < \theta_0\alpha^{\frac{1}{n}}\\
+    &\text{ is UMP level }\alpha\text{ test}
+\end{align*}
+$$
+
+$\implies [X_{(n)}, X_{(n)}\alpha^{-\frac{1}{n}}]$ is **UMA** $1-\alpha$ confidence set for $\theta$.
+
+---
+
+**EX** $X_1, \cdots, X_n\overset{\text{iid}}{\sim}\frac{1}{\lambda}e^{-\frac{x}{\lambda}}\in$ scale family and $\sum X_i$ is suff for $\lambda$
+
+Note that
+
+$$
+\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)\implies \frac{2\sum X_i}{\lambda}\sim\text{Gamma}(n, 2)=\chi^2_{2n}\perp\lambda
+$$
+
+$\implies$ Use $\frac{2\sum X_i}{\lambda}\sim \chi^2_{2n}$ as pivot.
+
+$$
+\begin{align*}
+    \implies 1-\alpha&=P_\lambda(\chi^2_{2n, 1-\frac{\alpha}{2}}\le\frac{2\sum X_i}{\lambda}\le\chi^2_{2n, \frac{\alpha}{2}})\\
+    &=P_\lambda\left(\frac{2\sum X_i}{\chi^2_{2n,\frac{\alpha}{2}}}\le\lambda\le\frac{2\sum X_i}{\chi^2_{2n, 1-\frac{\alpha}{2}}}\right)\\
+\end{align*}
+$$
+
+$\implies \left[\frac{2\sum X_i}{\chi^2_{2n, 1-\frac{\alpha}{2}}}, \frac{2\sum X_i}{\chi^2_{2n, \frac{\alpha}{2}}}\right]$ is $1-\alpha$ conf. int. for $\lambda$.
+
+---
+
+**EX**
+
+$$
+\perp\Big<\begin{align*}
+    &X_1, \cdots, X_n\overset{\text{iid}}{\sim}\frac{1}{\lambda}e^{-\frac{x}{\lambda}}, x>0\\
+    &Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}\frac{1}{\theta}e^{-\frac{y}{\theta}}, y>0
+\end{align*}
+\quad\implies\quad
+\perp\Big<\begin{align*}
+    &\frac{2\sum X_i}{\lambda}\sim\chi^2_{2n}\perp\lambda\\
+    &\frac{2\sum Y_i}{\theta}\sim\chi^2_{2m}\perp\theta
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    &\frac{2\sum X_i}{\lambda(2n)}\Bigg/\frac{2\sum Y_i}{\theta(2m)}\sim F_{2n, 2m}\\
+    =&\frac{\bar{X}}{\lambda}\bigg/\frac{\bar{Y}}{\theta}=\frac{\bar{X}}{\bar{Y}}\frac{\theta}{\lambda}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    1-\alpha&=P(F_{2n,2m,1-\frac{\alpha}{2}}\le F_{2n,2m}\le F_{2n,2m,\frac{\alpha}{2}})\\
+   &=P_{\theta,\lambda}\left(F_{2n,2m,1-\frac{\alpha}{2}}\le\frac{\bar{X}}{\bar{Y}}\frac{\theta}{\lambda}\le F_{2n,2m,\frac{\alpha}{2}}\right)\\
+   &=P_{\theta,\lambda}\left(\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}\le\frac{\lambda}{\theta}\le\frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right)\\
+\end{align*}
+$$
+
+$\implies \left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$ is $1-\alpha$ conf. int. for $\frac{\lambda}{\theta}$.
+
+$\implies$ To test $H_0:\lambda=\theta$ v.s. $H_1:\lambda\neq\theta$ $\iff$ $H_0:\frac{\lambda}{\theta}=1$ v.s. $H_1:\frac{\lambda}{\theta}\neq 1$  
+
+Reject $H_0$ if $1\notin\left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$
 
 ## Asymptotic
