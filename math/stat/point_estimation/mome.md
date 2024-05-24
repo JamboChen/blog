@@ -8,7 +8,7 @@ sidebar_position: 4
 
 我們定義 k 次動差：
 - 母體（Population）：$E_\theta(X^k)=m_k(\theta)$
-- 樣本（Sample）: $\frac{1}{n}\sum_{i=1}^n=m_k(\utilde{X})$
+- 樣本（Sample）: $\frac{1}{n}\sum_{i=1}^nX_i^k=m_k(\utilde{X})$
 
 根據大數法則，隨著樣本數量增加，樣本動差會收斂到母體動差，i.e. $m_k(\utilde{X})\xrightarrow{P}m_k(\theta)$ as $n\to\infty$.
 
