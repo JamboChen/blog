@@ -465,4 +465,146 @@ $\implies$ To test $H_0:\lambda=\theta$ v.s. $H_1:\lambda\neq\theta$ $\iff$ $H_0
 
 Reject $H_0$ if $1\notin\left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$
 
+---
+
+**EX**
+
+$$
+\Big < \begin{align*}
+    &X_1, \cdots, X_n\overset{\text{iid}}{\sim}N(\mu_x, \sigma^2)\\
+    &Y_1, \cdots, Y_m\overset{\text{iid}}{\sim}N(\mu_y, \sigma^2)
+\end{align*}
+$$
+
+Note that $S_p^2\triangleq\frac{(n-1)S^2_X+(m-1)S^2_Y}{n+m-2}$ is the best est for $\sigma^2$ and
+
+$$
+\frac{\bar{X}-\bar{Y}-(\mu_x-\mu_y)}{\sqrt{(\frac{1}{n}+\frac{1}{m})S_p^2}}\sim t_{n+m-2}\perp(\mu, \sigma^2)
+$$
+
+$\implies [(\bar{X}-\bar{Y})\pm t_{n+m-2,\frac{\alpha}{2}}\sqrt{(\frac{1}{n}+\frac{1}{m})S_p^2}]$ is $1-\alpha$ conf. int. for $\mu_x-\mu_y$.
+
+To test $H_0:\mu_x=\mu_y$ vs. $H_1:\mu_x\neq\mu_y$, reject $H_0$ if $0\notin\left[(\bar{X}-\bar{Y})\pm t_{n+m-2,\frac{\alpha}{2}}\sqrt{(\frac{1}{n}+\frac{1}{m})S_p^2}\right]$ is UMAP test.
+
+$\implies \left[(\bar{X}-\bar{Y})\pm t_{n+m-2,\frac{\alpha}{2}}\sqrt{(\frac{1}{n}+\frac{1}{m})S_p^2}\right]$ is UMAU $1-\alpha$ conf. int. for $\mu_x-\mu_y$.
+
 ## Asymptotic
+
+這個方法會讓 $n\to\infty$，因此也稱為 **Large Sample method**。
+
+As $n\to\infty$, if $\frac{W(\utilde{x})-\theta}{V(\utilde{X})}\xrightarrow{D}N(0,1)$, i.e.
+
+$$
+P\left(a\le\frac{W(\utilde{X})-\theta}{V(\utilde{X})}\le b\right)\approx P\left(a\le Z\le b\right)
+$$
+
+$$
+\begin{align*}
+    \text{i.e. }1-\alpha&\approx P_\theta\left(-Z_{\frac{\alpha}{2}}\le\frac{W(\utilde{X})-\theta}{V(\utilde{X})}\le Z_{\frac{\alpha}{2}}\right)\\
+    &=P_\theta\left(W(\utilde{X})-Z_{\frac{\alpha}{2}}V(\utilde{X})\le\theta\le W(\utilde{X})+Z_{\frac{\alpha}{2}}V(\utilde{X})\right)\\
+    &=P_\theta\left(\theta\in [W(\utilde{X})\pm Z_{\frac{\alpha}{2}}V(\utilde{X})]\right)\quad \forall\theta
+\end{align*}
+$$
+
+$\implies [W(\utilde{X})\pm Z_{\frac{\alpha}{2}}V(\utilde{X})]$ is **approximated** $1-\alpha$ conf. int. for $\theta$.
+
+**Remark**: 當有確定的樣本數時，永遠都是推導**精確**的信賴區間。只有當被要求時，才用 approximated 的信賴區間。
+
+
+:::info[Theorem]
+**C.L.T(中央極限定理)**
+
+$X_1,\cdots,X_n$ are iid with $E(X_i)=\mu, Var(X_i)\in(0, \infty)$, let $\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$, then
+
+$$
+\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\xrightarrow[n\to\infty]{D}N(0,1)
+$$
+
+
+$$
+\text{i.e. }P\left(\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\le t\right)\approx\Phi(t) \quad \forall t\text{ for large enough } n
+$$
+:::
+
+$$
+\begin{align*}
+    &\implies \text{ if }\sigma^2\text{ known}\\
+    &\implies P\left(-Z_{\frac{\alpha}{2}}\le\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\le Z_{\frac{\alpha}{2}}\right)\approx 1-\alpha\\
+    &\iff P_\mu\left(\mu\in[\bar{X}-\frac{\sigma}{\sqrt{n}}Z_{\frac{\alpha}{2}}, \bar{X}+\frac{\sigma}{\sqrt{n}}Z_{\frac{\alpha}{2}}]\right)\approx 1-\alpha\quad\forall\mu
+\end{align*}
+$$
+i.e. $[\bar{X}\pm\frac{\sigma}{\sqrt{n}}Z_{\frac{\alpha}{2}}]$ is approximated $1-\alpha$  conf. int. for $\mu$
+$$
+\begin{align*}
+    \text{Also } &P_\mu\left(\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\le Z_{\alpha}\right)=P_\mu\left(\mu\ge\bar{X}-\frac{\sigma}{\sqrt{n}}Z_{\alpha}\right)\\
+    \approx& P(Z\le Z_{\alpha})=1-\alpha\quad\forall\mu
+\end{align*}
+$$
+
+i.e. $[\bar{X}-\frac{\sigma}{\sqrt{n}}Z_{\alpha}, \infty)$ is approximated $1-\alpha$ conf lower bound for $\mu$.
+
+但以上結論都是在 $\sigma^2$ 已知的情況下。如果 $\sigma^2$ 未知，上面的結論就是錯的。
+
+:::info[Theorem]
+**Slutsky's Theorem**
+
+1. r.v.'s $Y_n\xrightarrow[n\to\infty]{D}W$ : r.v., i.e. $P(Y_n\le t)\xrightarrow[n\to\infty]{}P(W\le t)$ $\forall t$ with $F_w$: conti at $t$.
+2. r.v. $T_n\xrightarrow[n\to\infty]{P}c$ : const
+
+$$
+\implies T_nY_n\xrightarrow[n\to\infty]{D}cW
+$$
+:::
+
+**EX** $X_1,\cdots, X_n$ are iid with $E(X_i)=\mu, Var(X_i)=\sigma^2\in(0, \infty)$
+
+If $\sigma^2$ unknown
+
+$$
+\frac{\sqrt{n}(\bar{X}-\mu)}{S}=\frac{\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\xrightarrow{D}N(0,1)}{\frac{S}{\sigma}\xrightarrow{P}1} \xrightarrow{D}N(0,1)
+$$
+
+i.e. If $\sigma^2$ unknown
+
+- $[\bar{X}\pm\frac{S}{\sqrt{n}}Z_{\frac{\alpha}{2}}]$ is approximated $1-\alpha$ conf. int. for $\mu$
+- $[\bar{X}-\frac{S}{\sqrt{n}}Z_{\alpha}, \infty)$ is approximated $1-\alpha$ conf lower bound for $\mu$
+
+---
+
+**EX** $X_1, \cdots, X_n\overset{\text{iid}}{\sim}B(1, p)$ with $E(X_i)=p, Var(X_i)=p(1-p)$
+
+$$
+\text{By C.L.T}\qquad\frac{\sqrt{n}(\bar{X}-p)}{\sqrt{p(1-p)}}\xrightarrow{D}N(0,1)
+$$
+
+但其中分母部分有 $p$，這難以湊成 $[L(\utilde{X}),U(\utilde{X})]$。
+
+$$
+\text{L.L.N }\bar{X}\xrightarrow{P}p\implies\bar{X}\xrightarrow{P}p\implies\sqrt{\bar{X}(1-\bar{X})}\xrightarrow{P}\sqrt{p(1-p)}
+$$
+
+$\implies \left[\bar{X}\pm Z_{\frac{\alpha}{2}}\sqrt{\bar{X}(1-\bar{X})}/\sqrt{n}\right]$ is approximated $1-\alpha$ conf. int. for $p$.
+
+**Recall**: $\forall a_n\to 1, b_n\to 0$, $a_n\bar{X}+b_n\xrightarrow{P}p$ , i.e. 答案並不唯一。
+
+$$
+\begin{align*}
+    S^2&=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\\
+    &=\frac{1}{n-1}\sum_{i=1}^nX_i^2-\frac{n}{n-1}\bar{X}^2\\
+    &=\frac{1}{n-1}\sum_{i=1}^nX_i-\frac{n}{n-1}\bar{X}^2\quad X_i\in\{0,1\}\text{ in Bernoulli}\\
+    &=\frac{n}{n-1}\bar{X}-\frac{n}{n-1}\bar{X}^2\\
+    &=\frac{n}{n-1}\bar{X}(1-\bar{X})\\
+\end{align*}
+$$
+
+$\implies\left[\bar{X}\pm \frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n-1}}Z_{\frac{\alpha}{2}}\right]$ is also approximated $1-\alpha$ conf. int. for $p$.
+
+**Remark**: 如果 $\bar{X}=1$ or $0$ 時，按照以上方法計算出的信賴區間會只有單點。在實際應用中，可能會偏離正確的信賴區間。
+
+---
+
+**EX** $X_1, \cdots, X_n\overset{\text{iid}}{\sim}P(\lambda)$ with $E(X_i)=\lambda=Var(X_i)$. 我們可以用 $\bar{X}$ 或 $S^2$ 來估計 $\lambda$。
+
+$\implies \left[\bar{X}\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{\bar{X}\text{ or }S^2}{n}}\right]$ are approximated $1-\alpha$ conf. int. for $\lambda$.
+
+我們還可以直接假設區間 $C(\utilde{X})=\set{\lambda: -Z_{\frac{\alpha}{2}}\le\frac{\sqrt{n}(\bar{X}-\lambda)}{\sqrt{\lambda}}\le Z_{\frac{\alpha}{2}}}$，然後分別解出左右兩個不等式。這個區間相比於上面的區間更精確，因為少了一個 $\lambda$ 的估計。
