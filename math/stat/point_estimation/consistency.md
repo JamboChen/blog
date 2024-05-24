@@ -56,3 +56,25 @@ $\implies \delta^*$ is consistent.
 E.g. $\delta=\bar{X}\implies Var(\bar{X})=\frac{\sigma^2}{n}\to 0$
 
 ## 大數法則
+
+:::info[Theorem]
+1. $X_1,\cdots,X_n$ are iid with $E(X_i)=\mu$ $\implies \bar{X}\xrightarrow{P}\mu$, i.e. $\bar{X}$ is consistent.
+2. $X_n\xrightarrow{P}c\implies g(Y_n)\xrightarrow{P}g(c), \forall g$ continuous. e.g. $\bar{X}^2\xrightarrow{P}\mu^2$
+3. $X_n\xrightarrow{P}c, Y_n\xrightarrow{P}d\implies X_n+Y_n\xrightarrow{P}c+d$
+:::
+
+**EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}E(X_i)=\mu, Var(X_i)=\sigma^2<\infty$
+
+$\implies X_1^2+\cdots+X_n^2\overset{\text{iid}}{\sim}E(X_i^2)=Var(X_i)+E(X_i)^2=\sigma^2+\mu^2$
+
+By LLN, $\bar{X^2}=\frac{1}{n}\sum_{i=1}^nX_i^2\xrightarrow{P}\sigma^2+\mu^2$ and $\bar{X}\xrightarrow{P}\mu\implies \bar{X}^2\xrightarrow{P}\mu^2$
+
+$$
+\implies S_*^2=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2=\frac{1}{n}\sum_{i=1}^nX_i^2-\bar{X}^2\xrightarrow{P}\sigma^2
+$$
+
+$$
+\because \frac{n}{n-1}\xrightarrow[n\to\infty]{}1\implies S^2=\frac{n}{n-1}S_*^2\xrightarrow{P}\sigma^2
+$$
+
+以上並沒有假設 $X_i$ 的分佈，只要 $E(X_i)=\mu, Var(X_i)=\sigma^2<\infty$ 即可。
