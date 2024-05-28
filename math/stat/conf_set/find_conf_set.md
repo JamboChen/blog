@@ -608,3 +608,91 @@ $\implies\left[\bar{X}\pm \frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n-1}}Z_{\frac{\
 $\implies \left[\bar{X}\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{\bar{X}\text{ or }S^2}{n}}\right]$ are approximated $1-\alpha$ conf. int. for $\lambda$.
 
 我們還可以直接假設區間 $C(\utilde{X})=\set{\lambda: -Z_{\frac{\alpha}{2}}\le\frac{\sqrt{n}(\bar{X}-\lambda)}{\sqrt{\lambda}}\le Z_{\frac{\alpha}{2}}}$，然後分別解出左右兩個不等式。這個區間相比於上面的區間更精確，因為少了一個 $\lambda$ 的估計。
+
+### $\delta$-method
+
+如果我們關注參數 $\mu$ ,可以利用 C.L.T 得到 $\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\xrightarrow{D}N(0,1), S\xrightarrow{P}\sigma$，進而得到 $\mu$ 的信賴區間。但如果我們關注的是 $g(\mu)$ ，我們則會使用 $\delta$-method。
+
+:::info[Theorem]
+$\delta$-method: As $n\to\infty$, $\forall g$ with $g'$ exists and $g'(\mu)\neq 0$
+
+If $\sqrt{n}(T_n-\mu)\xrightarrow{D}N(0, \sigma^2)$
+
+then $\sqrt{n}(g(T_n)-g(\mu))\xrightarrow{D}N(0, \sigma^2\cdot[g'(\mu)]^2)$
+:::
+
+**EX** $X_1,\cdots, X_n\overset{\text{iid}}{\sim}B(1,p)$
+
+我們關心 $\frac{p}{1-p}$。（如果 $p$ 是遊戲的勝率，那麼 $\frac{p}{1-p}$ 就是勝算(odds)）
+
+$$
+\begin{align*}
+    \text{Let }g(p)&=\log\left(\frac{p}{1-p}\right)\triangleq \text{logit}(p)\\
+    &=\log(p)-\log(1-p)\\
+\end{align*}
+$$
+
+$$
+\implies g'(p)=\frac{1}{p}-\frac{1}{1-p}=\frac{1}{p(1-p)}
+$$
+
+$$
+\begin{align*}
+    \frac{\sqrt{n}(\bar{X}-p)}{\sqrt{p(1-p)}}\xrightarrow{D}N(0,1) &\iff\sqrt{n}(\bar{X}-p)\xrightarrow{D}N(0, p(1-p))\\
+    \delta\text{-methpd with }g(p)=\log(\frac{p}{1-p})&\implies \sqrt{n}(g(\bar{X})-g(p))\xrightarrow{D}N(0, [p(1-p)]\cdot[\frac{1}{p(1-p)}]^2)\\
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    \text{i.e.} &\sqrt{n}\left(\log\left(\frac{T}{n-T}\right)-\log\left(\frac{p}{1-p}\right)\right)\xrightarrow{D}N(0, 1)\qquad\text{with }T=\sum X_i\\
+    \iff &\frac{\sqrt{n}\left(\log\left(\frac{T}{n-T}\right)-\log\left(\frac{p}{1-p}\right)\right)}{\sqrt{\frac{1}{p(1-p)}}}\xrightarrow{D}N(0, 1)\\
+    \iff &\frac{\log\left(\frac{T}{n-T}\right)-\log\left(\frac{p}{1-p}\right)}{\sqrt{\frac{1}{n}\left(\frac{1}{p}+\frac{1}{1-p}\right)}}\xrightarrow{D}N(0, 1)\\
+\end{align*}
+$$
+
+分母部分仍有 $p$，我們可以用 $\bar{X}$ 來估計 $p$，並且因為 **Slutsky's Theorem**，收斂性不會受到影響。
+
+$$
+\begin{align*}
+    \implies& \frac{\log\left(\frac{T}{n-T}\right)-\log\left(\frac{p}{1-p}\right)}{\sqrt{\frac{1}{\cancel{n}}\left(\frac{\cancel{n}}{T}+\frac{\cancel{n}}{n-T}\right)}}\xrightarrow{D}N(0, 1)\\
+    \implies& P_p\left(\log\left(\frac{p}{1-p}\right)\in\left[\log\left(\frac{T}{n-T}\right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{T}+\frac{1}{n-T}}\right]\right)\approx 1-\alpha
+\end{align*}
+$$
+
+$\implies$ $[\log\left(\frac{T}{n-T}\right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{T}+\frac{1}{n-T}}]$ is approximated $1-\alpha$ conf. int. for $\log\left(\frac{p}{1-p}\right)$
+
+$\implies$ $\left[\exp\left(\log\left(\frac{T}{n-T}\right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{T}+\frac{1}{n-T}}\right)\right]$ is approximated $1-\alpha$ conf. int. for $\frac{p}{1-p}$
+
+
+因為在 $B(1,p)$ 中，$\sum X_i=T$ 就会是成功的次数，$n-T$ 则是失败的次数。因此 $\frac{T}{n-T}$ 就是成功的次数与失败的次数的比值，即 $\frac{p}{1-p}$。
+
+---
+
+for large $n$
+
+$$
+\begin{align*}
+    &\log\left(\frac{T_x}{n-T_x}\right)-\log\left(\frac{p_1}{1-p_1}\right)\approx \sqrt{\frac{1}{T_x}+\frac{1}{n-T_x}}Z_1\\
+    &\log\left(\frac{T_y}{m-T_y}\right)-\log\left(\frac{p_2}{1-p_2}\right)\approx \sqrt{\frac{1}{T_y}+\frac{1}{m-T_y}}Z_2
+\end{align*}\qquad\text{with }Z_1, Z_2\sim N(0,1) \text{ iid}
+$$
+
+
+$$
+\begin{align*}
+    \log\left(\frac{T_x}{n-T_x}\frac{m-T_y}{T_y}\right)-\log\left(\frac{p_1}{1-p_1}\frac{p_2}{1-p_2}\right)&\approx \sqrt{\frac{1}{T_x}+\frac{1}{n-T_x}}Z_1+\sqrt{\frac{1}{T_y}+\frac{1}{m-T_y}}Z_2\\
+    &=N(0,\frac{1}{T_x}+\frac{1}{n-T_x}+\frac{1}{T_y}+\frac{1}{m-T_y})
+\end{align*}
+$$
+
+如果我們關注的是勝算比（odds ratio）$\frac{p_1}{1-p_1}\big/\frac{p_2}{1-p_2}\triangleq\theta$
+
+$$
+\implies P_{p_1,p_2}\left(\log(\theta)\in\left[\log\left(\frac{T_x}{n-T_x}\frac{m-T_y}{T_y}\right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{T_x}+\frac{1}{n-T_x}+\frac{1}{T_y}+\frac{1}{m-T_y}}\right]\right)\approx 1-\alpha
+$$
+
+|     | 正面  | 反面    | 總和 |
+| --- | ----- | ------- | ---- |
+| X   | $T_x$ | $n-T_x$ | n    |
+| Y   | $T_y$ | $m-T_y$ | m    |
