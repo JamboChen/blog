@@ -95,7 +95,7 @@ n\gg p \implies\begin{cases}
 \end{cases}\quad\text{ sample of size }n\text{ from }N(0,1) 
 $$
 
-## 殘差圖
+### 殘差圖
 
 在做診斷時，我們通常會畫出殘差圖（residual plot）來檢查模型是否適合數據。因為 $e_i$ 的方差還是與 $\sigma$ 相關，所以我們通常會用 $e^*_i$ 或 $\gamma_i$ 來畫殘差圖。
 
@@ -264,7 +264,7 @@ i.e. 截距 $\mu=0$，斜率 $\tau=\sigma$（使用 $e_{(i)}$） 或 $\tau=1$（
 - 如果殘差圖呈現二次曲線關係，則將 $x^*$ 和 ${x^*}^2$ 加入到模型中。
 - 如果c殘差圖呈現波動範圍有明顯變化，那麼說明數據收集時可能有問題，比如資料的品質發生了變化。
 
-## 離群點
+### 離群點
 
 當畫原始點 $Y$ 和 $x$ 之間的圖時，可能會發生一些點與其他點有明顯的差距。這些點會影響 $\utilde{b}$ 的結果。
 
@@ -281,3 +281,242 @@ i.e. 截距 $\mu=0$，斜率 $\tau=\sigma$（使用 $e_{(i)}$） 或 $\tau=1$（
 :::
 
 Remark: 直方圖、點圖或殘差圖可以幫我們找到 outliers，但可能無法找到 influential points。因此要用其他方法來找，比如：DBeta, DFitted, Cook's distance...
+
+### Tests for Constancy of error Variance
+
+當殘差圖呈現的波動沒有明顯變化或者明顯沒有變化時，我們會需要用一些檢驗來確認殘差的方差是否是常數。
+
+#### Modified Levene test (Brown-Forsythe test)
+
+適用於簡單線性回歸，並且方差隨著 $X$ 單調變化。並且在 $n\gg p$ s.t. $e_i$ 之間的相關性可以忽略。
+
+Remark：在使用上，對於複回歸，我們也可以對每個解釋變數 $x_j$ 做檢驗。
+
+假設有 $n$ 組原始數據。首先將原始數據按照 $X$ 低值和高值分成兩組分別有 $n_1$ 和 $n_2$ 組數據，並且 $n_1+n_2=n$。而殘差 $e_i$ 同樣也會被分成兩組 $e_{i1}$ 和 $e_{i2}$，相當於是殘差小和殘差大的兩組數據。
+
+令 $\tilde{e}_j=\text{median}\set{e_{ij}:i=1,\cdots,n_j}, j=1,2$ 即兩組數據的中位數。殘差小的組距離其中位數的平均距離會比殘差大的組距離中位數的平均距離要小。
+
+令 $d_{ij}=|e_{ij}-\tilde{e_j}|, i=1,\cdots,n_j, j=1,2$ 以及 $\bar{d}_j=\frac{1}{n_j}\sum_{i=1}^{n_j}d_{ij}$。
+
+把兩組 $d_{ij}$ 當成兩組 normal 分佈的觀測值，而我們要檢定這兩個 normal 分佈的均值是否相等。如果均值不等就代表兩組 $e_{ij}$ 的分散程度不同。
+
+$$
+t^*_L\triangleq \frac{\bar{d}_1-\bar{d}_2}{S\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\qquad \text{with } S^2=\frac{\sum(d_{i1}-\bar{d}_1)^2+\sum(d_{i2-\bar{d}_2}^2)}{n-2}
+$$
+
+在 $H_0:\sigma^2\set{\varepsilon_i}=\sigma^2 \forall i$ 下，即 $d_{i1}$ 和 $d_{i2}$ 母體的均值相等。並且 $n_1,n_2$ 沒有很小，那麼 $t^*_L\sim t_{n-2}$
+
+因此在 level $\alpha$ 下，如果 $|t^*_L|>t_{n-2,\frac{\alpha}{2}}$，則拒絕 $H_0$，即殘差的方差不等。
+
+#### Breusch-Pagan test
+
+應用於樣本數足夠大，並且 $\ln\sigma^2_i=\gamma_0+\gamma_1x_i$ 即方差與 $X$ 有指數關係。I.e. $H_0:\sigma^2\set{\varepsilon_i}=\sigma^2$ $\forall i\implies H_0:\gamma_1=0$
+
+首先對於 $e^2_i$ 做每個 $x_i$ 的簡單線性回歸，並得到 $\text{SSR}$ 記作 $\text{SSR}^*$。並且做 $Y$ 於 $x_i$ 的簡單線性回歸，得到 SSE。則有以下結論：
+
+$$
+X^2_{BP}\triangleq\frac{\frac{\text{SSR}^*}{2}}{\left(\frac{\text{SSR}}{n}\right)^2}\xrightarrow{n\to\infty}\chi^2_1
+$$
+
+因此，當 $X^2_{BP}>\chi^2_{1,\alpha}$ 時拒絕 $H_0:\sigma^2\set{\varepsilon_i}=\sigma^2\quad\forall i$ 可以得到 level $\approx \alpha$ 檢定。
+
+## Remedial methods
+
+如果發生了方差不等的情況，我們可以有以下方法來調整：
+1. 在分析前先對 $Y_i$ 進行轉換
+2. Weighted LSE(WLSE)
+
+### Variance-stablization transformation
+
+Let $E(Y_i)=\theta_i$ and $\sigma^2\set{Y_i}=\sigma^2(\theta_i)$ 即方差隨著均值的變化而變化。
+
+我們希望找到一個函數 $f$ 使得 $f(Y_i)$ 的方差是常數。
+
+Note：如果 $f'' <\infty$，我們可以找到一個與 $Y_i$ 和 $\theta_i$ 相關的 $\theta^*_i$ 使得
+
+$$
+\begin{align*}
+   f(Y_i)&=f(\theta_i)+f'(\theta_i)(Y_i-\theta_i)+\frac{1}{2}f''(\theta^*_i)(Y_i-\theta_i)^2\\
+   \iff f(Y_i)-f(\theta_i)&=f'(\theta_i)(Y_i-\theta_i)+\frac{1}{2}f''(\theta^*_i)(Y_i-\theta_i)^2
+\end{align*}
+$$
+
+當 $(Y_i-\theta_i)^2\approx 0\implies E[f(Y_i-\theta_i)^2]\approx 0\implies E[f(Y_i)]\approx f(\theta_i)=f(E[Y_i])$
+
+$\implies E[(f(Y_i)-f(\theta_i))^2]\approx \sigma^2\set{f(Y_i)}\approx f'(\theta_i)^2\sigma^2\set{Y_i}$
+
+$$
+\begin{align*}
+    &\text{i.e. }\sigma^2\set{f(Y_i)}\approx \left(f'(\theta_i)\right)^2\sigma^2\set{Y_i}=\left(f'(\theta_i)\right)^2\sigma^2(\theta_i)=c^2\text{ const in }\theta_i\\
+    &\text{i.e. }f'(\theta_i)=\frac{c}{\sigma(\theta_i)}
+\end{align*}
+
+$$
+
+:::info[Definition]
+A function $f$ s.t. 
+$$
+f'(\theta_i)=\frac{c}{\sigma(\theta_i)}
+$$
+
+with constant $c>0$ is called a **variance-stabilizing transformation** 方差穩定轉換。
+:::
+
+**Remark:** $\delta$-method:
+
+$$
+\begin{align*}
+    &\sqrt{n}(T_n-\theta)\xrightarrow{D}N(0,\tau^2(\theta))\\
+    \implies& \sqrt{n}(g(T_n)-g(\theta))\xrightarrow{D}N(0,\underbrace{(g'(\theta))^2\tau^2(\theta)}_{=c^2})
+\end{align*}
+$$
+
+**EX**: 
+
+1. $Y_i\sim P(\theta_i)$ with $E(Y_i)=\theta_i=\sigma^2\set{Y_i}$, i.e. $\sigma^2(\theta)=\sigma^2{Y_i}=\theta\implies\sigma(\theta)=\sqrt{\theta}$。注意我們並不知道 $\theta_i$ 的真實值。 
+   
+   $$
+    \begin{align*}
+       &\implies f(t)=\int \frac{1}{\sigma(t)} dt=\int \frac{1}{\sqrt{t}}dt\propto \sqrt{t}\\
+       &\implies Y_i\xrightarrow[\text{variance}]{\text{stablitice}} \sqrt{Y_i}\triangleq Y^*_i
+    \end{align*}
+   $$
+
+2. $Y_i\sim \exp(\frac{1}{\theta})$ with $\sigma^2(\theta)=\theta^2$ i.e. $\sigma(\theta)=\theta$。
+
+   $$
+    \implies f(t)=\int \frac{1}{\sigma(t)} dt=\int \frac{1}{t}dt\propto \ln(t)
+   $$
+
+3. $\sigma^2(\theta)=\theta^4$ i.e. $\sigma(\theta)=\theta^2$
+
+   $$
+    \implies f(t)=\int \frac{1}{\sigma(t)} dt=\int \frac{1}{t^2}dt\propto \frac{1}{t}
+   $$
+
+4. $Y_i\sim\text{Ber}(p)$ with $\sigma^2(\theta)=\theta(1-\theta)$ i.e. $\sigma(\theta)=\sqrt{\theta(1-\theta)}$
+
+   $$
+    \implies f(t)=\int \frac{1}{\sigma(t)} dt=\int \frac{1}{\sqrt{t(1-t)}}dt\propto \arcsin(\sqrt{t})
+   $$
+
+:::tip
+**Most useful transformation in parctic**:
+
+| $\sigma(\theta)$                 | data's range   | transformation                          |
+| -------------------------------- | -------------- | --------------------------------------- |
+| $k\theta$                        | $Y\ge 0$       | $\ln Y$                                 |
+| $k\sqrt{\theta}$                 | $Y\ge 0$       | $\sqrt{Y}$                              |
+| $\theta^2$                       | $Y\ge 0$       | $\frac{1}{Y}$                           |
+| $\sqrt{\theta(1-\theta)}$        | $0\le Y\le 1$  | $\arcsin(\sqrt{Y})$                     |
+| $\frac{\sqrt{1-\theta}}{\theta}$ | $0\le Y\le 1$  | $\sqrt{1-Y}\frac{(1-Y)^\frac{3}{2}}{3}$ |
+| $1-\theta^2$                     | $-1\le Y\le 1$ | $\ln\left(\frac{1+Y}{1-Y}\right)$       |
+:::
+
+但轉換可能會改變原本數據的分佈
+
+:::tip[Thory]
+**Meta-theory**
+
+對方差進行穩定轉換，通常會讓數據看起來更像常態分佈。
+:::
+
+因此如果發現方差不等的情況，要優先處理。
+
+### Weighted LSE
+
+與原本的模型假設不同的是，我們假設方差並不是常數，即：
+
+$$
+\utilde{Y}=D\utilde{\beta}+\utilde{\varepsilon}\quad\text{ where }\utilde{\varepsilon}\sim N_n(0,\bcancel{\sum}_{\utilde{\varepsilon}})\quad \bcancel{\sum}_{\utilde{\varepsilon}}=\text{diag}(\sigma^2_1,\sigma^2_2,\cdots,\sigma^2_n)
+$$
+
+假設 $\sigma^2_i=\sigma^2c^2_i$ with $c_i>0$，並且 $c_i$ 是已知的，這樣就只有一個未知數 $\sigma^2$。
+
+$$
+\begin{align*}
+    &Y_i=\beta_0+\beta_1X_{i1} + \cdots +\beta_kX_{ik}+\varepsilon_i\\
+    \iff& \frac{Y_i}{c_i}= \frac{\beta_0}{c_i}+\frac{\beta_1}{c_i}X_{i1} + \cdots +\frac{\beta_k}{c_i}X_{ik}+\frac{\varepsilon_i}{c_i}\\
+    \text{i.e. }& \frac{Y_i}{c_i}=\frac{\beta_0+\beta_1X_{i1} + \cdots +\beta_kX_{ik}}{c_i}+\varepsilon^*_i \tag{$*$}
+\end{align*}
+$$
+
+其中 $\varepsilon^*_i\triangleq \frac{\varepsilon_i}{c_i}\sim N(0,c_i)$。因此這個新的模型就符合我們對於方差的假設。為了找到 $\utilde{\beta}$ 在 $(*)$ 模型下的 LSE，我們需要最小化：
+
+$$
+\begin{align*}
+    Q_W(\utilde{\beta})&\triangleq \sum_{i=1}^n\left(\frac{Y_i}{c_i}-\left(\frac{\beta_0+\beta_1X_{i1} + \cdots +\beta_kX_{ik}}{c_i}\right) \right)^2\\
+    &=\sum_{i=1}^n\frac{1}{c_i^2}\left(Y_i-(\beta_0+\beta_1X_{i1} + \cdots +\beta_kX_{ik})\right)^2\\
+    &=(\utilde{Y}-D\utilde{\beta})^tW(\utilde{Y}-D\utilde{\beta})\quad\text{ where } W=\text{diag}\set{\frac{1}{c_1^2},\cdots,\frac{1}{c_n^2}}=\text{diag}\set{w_1,\cdots,w_n}
+\end{align*}
+$$
+
+:::info[Definition]
+$\utilde{b}_W$ is the WLSE of $\beta$ under $\utilde{Y}=D\utilde{\beta}+\utilde{\varepsilon}$ with $\varepsilon_i=\sigma^2c_i^2$ if
+
+$$
+Q_W(\utilde{b}_W)=\min_{\utilde{\beta}}Q_W(\utilde{\beta})
+$$
+:::
+
+與 LSE 相似，$Q_W(\utilde{b}_W)=\min_{\utilde{\beta}}Q_W(\utilde{\beta})\iff \utilde{b}_W$ 滿足 $D^tW\utilde{Y}=D^tWD\utilde{b}_W$ 
+
+如果 $(D^tWD)^t$ 存在，則 $\utilde{b}_W=(D^tWD)^{-1}D^tW\utilde{Y}$
+
+**Note**:
+
+$$
+\begin{align*}
+    Q_W(\beta)&=(\utilde{Y}-D\utilde{\beta})^tW(\utilde{Y}-D\utilde{\beta})\\
+    &=(W^\frac{1}{2}\utilde{Y}-W^\frac{1}{2}D\utilde{\beta})^t(W^\frac{1}{2}\utilde{Y}-W^\frac{1}{2}D\utilde{\beta})\quad\text{where }W^\frac{1}{2}=\text{diag}\set{\frac{1}{c_1},\cdots,\frac{1}{c_n}}\\
+    &=(\utilde{Y}^*-D^*\utilde{\beta})^t(\utilde{Y}^*-D^*\utilde{\beta})\quad\text{where }\utilde{Y}^*=W^\frac{1}{2}\utilde{Y}, D^*=W^\frac{1}{2}D
+\end{align*}
+$$
+
+這就想轉換成了一個新的模型 $\utilde{Y}^*=D^*\utilde{\beta}+\utilde{\varepsilon}^*$ with $\varepsilon^*_i\sim N(0,\sigma^2I_n)$，並且 $D^*$ is of full rank $\iff D$ is of full rank。
+
+根據 **Gauss-Markov theorem**，$\utilde{b}_W$ 是 $\utilde{\beta}$ 的 BLUE。雖然用原始模型得到的 $\utilde{b}$ 仍然會是 $\utilde{\beta}$ 的無偏估計，但因為 $\utilde{b}_W$ 的方差更小，因此 $\utilde{b}$ 就不再是 BLUE。
+
+在 $(D^*,\utilde{Y}^*)$ 模型下
+
+$$
+\begin{align*}
+    \text{MSE}_W&\triangleq \frac{(\utilde{Y}^*-D^*\utilde{b}_W)^t(\utilde{Y}^*-D^*\utilde{b}_W)}{n-p}\\
+    &=\frac{(\utilde{Y}-D\utilde{b}_W)^tW(\utilde{Y}-D\utilde{b}_W)}{n-p}\\
+    &=\frac{\utilde{e}^tW\utilde{e}}{n-p}\\
+    &=\frac{1}{n-p}\sum_{i=1}^n\frac{e_i^2}{c_i^2}\\
+\end{align*}
+$$
+
+$$
+\implies S^2\set{\utilde{b}_W}=\text{MSE}_W(D^tWD)^{-1}
+$$
+
+因此，如果 $\utilde{\varepsilon}\sim N_n(0,\sigma^2\text{diag}(c^2_1,\cdots,c^2_n))$ 其中 $\sigma^2$ 未知但 $c_i$ 已知，那麼我們應該用 $\utilde{b}_W$ 來估計 $\utilde{\beta}$。並且：
+- $\utilde{\hat{Y}}=D\utilde{b}_W$
+- $\utilde{e}=\utilde{Y}-\utilde{\hat{Y}}$
+- $\text{MSE}_W=\frac{\utilde{e}^tW\utilde{e}}{n-p}$ 用於估計 $\sigma^2$
+
+---
+
+如果我們對 $\sigma^2_i$ 完全不知道，那我們就需要通過現有資料來估計 $\sigma^2_i$。
+
+1. 做 $\utilde{Y}$ 的回歸模型，得到 $\utilde{e}$
+2. 通過 $e_i$ 估計 $\sigma^2_i$
+3. 當得到 $\sigma^2$ 的估計值 $S^2$ 後，令 $w_i=\frac{1}{S^2_i}$ 並得到 WLSE
+
+以下是一些估計方法的經驗總結：
+
+1. 如果 $e$ 與 $X_j$ 的圖呈麥克風形狀。做 $Y^*=|e|\sim X_{j}$ 的回歸，$\hat{Y_i^*}=S_i$
+
+   ![alt text](img/mlse_1.png)
+2. 如果 $e$ 與 $Y$ 的圖呈麥克風形狀。做 $Y^*=|e|\sim Y_i$ 的回歸，$\hat{Y_i^*}=S_i$
+
+   ![alt text](img/mlse_2.png)
+3. 如果 $e^2$ 與 $X_j$ 的圖呈上揚趨勢。做 $Y^*=e^2\sim X_{j}$ 的回歸，$\hat{Y_i^*}=S_i^2$
+
+   ![alt text](img/mlse_3.png)
+
+4. 如果 $e$ 與 $X_j$ 的圖變化率由大到小。做 $Y^*=|e|\sim X_j+X_j^2$ 的回歸，$\hat{Y_i^*}=S_i$
+
+   ![alt text](img/mlse_4.png)
