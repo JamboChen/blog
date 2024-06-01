@@ -696,3 +696,248 @@ $$
 | --- | ----- | ------- | ---- |
 | X   | $T_x$ | $n-T_x$ | n    |
 | Y   | $T_y$ | $m-T_y$ | m    |
+
+---
+
+**EX**：對於阿司匹林是否能預防心臟病這一問題收集到以下數據：
+
+| 是否有心臟病 | 有  | 沒有  |
+| ------------ | --- | ----- |
+| 阿司匹林     | 104 | 10933 |
+| 安慰劑       | 189 | 10845 |
+
+我們關心 odds ratio $\theta=\frac{p_1}{1-p_1}\big/\frac{p_2}{1-p_2}$，其中 $p_2$ 是阿司匹林組的心臟病發生率，$p_1$ 是安慰劑組的心臟病發生率。
+
+$$
+\begin{align*}
+    &\implies \left[\ln\left(\frac{189\times 10933}{10845\times 104}\right)\pm 1.96\sqrt{\frac{1}{189}+\frac{1}{10845}+\frac{1}{104}+\frac{1}{10933}} \right]=[0.365, 0.846]\text{ is } 95\%\text{ conf. int. for }\ln(\theta)\\
+    &\implies \left[e^{0.365}, e^{0.846}\right]=[1.44, 2.33]\text{ is } 95\%\text{ conf. int. for }\theta
+\end{align*}
+$$
+
+如果阿司匹林明顯有預防心臟病的效果，那麼 $p_2$ 應該顯著小於 $p_1$；如果沒有效果，那麼吃阿司匹林或安慰劑的產生心臟病的幾率應該相同。因此做檢定：
+
+$$
+\begin{align*}
+    & H_0: p_1=p_2\text{ vs. }H_1: p_1>p_2\\
+    \iff& H_0: \theta=1\text{ vs. }H_1: \theta>1\\
+\end{align*}
+$$
+
+$1\notin [1.44, 2.33]\implies$ reject $H_0$ at $5\%$ level. I.e. 阿司匹林在預防心臟病方面有顯著效果。
+
+---
+
+**EX**:
+
+$$
+\perp\Big<\begin{align*}
+    &X\sim B(n,p)\\
+    &Y\sim B(m,p)
+\end{align*}\qquad\theta=\frac{p_1(1-p_2)}{(1-p_1)p_2}
+$$
+
+將獲得的 Binomal 數據整理成以下 $2\times 2$ 列聯表（contingency table）
+
+| Data | S         | F               | Total |
+| ---- | --------- | --------------- | ----- |
+|      | $x_{p_1}$ | $n-x_{(1-p_1)}$ | n     |
+|      | $y_{p_2}$ | $m-x_{(1-p_2)}$ | m     |
+
+$$
+\begin{align*}
+    &\ln\theta\in \left[\ln\left(\frac{x(m-y)}{y(n-x)}\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{x}+\frac{1}{n-x}+\frac{1}{y}+\frac{1}{m-y}} \right)\right]=[A,B] \text{ with conf }\approx 1-\alpha\\
+    \implies& \theta\in [e^A, e^B] \text{ with conf }\approx 1-\alpha
+\end{align*}
+$$
+
+**Remark**：這個結論對於從 multinomial / Poisson 獲得樣本所組成的列聯表也是成立的。
+
+---
+
+**EX**:
+
+收集到以下數據。A, B 是關心的兩個不同的事件（e.g. 天氣、路口），中間表格則是交集事件發生的次數，以及發生幾率。這組數據服從 multinomial distribution。
+
+|       | $B_1$            | $B_2$            |
+| ----- | ---------------- | ---------------- |
+| $A_1$ | $X_{11}, P_{11}$ | $X_{12}, P_{12}$ |
+| $A_2$ | $X_{21}, P_{21}$ | $X_{22}, P_{22}$ |
+
+$\sum_{i=1}^2\sum_{j=1}^2 X_{ij}=n\quad \sum_{i=1}^2\sum_{j=1}^2 P_{ij}=1$
+
+$$
+\begin{align*}
+    &\utilde{X}=(X_{11}, X_{12}, X_{21}, X_{22})\\
+    &\utilde{P}=(P_{11}, P_{12}, P_{21}, P_{22})
+\end{align*}\sim \text{Multinomial}_n(k, \utilde{P})\quad k=\text{ col }\times \text{ row }=4
+$$
+
+$$
+\theta\triangleq \frac{P_{11}P_{22}}{P_{12}P_{21}}: \text{ odds ratio}
+$$
+
+如果 $A\perp B$，那麼不管在 $A_1$ 或 $A_2$ 條件下，$B_1$ 和 $B_2$ 的發生概率應該是不變的。因此
+
+$$
+\begin{align*}
+    & H_0: A\perp B\\
+    \iff& H_0: \frac{P_{11}}{P_{12}}=\frac{P_{21}}{P_{22}}\\
+    \iff& H_0: \frac{P_{11}P_{22}}{P_{12}P_{21}}=\theta=1\\
+    \iff& H_0: \ln\theta=0
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    &\implies \ln\theta\in \left[\ln\left(\frac{X_{11}X_{22}}{X_{12}X_{21}}\right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{X_{11}}+\frac{1}{X_{12}}+\frac{1}{X_{21}}+\frac{1}{X_{22}}}\right]=[A,B] \text{ with conf }\approx 1-\alpha\\
+    &\implies \theta\in [e^A, e^B] \text{ with conf }\approx 1-\alpha
+\end{align*}
+$$
+
+廣泛來說，$\utilde{X}\sim \text{Multinomial}_n(k,\utilde{P})$ with $k=I\times J$ 可以做成一張 $I\times J$ 的列聯表
+
+| A\B      | $B_1$    | $B_2$    | $\cdots$ | $B_J$    |
+| -------- | -------- | -------- | -------- | -------- |
+| $A_1$    | $X_{11}$ | $X_{12}$ | $\cdots$ | $X_{1J}$ |
+| $A_2$    | $X_{21}$ | $X_{22}$ | $\cdots$ | $X_{2J}$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ |
+| $A_I$    | $X_{I1}$ | $X_{I2}$ | $\cdots$ | $X_{IJ}$ |
+
+而關注的問題通常是 $H_0:A\perp B$ v.s. $H_1:A\not\perp B$。進一步可能會關注關鍵的地方在哪，因此會在 A, B 中各挑選 2 個事件組成 $2\times 2$ 的列聯表，並計算 odds ratio 的信賴區間。
+
+### Multivariate
+
+#### C.L.T
+
+$$
+\utilde{X}_1, \cdots, \utilde{X}_n \text{ iid with } E(\utilde{X}_i)=\utilde{\theta}, Var(\utilde{X}_i)=\bcancel{\utilde{\Sigma}}
+$$
+
+如果每個隨機向量 $\utilde{X}_i$ 的維度都是 $m$，那麼 $\bar{X}=\frac{1}{n}\sum\utilde{X}_i$ 也會是一個 $m$ 維的隨機向量。
+
+$$
+\implies \sqrt{n}(\bar{X}-\utilde{\theta})\xrightarrow[n\to\infty]{D}N_m(\utilde{0}, \bcancel{\utilde{\Sigma}})
+$$
+
+**EX**: $\utilde{Y}\sim \text{Multinomial}_n(k,\utilde{P})$
+
+|         | 1     | 2     | $\cdots$ | k     | total |
+| ------- | ----- | ----- | -------- | ----- | ----- |
+| data    | $Y_1$ | $Y_2$ | $\cdots$ | $Y_k$ | n     |
+| w) prob | $P_1$ | $P_2$ | $\cdots$ | $P_k$ | 1     |
+
+$\implies$ est $P_j$ by $\frac{Y_j}{n}$, i.e. $\utilde{\hat{P}}=\frac{\utilde{Y}}{n}$
+
+如果令 $\utilde{X}_i$ 是第 $i$ 次丟一個球的結果。因為一個球只能進一個籃子裡，所以每個 $\utilde{X}_i$ 向量中只有一個元素是 1，其他都是 0。
+
+如果單看 $\utilde{X}_i$ 中的每個 $X_{ij}$，那麼 $X_{ij}\sim B(1,P_j)$ with $E[X_{ij}\cdot X_{ij'}]=0\quad Var(X_{ij})=P_j(1-P_j)\implies\forall j\neq j'\quad Cov(X_{ij},X_{ij'})=-P_jP_{j'}$
+
+I.e. $\utilde{X}_i\sim \text{Multinomial}_1(k, \utilde{P})$ with
+
+$$
+\begin{align*}
+    E(X_i)=\utilde{P}\quad \sigma^2\set{\utilde{X}_i}&=\begin{bmatrix}
+      P_1(1-P_1) & -P_1P_2 & \cdots & -P_1P_k\\
+      -P_2P_1 & P_2(1-P_2) & \cdots & -P_2P_k\\
+      \vdots & \vdots & \ddots & \vdots\\
+      -P_kP_1 & -P_kP_2 & \cdots & P_k(1-P_k)
+  \end{bmatrix}\\
+  &=\text{diag}(\utilde{P})-\utilde{P}\utilde{P}^t=\bcancel{\Sigma}
+\end{align*}
+$$
+
+$$
+\implies \utilde{Y}=\sum \utilde{X}_i\implies \utilde{\hat{P}}=\frac{\utilde{Y}}{n}=\bar{X}
+$$
+
+$$
+\xRightarrow{\text{C.L.T}} \sqrt{n}(\utilde{\hat{P}}-\utilde{P})\xrightarrow{D}N_m(\utilde{0}, \bcancel{\Sigma})
+$$
+
+#### $\delta$-method
+
+$$
+\begin{align*}
+    &\sqrt{n}(\bar{X}-\utilde{\theta})\xrightarrow{D}N_m(\utilde{0}, \bcancel{\Sigma})\\
+    \implies& \sqrt{n}(g(\bar{X})-g(\utilde{\theta}))\xrightarrow{D}N_m(\utilde{0},\nabla g(\utilde{\theta})^t\bcancel{\Sigma}\nabla g(\utilde{\theta}))
+\end{align*}
+$$
+
+$$
+\forall g:\R^m\to \R \quad\text{with } \nabla g(\utilde{\theta})=\begin{pmatrix}
+    \frac{\partial g}{\partial \theta_1}(\utilde{\theta})\\
+    \vdots\\
+    \frac{\partial g}{\partial \theta_m}(\utilde{\theta})
+\end{pmatrix}\text{ exists and }\neq \utilde{0}
+$$
+
+---
+
+$$
+k\ge 4\quad \sqrt{n}(\utilde{\hat{P}}-\utilde{P})\xrightarrow{D}N_k(\utilde{0}, \bcancel{\Sigma})\quad \bcancel{\Sigma}=\text{diag}(\utilde{P})-\utilde{P}\utilde{P}^t
+$$
+
+$$
+\begin{align*}
+    \text{Take}&\quad g(\utilde{P})=\ln\left(\frac{P_1P_2}{P_3P_4}\right)=\ln(P_1) + \ln(P_2) - \ln(P_3) - \ln(P_4)\\
+    \implies& \nabla g(\utilde{P})=(\frac{1}{P_1}, \frac{1}{P_2}, -\frac{1}{P_3}, -\frac{1}{P_4}, 0, \cdots, 0)^t: k\times 1
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    &(\nabla g(\utilde{P}))^t\bcancel{\Sigma}\nabla g(\utilde{P})\\
+    =&(\nabla g(\utilde{P}))^t\left(\text{diag}(\utilde{P})-\utilde{P}\utilde{P}^t\right)\nabla g(\utilde{P})\\
+    =&(\nabla g(\utilde{P}))^t\text{diag}(\utilde{P})\nabla g(\utilde{P}) - (\nabla g(\utilde{P}))^t\utilde{P}\utilde{P}^t\nabla g(\utilde{P})\\
+    =&\sum_{i=1}^kP_i(\nabla g(\utilde{P}))_i^2 - \left[(\nabla g(\utilde{P}))^t \utilde{P} \right]^2\\
+    =&\frac{1}{P_1} + \frac{1}{P_2} + \frac{1}{P_3} + \frac{1}{P_4} - (1+1-1-1+0+\cdots+0)^2\\
+    =&\frac{1}{P_1} + \frac{1}{P_2} + \frac{1}{P_3} + \frac{1}{P_4}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    \xRightarrow{\delta\text{-method}}& \sqrt{n}(g(\utilde{\hat{P}})-g(\utilde{P}))\xrightarrow{D}N\left(0, \frac{1}{P_1} + \frac{1}{P_2} + \frac{1}{P_3} + \frac{1}{P_4}\right)\\
+    \implies& \frac{g(\utilde{\hat{P}})-g(\utilde{P})}{\sqrt{\frac{1}{n}\left(\frac{1}{P_1}+\frac{1}{P_2}+\frac{1}{P_3}+\frac{1}{P_4} \right)}} \xrightarrow{D}N(0,1)\\
+    \xRightarrow{\text{slutsky}}& \frac{g(\utilde{\hat{P}})-g(\utilde{P})}{\sqrt{\frac{1}{Y_1}+\frac{1}{Y_2}+\frac{1}{Y_3}+\frac{1}{Y_4}}} \xrightarrow{D}N(0,1)\quad \hat{P}_j=\frac{Y_j}{n}\\
+    \implies& \frac{\ln\left(\frac{Y_1Y_2}{Y_3Y_4} \right)-\ln\left(\frac{P_1P_2}{P_3P_4} \right)}{\sqrt{\frac{1}{n}\left(\frac{1}{P_1}+\frac{1}{P_2}+\frac{1}{P_3}+\frac{1}{P_4} \right)}} \xrightarrow{D}N(0,1)
+\end{align*}
+$$
+
+因此如果 $\theta=\ln\frac{P_1P_2}{P_3P_4}$ 是我們關心的參數
+
+$$
+P\left(\theta\in\left[\ln\left(\frac{Y_1Y_2}{Y_3Y_4} \right)\pm Z_{\frac{\alpha}{2}}\sqrt{\frac{1}{Y_1}+\frac{1}{Y_2}+\frac{1}{Y_3}+\frac{1}{Y_4}} \right] \right)\approx 1-\alpha\quad\text{for large enough }n
+$$
+
+### Sample size determination with Binomial sample
+
+我們通常會在收集資料之前就定下目標，然後為了驗證目標而收集資料。因此我們會需要知道需要多少樣本才能驗證是否達到目標。而不是收集資料後發現樣本數不夠達到足夠的信心水平。
+
+$X_1,\cdots, X_n\overset{\text{iid}}{\sim}B(1,p)$
+
+$$
+\xRightarrow{\text{C.L.T}} p\in \left[\bar{X}\pm \frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}Z_{\frac{\alpha}{2}} \right] \text{ with conf }\approx 1-\alpha
+$$
+
+$$
+\begin{align*}
+    \text{i.e. }\forall p\in(0,1)\quad 1-\alpha&\approx P_p\left(\bar{X}-\frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}Z_{\frac{\alpha}{2}}\le p\le\bar{X}+\frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}Z_{\frac{\alpha}{2}} \right)\\
+    &=P_p\left(|\bar{X}-p|\le\frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}Z_{\frac{\alpha}{2}} \right)
+\end{align*}
+$$
+
+其中 $\bar{X}$ 是 $p$ 的估計。意思是在 $1-\alpha$ 的信心水平下，我們需要確保 $\bar{X}$ 與 $p$ 的誤差不超過某個範圍 $E$。
+
+因為這是在收集數據之前確定要收集的樣本量，因此我們還不知道 $\bar{X}$ 的值。但我們知道 $\bar{X}\in[0,1]$ 並且 $\sqrt{\bar{X}(1-\bar{X})}\le \frac{1}{2}$。因此我們可以用這個上界來計算一個保守的樣本量。
+
+$$
+\begin{align*}
+    &\sqrt{\frac{\bar{X}(1-\bar{X})}{n}} Z_{\frac{\alpha}{2}}\le \frac{1}{2}Z_{\frac{\alpha}{2}}=E\\
+    \iff& \sqrt{n}=\frac{1}{2E}Z_{\frac{\alpha}{2}}\\
+    \iff& n=\left(\frac{1}{2E}Z_{\frac{\alpha}{2}}\right)^2
+\end{align*}
+$$
+
+e.g. $\alpha=0.05, E=0.03\implies n\ge \frac{(1.96)^2}{4\cdot(0.03)^2}=1068$
