@@ -301,7 +301,7 @@ Remark：在使用上，對於複回歸，我們也可以對每個解釋變數 $
 把兩組 $d_{ij}$ 當成兩組 normal 分佈的觀測值，而我們要檢定這兩個 normal 分佈的均值是否相等。如果均值不等就代表兩組 $e_{ij}$ 的分散程度不同。
 
 $$
-t^*_L\triangleq \frac{\bar{d}_1-\bar{d}_2}{S\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\qquad \text{with } S^2=\frac{\sum(d_{i1}-\bar{d}_1)^2+\sum(d_{i2-\bar{d}_2}^2)}{n-2}
+t^*_L\triangleq \frac{\bar{d}_1-\bar{d}_2}{S\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\qquad \text{with } S^2=\frac{\sum(d_{i1}-\bar{d}_1)^2+\sum(d_{i2}-\bar{d}_2)^2}{n-2}
 $$
 
 在 $H_0:\sigma^2\set{\varepsilon_i}=\sigma^2 \forall i$ 下，即 $d_{i1}$ 和 $d_{i2}$ 母體的均值相等。並且 $n_1,n_2$ 沒有很小，那麼 $t^*_L\sim t_{n-2}$
@@ -315,7 +315,7 @@ $$
 首先對於 $e^2_i$ 做每個 $x_i$ 的簡單線性回歸，並得到 $\text{SSR}$ 記作 $\text{SSR}^*$。並且做 $Y$ 於 $x_i$ 的簡單線性回歸，得到 SSE。則有以下結論：
 
 $$
-X^2_{BP}\triangleq\frac{\frac{\text{SSR}^*}{2}}{\left(\frac{\text{SSR}}{n}\right)^2}\xrightarrow{n\to\infty}\chi^2_1
+X^2_{BP}\triangleq\frac{\frac{\text{SSR}^*}{2}}{\left(\frac{\text{SSE}}{n}\right)^2}\xrightarrow{n\to\infty}\chi^2_1
 $$
 
 因此，當 $X^2_{BP}>\chi^2_{1,\alpha}$ 時拒絕 $H_0:\sigma^2\set{\varepsilon_i}=\sigma^2\quad\forall i$ 可以得到 level $\approx \alpha$ 檢定。
