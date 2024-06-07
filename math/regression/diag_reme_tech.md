@@ -277,10 +277,93 @@ i.e. 截距 $\mu=0$，斜率 $\tau=\sigma$（使用 $e_{(i)}$） 或 $\tau=1$（
    $$
    \text{e.g. } |e^*_i|\triangleq\left|\frac{e_i}{\sqrt{\text{MSE}}}\right|>4\implies\text{outlier}
    $$
-2. High-leverage point(influential): 是否包含這個數據會極大改變推論的結果。這個點的殘差可能會很小，因為回歸線會直接通過這個點。
+2. **High-leverage point**(influential): 是否包含這個數據會極大改變推論的結果。這個點的殘差可能會很小，因為回歸線會直接通過這個點。因為這個點可以撬動回歸線，所以這個點是*高槓桿*的。
 :::
 
 Remark: 直方圖、點圖或殘差圖可以幫我們找到 outliers，但可能無法找到 influential points。因此要用其他方法來找，比如：DBeta, DFitted, Cook's distance...
+
+可以用以下方式找到 influential points：
+
+1. $h_{ii}\in H$，如果 $h_{ii}>\frac{2p}{n}$ （不同程式可能會有不同標準），那麼就將第 $i$ 筆資料標記。
+   
+   $$
+   \utilde{\hat{Y}}=H\utilde{Y}\quad\text{with }H=(h_{ij})_{n\times n},\quad 0\le h_{ii}\le 1,\quad\sum h_{ii}=p\implies h_{ii}\approx\frac{p}{n}
+   $$
+
+   $$
+   \implies \hat{Y}_i=\sum_{j=1}^n h_{ij}Y_j=h_{ii}Y_i+\sum_{j\neq i}h_{ij}Y_j
+   $$
+
+   i.e. $h_{ii}$ 代表了 $Y_i$ 對 $\hat{Y}_i$ 的影響程度。如果 $h_{ii}$ 過大，那麼這個點就是 high-leverage point。
+
+2. 如果 $|t^*_i|>t_{n-1-p,\frac{\alpha}{2n}}$，那麼就將第 $i$ 筆資料標記為 outlier/influential。
+   
+   因為 influential 是指有無這個點會有很大的影響。那麼我們先從原始資料 $(\utilde{Y}, D)$ 中刪除第 $i$ 筆資料，得到新的一組資料 $(\utilde{Y}_{(i)}, D_{(i)})$ 並計算出刪除 $i$ 後的 LSE $\utilde{b}_{(i)}$。
+
+   $$
+   \implies \utilde{\hat{Y}}_{(i)}=D\utilde{b}_{(i)}\quad\text{and }\utilde{e}_{(i)}=\utilde{Y}-\utilde{\hat{Y}}_{(i)}
+   $$
+
+   然後就能得到第 $i$ 個預測值 $\hat{Y}_{i(i)}=(D\utilde{b}_{(i)})_i=\utilde{c}_i^t\utilde{b}_{(i)}$，with $\utilde{c}_i$ is the $i$-th row of $D$。
+
+   Def: $d_i=Y_i-\hat{Y}_{i(i)}$: deleted residual for the $i$-th case.
+
+   $$
+   \begin{align*}
+      \implies &E(d_i)=0\qquad E(Y_i)=E(\hat{Y}_{i(i)})=\utilde{c}_i^t\utilde{\beta}\\
+      &\begin{align*}
+         \sigma^2&=\sigma^2+\sigma^2\set{\hat{Y}_{i(i)}}\quad Y_i\perp Y_{i(i)}\\
+         &=\sigma^2+\utilde{c}_i^t\sigma^2\set{\utilde{b}_{(i)}}\utilde{c}_i\\
+         &=\sigma^2+\sigma^2\cdot \underbrace{\utilde{c}_i^t(D^tD)^{-1}\utilde{c}_i}_{\triangleq A}
+      \end{align*}
+   \end{align*}
+   $$
+
+   Also, $\text{MSE}_{(i)}=\frac{\utilde{e}^t_{(i)}\utilde{e}_{(i)}}{n-1-p}$ and $S^2{d_i}=\sigma^2\set{d_i}|_{\sigma^2=\text{MSE}_{(i)}}=\widehat{\sigma^2\set{d_i}}$
+
+   $$
+   \implies t_i^*=\frac{d_i}{S\set{d_i}}\sim t_{n-1-p}
+   $$
+
+   如果不希望做 $n$ 次測試，那麼可以用 Bonferroni correction，即 $\alpha\to\frac{\alpha}{n}$
+
+3. Cook's distance
+   
+   $$
+   D_i=\frac{\sum(\hat{Y}-\hat{Y}_{j(i)})^2}{p\cdot\text{MSE}}
+   $$
+
+   代表 $i$ 點對所有估計值 $\hat{Y}_{j(i)}$ 的影響程度。如果 $D_i$ 過大，那麼這個點就是 influential。
+
+   $$
+   \implies i\text{-th case has}\begin{cases}
+      \text{major influence if } D_i>F_{p,n-p,0.5}\\
+      \text{little apparent influence if } D_i>F_{p,n-p,0.2}
+   \end{cases}
+   $$
+
+**Remark**: 如果有 $n$ 個數據，那麼對每個數據計算 $t_i^*,D_i$ 需要 fit $n+1$ 次模型（原始模型和 n 個刪除數據 $i$ 的模型）。因此這個方法的計算量是很大的。
+
+- **Fact**： $t^*_i, D_i$ 可以直接由原始數據 $(\utilde{Y}, D)$ 得到，而不需要 fit $n+1$ 次模型。
+
+:::tip[Lemma]
+$$
+\begin{align*}
+   & Q_{n\times n} = P_{n\times n} + U_{n\times q}V_{q\times n}\\
+   \implies & Q^{-1}=P^{-1}-P^{-1}U(I_q+V P^{-1}U)^{-1}V P^{-1}
+\end{align*}
+$$
+:::
+
+:::note[Summary]
+$$
+\begin{align*}
+   & d_i=\frac{e_i}{1-h_{ii}}\\
+   & t^*_i=\frac{e_i\sqrt{n-p-1}}{\sqrt{(1-h_{ii}\text{SSE}-e_i^2)}}\\
+   & D_i=\frac{e_i^2\cdot h_{ii}}{p\cdot\text{MSE}(1-h_{ii})^2}
+\end{align*}
+$$
+:::
 
 ### Tests for Constancy of error Variance
 
