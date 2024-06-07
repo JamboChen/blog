@@ -455,13 +455,13 @@ $$
 \begin{align*}
     1-\alpha&=P(F_{2n,2m,1-\frac{\alpha}{2}}\le F_{2n,2m}\le F_{2n,2m,\frac{\alpha}{2}})\\
    &=P_{\theta,\lambda}\left(F_{2n,2m,1-\frac{\alpha}{2}}\le\frac{\bar{X}}{\bar{Y}}\frac{\theta}{\lambda}\le F_{2n,2m,\frac{\alpha}{2}}\right)\\
-   &=P_{\theta,\lambda}\left(\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}\le\frac{\lambda}{\theta}\le\frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right)\\
+   &=P_{\theta,\lambda}\left(\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}\le\frac{\theta}{\lambda}\le\frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right)\\
 \end{align*}
 $$
 
-$\implies \left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$ is $1-\alpha$ conf. int. for $\frac{\lambda}{\theta}$.
+$\implies \left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$ is $1-\alpha$ conf. int. for $\frac{\theta}{\lambda}$.
 
-$\implies$ To test $H_0:\lambda=\theta$ v.s. $H_1:\lambda\neq\theta$ $\iff$ $H_0:\frac{\lambda}{\theta}=1$ v.s. $H_1:\frac{\lambda}{\theta}\neq 1$  
+$\implies$ To test $H_0:\lambda=\theta$ v.s. $H_1:\lambda\neq\theta$ $\iff$ $H_0:\frac{\theta}{\lambda}=1$ v.s. $H_1:\frac{\theta}{\lambda}\neq 1$  
 
 Reject $H_0$ if $1\notin\left[\frac{\bar{Y}}{\bar{X}}F_{2n,2m,1-\frac{\alpha}{2}}, \frac{\bar{Y}}{\bar{X}}F_{2n,2m,\frac{\alpha}{2}}\right]$
 
