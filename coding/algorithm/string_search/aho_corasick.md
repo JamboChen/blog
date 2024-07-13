@@ -11,3 +11,6 @@ Aho–Corasick 算法可以在給定文本中定位靜態字典中所有字串�
 
 字典中一個字串的某些子字串，可能是其他字串的前綴。例如字典中有 'abcd' 和 'bc' 兩個字串，而匹配文本為 'abce'，當指針在 'abcd' 的 'c' 將要匹配 'd' 時失敗，此時可以直接跳轉到 'bc' 的 'c' 重新開始匹配，而不用回溯到 'a' 重新開始匹配。
 
+## 算法實現
+
+[text](https://github.com/JamboChen/blog/tree/main/code/string_search/aho-corasick)
