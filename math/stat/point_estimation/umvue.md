@@ -268,6 +268,64 @@ Suppose $\mathring{B}\neq\empty$ （內點集非空）, i.e. $\dim(B)=k$
 then $T(\utilde{X})=(T_1(\utilde{X}),\cdots,T_k(\utilde{X}))$ is suff for $\theta$ and is complete.
 :::
 
+**EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}B(1,p), p\in(0,1)$
+
+$$
+\begin{align*}
+   f(\utilde{x};p)&=p^{\sum x_i}(1-p)^{n-\sum x_i},\quad x_i=0,1\\
+   &=(1-p)^n\cdot\left(\frac{p}{1-p}\right)^{\sum x_i}\\
+   &=(1-p)^n\exp\left[\sum x_i\ln\left(\frac{p}{1-p}\right)\right]\\
+   &=c(p)\exp\left(Q(p)T(\utilde{x})\right)h(\utilde{x})
+\end{align*}
+$$
+
+and $X=\set{\utilde{x}:f(\utilde{x};p)>0}=\set{x:x_i=0 \text{ or }1, \forall i}\perp p$
+
+$\implies f(\utilde{x};p)\in$ 1-par exp family with
+
+$$
+\begin{align*}
+   B&=\set{Q(p):p\in\Omega}\subseteq R^1\\
+   &=\set{\ln\left(\frac{p}{1-p}\right):p\in(0,1)}\\
+   &=(-\infty,\infty)=\R^1\\
+   \text{i.e. }& \mathring{B}\neq\empty
+\end{align*}
+$$
+
+$\implies T(\utilde{X})=\sum X_i$ is suff for $p$ and is complete.
+
+e.g. $\eta(P)=P(1-P)=P(X_1=1,X_2=0)=E_p(I(X_1=1,X_2=0))$
+
+$\implies$ The UMVUE for $P(1-P)$ is
+
+$$
+\begin{align*}
+   E(I(X_1=1,X_2=0)|T) &= P(X_1=1,X_2=0|T)\\
+   &=\frac{P(X_1=1,X_=0.T=t)}{P(T=t)}\\
+   &=\frac{P(X_1=1)P(X_2=0)P(\sum_{i=3}^nX_i=t-1)}{P(T=t)}\\
+   &=\frac{P(1-P)\binom{n-2}{t-1}P^{t-1}(1-P)^{n-1-t}}{\binom{n}{t}P^t(1-P)^{n-t}}\\
+   &=\frac{\frac{(n-2)!}{(t-1)!(n-1-t)!}}{\frac{n!}{t!(n-t)!}}\\
+   &=\frac{t(n-t)}{n(n-1)}\\
+\end{align*}
+$$
+
+---
+
+**EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}P(\lambda)$
+
+$\implies f(\utilde{x};\lambda)=\prod\frac{e^{-\lambda}\lambda^{x_i}}{x_i!}=e^{-n\lambda}\lambda^{\sum x_i}\frac{1}{\prod x_i!}=c(\lambda)\exp\left(\sum x_i \ln\lambda\right)h(\utilde{x})\in$ 1-par exp family and $X=\set{\utilde{x}:x\in \N}\perp \lambda$
+
+with $B=\set{\ln\lambda:\lambda>0}=(-\infty,\infty)\implies \mathring{B}\neq\empty$
+
+$\implies T=\sum X_i$ is suff for $\lambda$ and is complete.
+
+1. $\eta(\lambda)=\lambda$
+   
+   Note $T\sim P(n\lambda)$ with $E(T)=n\lambda\implies E(\frac{T}{n})=\lambda$ i.e. $\frac{T}{n}$ is the UMVUE for $\lambda$. 
+2. $\eta(\lambda)=e^{-2\lambda}\lambda^3=3!P(X_1=3,X_2=0)=E\left(6I(X_1=3,X_2=0) \right)$
+   
+   $\implies$ The UMVUE for $\lambda^3e^{-2\lambda}$ is $E(6I(X_1=3,X_2=0)|T)=P(X_1=3,X_2=0|T)$
+
 :::tip[Theorem]
 **Basu's Theorem**
 Let $T=T(\utilde{X})$ be suff for $\theta$ and is complete
@@ -288,6 +346,122 @@ $$
 $$
 
 by Basu's Theorem, $\bar{X}$ and $S^2$ are independent.
+
+---
+
+**EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}N(\mu,\sigma^2)$
+
+$$
+\begin{align*}
+   f(\utilde{x};\mu,\sigma^2)&=\frac{1}{(2\pi\sigma^2)^{n/2}}\exp\left(-\frac{1}{2\sigma^2}\sum(x_i-\mu)^2\right)\\
+   &=\left(\frac{1}{\sqrt{2\pi\sigma^2}}\right)^n\exp\left(-\frac{1}{2\sigma^2}\sum x_i^2 +\frac{\mu}{\sigma^2}\sum x_i-\frac{n\mu^2}{2\sigma^2}\right)\\
+\end{align*}
+$$
+
+1. $\sigma^2=\sigma_0^2$ known
+   
+   $$
+   f(\utilde{x};\mu)=\left(\frac{1}{\sqrt{2\pi\sigma_0^2}}\right)^ne^{-\frac{n\mu^2}{2\sigma^2}}\exp\left(\frac{\mu}{\sigma^2}\sum x_i\right)e^{-\frac{1}{2\sigma^2}\sum x_i^2}
+   $$
+
+   with $X=\R^n\perp\mu\implies f(\utilde{x};\mu)\in$ 1-par exp family and $B=\set{Q(\mu):\mu\in\Omega}=\set{\frac{mu}{\sigma_0^2}:\mu\in\R}=\R$
+
+   $\implies \mathring{B}\neq\empty$
+
+   $\implies T=\sum X_i$ is suff for $\mu$ and is complete $\xRightarrow{1-1} \bar{X}$ is suff for $\mu$ and is complete.
+
+   1. $\eta(\mu)=\mu, \bar{X}\sim N(\mu,\frac{\sigma_0^2}{n})$ with $E(\bar{X})=\mu$ i.e. $\bar{X}$ is the UMVUE for $\mu$.
+   2. $\eta(\mu)=\mu^2, \bar{X}\sim N(\mu,\frac{\sigma_0^2}{n})$ with $Var(\bar{X})=\frac{\sigma_0^2}{n}\implies E(\bar{X}^2)=\mu^2+\frac{\sigma_0^2}{n}$
+
+      $\implies \bar{X}^2-\frac{\sigma_0^2}{n}$ is the UMVUE for $\mu^2$.
+
+2. $\mu=\mu_0$: known, $\theta=\sigma^2\in\Omega=(0,\infty)$
+   
+   $$
+   f(\utilde{x};\sigma^2)=\left(\frac{1}{\sqrt{2\pi\sigma^2}}\right)^n\exp\left(-\frac{1}{2\sigma^2}\sum(x_i-\mu_0)^2\right) \in \text{1-par exp family}
+   $$
+
+   with $B=\set{-\frac{1}{2\sigma^2}:\sigma^2>0}=(-\infty,0)\subset R^1\implies \mathring{B}\neq\empty$
+
+   $\implies T=T(\utilde{X})=\sum(X_i-\mu_0)^2$ is suff for $\sigma^2$ and is complete.
+
+   Note: $\sum\left(\frac{X_i-\mu_0}{\sigma}\right)^2\sim\chi^2_n$ with $E(\chi^2_n)=n$, i.e. $\frac{T}{\sigma^2}\sim\chi^2_n$
+
+   $\implies E(T)=\sigma^2E(\frac{T}{\sigma^2})=\sigma^2n\implies E(\frac{T}{n})=\sigma^2$
+
+   i.e. $\frac{1}{n}\sum(X_i-\mu_0)^2$ is the UMVUE for $\sigma^2$.
+
+   for $\eta(\sigma^2)=\sigma=\sqrt{\sigma^2}$, try $E(\sqrt{T})=\sigma E\left(\sqrt{\frac{T}{\sigma^2}}\right)=\sigma E(\sqrt{Y})=\sigma C_n$ with $Y\sim\chi^2_n$
+
+   $$
+   \begin{align*}
+      E(\sqrt{Y})&=\int_0^\infty \sqrt{y}\frac{1}{\Gamma(\frac{n}{2})2^{n/2}}y^{n/2-1}e^{-y/2}dy\\
+      &=\frac{\Gamma(\frac{n+1}{2})2^{(n+1)/2}}{\Gamma(\frac{n}{2})2^{n/2}}\underbrace{\int_0^\infty \frac{1}{\Gamma(\frac{n+1}{2})2^{(n+1)/2}}y^{(n+1)/2-1}e^{-y/2}dy}_{=1}\\
+      &=\sqrt2\frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2})}\triangleq C_n
+   \end{align*}
+   $$
+
+   $\implies\frac{\sqrt{T}\Gamma(\frac{n}{2})}{\sqrt{2}\Gamma(\frac{n+1}{2})}$ is the UMVUE for $\sigma$.
+
+3. $\theta=(\mu,\sigma^2)\in\Omega=\R\times(0,\infty)$
+   
+   $$
+   f(\utilde{x};\mu,\sigma^2)=\left(\frac{1}{\sqrt{2\pi\sigma^2}}\right)^ne^{-\frac{n\mu^2}{\sigma^2}} \exp\left(-\frac{1}{2\sigma^2}\sum X_i^2+\frac{\mu}{\sigma^2}\sum X_i\right)\in\text{2-par exp family}
+   $$
+
+   with $B=\set{\frac{\mu}{\sigma^2},-\frac{1}{2\sigma^2}}=\R\times(-\infty,0)\implies \mathring{B}\neq\empty$
+
+   $\implies T^*=(\sum X_i,\sum X_i^2)$ is suff for $(\mu,\sigma^2)$ and is complete.
+
+   $\xRightarrow{1-1}T=(\bar{X},S^2)$ is suff for $(\mu,\sigma^2)$ and is complete.
+
+   1. $\eta(\theta)=\mu$, $\delta(T)=\delta(S^2,\bar{X})=\bar{X}$, $E\delta(T)=E\bar{X}=\mu$
+
+      $\implies \bar{X}$ is the UMVUE for $\mu$ (same as when $\sigma^2$ is known)
+
+   2. $\eta(\theta)=\mu^2$
+      
+      $E(\bar{X}^2)=Var(\bar{X})+(E\bar{X})^2=\frac{\sigma^2}{n}+\mu^2$, $E(S^2)=\frac{\sigma^2}{n-1}E\left(\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}\right)=\sigma^2$
+
+      $\implies E(\bar{X}^2-\frac{S^2}{n})=\mu^2$
+
+      $\implies \bar{X}^2-\frac{S^2}{n}$ is the UMVUE for $\mu^2$ (same as when $\sigma^2$ is known)
+
+   3. $\eta(\theta)=\sigma^2$
+      $$
+      \frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}\implies E(S^2)=\sigma^2
+      $$
+
+      $\implies S^2$ is the UMVUE for $\sigma^2$ ($\neq$ when $\mu$ is known)
+
+   4. $\eta(\theta)=\frac{\mu}{\sigma}$
+
+      $$
+      \text{Try }E\left(\frac{\bar{X}}{S}\right)=E(\bar{X})E\left(\frac{1}{S}\right)=\mu E\left(\frac{1}{\sqrt{\frac{(n-1)S^2}{\sigma^2}\sim \chi^2_{n-1}}}\right)\frac{\sqrt{n-1}}{\sigma}=\frac{\mu}{\sigma}\sqrt{n-1}a_n
+      $$
+
+      for $Y\sim \chi^2_m$
+
+      $$
+      \begin{align*}
+         E\left(\frac{1}{Y}\right)&=\int_0^\infty \frac{1}{y}\frac{1}{\Gamma(\frac{m}{2})2^{m/2}}y^{m/2-1}e^{-y/2}dy\\
+         &=\frac{\Gamma(\frac{m-1}{2})2^{(m-1)/2}}{\Gamma(\frac{m}{2})2^{m/2}}\underbrace{\int_0^\infty \frac{1}{\Gamma(\frac{m-1}{2})2^{(m-1)/2}}y^{(m-1)/2-1}e^{-y/2}dy}_{=1}\\
+         &=\frac{\Gamma(\frac{n-2}{2})}{\Gamma(\frac{n-1}{2})\sqrt2}\triangleq a_n
+      \end{align*}
+      $$
+
+      $\implies \frac{\bar{X}}{S}\frac{\sqrt{2}\Gamma(\frac{n-1}{2})}{\sqrt{n-1}\Gamma(\frac{n-2}{2})}$ is the UMVUE for $\frac{\mu}{\sigma}$
+---
+
+$X\sim f(x;\theta)$, $T=T(\utilde{X})$ is suff for $\theta$ and is complete
+
+如果對給定 $x_0$ 時的 pdf 或 cdf 感興趣，i.e. $\eta(\theta)=f(x_0;\theta)$ or $F(x_0;\theta)$
+
+Note: $F(x_0;\theta)=P(X\le x_0)=E[I(X\le x_0)]$
+
+$\implies$ The UMVUE for $F(x_0;\theta)$ is $E[I(X\le x_0)|T]=P(X\le x_0|T)=\delta(T)$
+
+$\implies$ The UMVUE for $f(x_0;\theta)$ is $\frac{\partial}{\partial x_0}\delta(T)$
 
 ## Cramer-Rao Lower Bound
 
@@ -341,6 +515,8 @@ I_n(\theta)\xlongequal{also}I_{\utilde{X}}(\theta)\triangleq E_\theta[(\frac{\pa
 $$
 :::
 
+Fisher Information 描述了隨機變量 $X$ 中包含有關 $\theta$ 的信息量。如果包含的信息量越多，則 $f(x;\theta)$ 對於 $\theta$ 的變化就越敏感，變化量越大。期望值則消除了隨機性。
+
 :::tip[Theorem]
 **Cramer-Rao ineq**
 
@@ -364,11 +540,40 @@ Var_\theta(u(\utilde{X}))\ge\frac{(\eta'(\theta))^2}{I_n(\theta)}
 $$
 :::
 
-
 Remark：
 1. 如果有一個無偏估計 $\delta^*(\utilde{X})$ 使得 $Var(\delta^*(\utilde{X}))=\frac{(\eta'(\theta))^2}{I_n(\theta)}$，則 $\delta^*(\utilde{X})$ 是 UMVUE，並且我們說 CRLB is attainable。
 
 2. 如果所有無偏估計的方差都大於 CRLB，則 CRLB is not attainable。
+
+---
+
+**EX**: $X_1,\cdots,X_n\overset{\text{iid}}{\sim}B(1,P)$
+
+$f(\utilde{x};P)=P^{\sum x_i}(1-P)^{n-\sum x_i}=P^T(1-P)^{n-T}$ with $T=\sum x_i\sim B(n,P)$
+
+$$
+\begin{align*}
+   \frac{\partial}{\partial P}\log f(\utilde{x};P)&=\frac{\partial}{\partial P}\left(T\log P+(n-T)\log(1-P)\right)\\
+   &=\frac{T}{P}-\frac{n-T}{1-P}\\
+   &=\frac{T-nP}{P(1-P)}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+   I_n(P)&=E[(\frac{\partial}{\partial P}\log f(\utilde{X};P))^2]\\
+   &=E\left[\left(\frac{T-nP}{P(1-P)}\right)^2\right]\\
+   &=\frac{1}{P^2(1-P)^2}Var(T)\\
+   &=\frac{n}{1-P}
+\end{align*}
+$$
+
+To est $\eta(P)=P$, CRLB $=\frac{(\eta'(P))^2}{I_n(P)}=\frac{P(1-P)}{n}=Var(\bar{X})$
+
+$\implies\bar{X}$ is the UMVUE for $P$ and CRLB is attainable.
+
+---
+
 
 Note:
 1. If $X_i,i=1,\cdots,n$ are independent r.v.s 
@@ -391,7 +596,7 @@ Note:
    \end{align*}
    $$
 
-**重新參數化（reparametrization）**
+### 重新參數化（reparametrization）
 
 $\theta=g(\xi)$ and $g'$ exists, i.e. $f(\utilde{x};\theta)=f(\utilde{x};g(\xi))$
 
@@ -406,6 +611,77 @@ $$
 i.e. $\theta=g(\xi)\implies I_n(\xi)=(g'(\xi))^2I_n(\theta)$
 
 如果我們已經知道 $I_n(\theta)$ ，如果我們又關心 $\xi$ 的 Fisher-info，可以直接利用這個公式換算。
+
+---
+
+**EX** $X_1,\cdots,X_n\overset{\text{iid}}{\sim}N(\mu,\sigma^2)$
+
+$$
+\begin{align*}
+   I(\mu)&=E[(\frac{\partial}{\partial\mu}\log f(\utilde{X};\mu,\sigma^2))^2]\\
+   &=E[(\frac{X-\mu}{\sigma^2})^2]=\frac{1}{\sigma^4}E[(X-\mu)^2]\\
+   &=\frac{1}{\sigma^4}Var(X)=\frac{1}{\sigma^2}
+\end{align*}
+$$
+
+$\implies I_n(\mu)=nI(\mu)=\frac{n}{\sigma^2}$
+
+$$
+\text{CRLB for }\mu=\frac{(\frac{\partial}{\partial\mu}\eta)^2}{I_n(\mu)}=\frac{\sigma^2}{n}=Var(\bar{X})
+$$
+
+$\implies \bar{X}$: UMVUE for $\mu$ CRLB is attainable.
+
+$$
+I(\sigma^2)=I(\theta)=E[(\frac{\partial}{\partial\theta}\log f(\utilde{X};\mu,\theta))^2]
+$$
+
+$$
+\begin{align*}
+   \frac{\partial}{\partial\theta}\log f(\utilde{X};\mu,\theta)&=\frac{\partial}{\partial\theta}\left(\ln\frac{1}{\sqrt{2\pi}}-\frac{1}{2}\ln\theta-\frac{(X-\mu)^2}{2\theta}\right)\\
+   &=-\frac{1}{2\theta}+\frac{(X-\mu)^2}{2\theta^2}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+   \implies I(\theta)&=E\left[\left(-\frac{1}{2\theta}+\frac{(X-\mu)^2}{2\theta^2}\right)^2\right]\\
+   &\xlongequal{\theta=\sigma^2}E\left[\frac{(X-\mu)^4}{4\sigma^8}-\frac{1}{2\sigma^6}E(X-\mu)^2+\frac{1}{4\sigma^4}\right]\\
+   &=\frac{1}{4\sigma^4}E\left[\frac{(X-\mu)^4}{\sigma^4}\right]-\frac{1}{2\sigma^4}E\left[\frac{(X-\mu)^2}{\sigma^2}\right]+\frac{1}{4\sigma^4}\\
+   &=\frac{1}{4\sigma^4}EY^2-\frac{1}{2\sigma^4}EY+\frac{1}{4\sigma^4} \quad \text{where } Y=(\frac{X-\mu}{\sigma})^2\sim\chi^2_1\\
+   &=\frac{3}{4\sigma^4}-\frac{1}{2\sigma^4}+\frac{1}{4\sigma^4}\\
+   &=\frac{1}{2\sigma^4}
+\end{align*}
+$$
+
+$\implies I_{\utilde{X}}(\sigma^2)=nI(\sigma^2)=\frac{n}{2\sigma^4}$
+
+$$
+\text{CRLB for }\sigma^2=\frac{(\frac{\partial}{\partial\sigma^2}\eta)^2}{I_n(\sigma^2)}=\frac{1}{\frac{n}{2\sigma^4}}=\frac{2\sigma^4}{n}
+$$
+
+1. $\mu=\mu_0$ known, the UMVUE for $\sigma^2$ is $\frac{1}{n}\sum(X_i-\mu_0)^2$
+
+   $$
+   Var(\frac{1}{n}\sum(X_i-\mu_0)^2)=\frac{\sigma^4}{n^2}\sum Var\left(\frac{X_i-\mu_0}{\sigma^2} \right)^2=\frac{2\sigma^4}{n}=\text{CRLB}
+   $$
+
+2. $\mu$ unknown, the UMVUE for $\sigma^2$ is $S^2$
+
+   Note that $\frac{(n-1)S^2}{\sigma}\sim\chi^2_{n-1}$
+
+   $$
+   Var(S^2)=\frac{\sigma^4}{(n-1)^2}Var\left(\frac{(n-1)S^2}{\sigma^2}\right)^2=\frac{2\sigma^4}{n-1}>\frac{2\sigma^4}{n}=\text{CRLB}
+   $$
+
+   CRLB is not attainable.
+
+3. To est $I(\sigma)$, let $\xi=\sigma\implies\sigma^2=\xi^2=g(\xi)$
+
+   $\implies I(\xi)=(g'(\xi))^2I(\sigma^2)=4\xi^2\frac{1}{2\sigma^4}=\frac{2}{\sigma^2}$
+
+   $\implies I_n(\sigma)=\frac{2n}{\sigma^2}$
+---
 
 **EX**: 
 1. $X\stackrel{\text{iid}}{\sim} P(\lambda)$
