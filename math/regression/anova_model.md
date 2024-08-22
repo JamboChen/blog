@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # 變異數分析模型（ANOVA Model）
 
 Anova Model 通常在分析定性型（Qualitative）變數時使用，例如：教育程度，血型等。在這種情況下，我們將變數稱為*因素（factor）*。

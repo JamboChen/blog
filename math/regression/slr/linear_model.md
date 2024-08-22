@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # 線性模型
 
 ## 簡單線性模型（Simple Linear Regression, SLR）
