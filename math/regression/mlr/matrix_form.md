@@ -576,7 +576,7 @@ $I=P_1+P_2+\cdots+P_m$, where $P_i$ is projection matrix then $||\utilde{Y}||^2=
 :::info[Definition]
 Let $\xi=\utilde{c}^t\utilde{\beta}$ with $\utilde{c}\in\R^p$
 
-$\xi$ is estimable if $\exist \utilde{a}\in\R^n$ s.t. $E[\utilde{a}^t\utilde{Y}]=\xi$, i.e. $\utilde{a}^t\utilde{Y}$ is unbiased for $\xi$
+$\xi$ is estimable if  $\exist \utilde{a}\in\R^n$ s.t. $\forall\utilde{\beta},  E[\utilde{a}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta}$, i.e. $\utilde{a}^t\utilde{Y}$ is unbiased for $\xi$
 :::
 
 :::tip[Theorem]
@@ -752,7 +752,7 @@ $$
 :::tip[Lemma 6]
 $\utilde{W}\sim N_m(\utilde{\eta}, \bcancel{\Sigma}_{\utilde{W}})$ where $\bcancel{\Sigma}_{\utilde{W}}$ is nonsingular
 
-$\implies Q=(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}-\utilde{\eta})\sim \chi^2_m$
+$\implies Q=(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}^{-1}(\utilde{W}-\utilde{\eta})\sim \chi^2_m$
 :::
 
 **Proof**:
@@ -765,7 +765,7 @@ $\implies Q=(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}
 
   $\implies (B(\utilde{W}-\utilde{\eta}))^t(B(\utilde{W}-\utilde{\eta}))\sim\chi^2_m$
 
-  $\implies(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}(\utilde{W}-\utilde{\eta})\sim\chi^2_m$
+  $\implies(\utilde{W}-\utilde{\eta})^t\bcancel{\Sigma}_{\utilde{W}}^{-1}(\utilde{W}-\utilde{\eta})\sim\chi^2_m$
 
 - Way 2:
   $$
