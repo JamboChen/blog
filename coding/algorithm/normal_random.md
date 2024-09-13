@@ -4,8 +4,6 @@
 
 ## Box-Muller 轉換
 
-### 基本原理
-
 $U_1, U_2 \stackrel{\text{iid}}{\sim} U(0,1)$ 且獨立，让
 
 $$
@@ -15,7 +13,11 @@ Y &= \sqrt{-2 \ln U_1} \sin(2\pi U_2)
 \end{align*}
 $$
 
-則 $X, Y \stackrel{\text{iid}}{\sim} N(0,1)$ 且獨立。这可以通过 Jacobian 计算得到。
+則 $X, Y \stackrel{\text{iid}}{\sim} N(0,1)$。
+
+### 基本原理
+
+这可以通过 Jacobian 计算得到。
 
 $$
 \begin{align*}
@@ -49,6 +51,10 @@ $$
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Box-Muller_transform_visualisation.svg/300px-Box-Muller_transform_visualisation.svg.png)
 
 以 $U_1$ 为例，可以把 $U_1$ 看做是 $U_1=R\cos(\theta)$。其中 $\theta\stackrel{\text{iid}}{\sim} U(0,2\pi)$ ，相当于是均匀的选取一个角度。而 $R^2=-2\ln U_1$ 服从卡方分布 $\chi^2_2$。
+
+$$
+Z_1^2+Z_2^2 = \chi^2_2 = -2\ln U = -2\ln U (\cos^2\theta+\sin^2\theta)
+$$
 
 ### 代碼實現
 
