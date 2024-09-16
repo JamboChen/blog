@@ -11,7 +11,7 @@ $$
 $$
 \perp\Bigg < \begin{align*}
     \hat{\theta}=\bar{X}&=\frac{1}{n}\sum_{i=1}^nX_i\sim N(\theta, \frac{\sigma^2}{n})\\
-    \hat{\sigma^2}=S^2&=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\sim\chi^2_{n-1}\quad\text{with }\frac{(n-1)S^2}{\sigma^2}=\frac{\sum(X_i-\bar{X})^2}{\sigma^2}\sim\chi^2_{n-1}
+    \hat{\sigma^2}=S^2&=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\quad\text{with }\frac{(n-1)S^2}{\sigma^2}=\frac{\sum(X_i-\bar{X})^2}{\sigma^2}\sim\chi^2_{n-1}
     \end{align*}
 $$
 
