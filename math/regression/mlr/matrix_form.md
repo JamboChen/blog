@@ -566,7 +566,7 @@ $$
 $$
 
 :::tip[Corollary]
-$I=P_1+P_2+\cdots+P_m$, where $P_i$ is projection matrix then $||\utilde{Y}||^2=\sum_{i=1}^m\utilde{Y}^tP_i\utilde{Y}$
+$I=P_1+P_2+\cdots+P_m$, where $P_i$ is projection matrix then $||\utilde{Y}||^2=\sum_{i=1}^m\utilde{Y}^tP_i\utilde{Y}$ 
 :::
 
 從上面的推理我們可以知道 SSTO, SSE, SSR 都是 quadratic form。$\utilde{Y}^tP\utilde{Y}$，其中 $P$ 是 projection matrix ($n\times n$ symmetric idempotent matrix)。
@@ -578,6 +578,29 @@ Let $\xi=\utilde{c}^t\utilde{\beta}$ with $\utilde{c}\in\R^p$
 
 $\xi$ is estimable if  $\exist \utilde{a}\in\R^n$ s.t. $\forall\utilde{\beta},  E[\utilde{a}^t\utilde{Y}]=\xi=\utilde{c}^t\utilde{\beta}$, i.e. $\utilde{a}^t\utilde{Y}$ is unbiased for $\xi$
 :::
+
+**EX**: 
+$$
+\begin{bmatrix}
+    z_1\\\vdots\\z_m\\w_1\\\vdots\\w_n
+\end{bmatrix}=
+\begin{bmatrix}
+    1, 0\\
+    \vdots, \vdots\\
+    1, 0\\
+    0, 1\\
+    \vdots, \vdots\\
+    0, 1
+\end{bmatrix}
+\begin{bmatrix}
+    \mu_1\\\mu_2
+\end{bmatrix}+\varepsilon
+$$
+
+If interested in $\xi=\mu_1-\mu_2=[1, -1]\beta = c^t\beta$
+
+1. $a^t=[1,0,\cdots,0,-1,0,\cdots,0]\implies E(a^tY)=E[Z_1-W_1]=\mu_1-\mu_2, \forall\beta\in\R^2$
+2. $a^t=[1/m,\cdots,1/m,1/n,\cdots,1/n]\implies E(a^tY)=E[\bar{Z}-\bar{W}]=\mu_1-\mu_2, \forall\beta\in\R^2$
 
 :::tip[Theorem]
 **Gauss-Markov Theorem**:
@@ -604,7 +627,7 @@ i.e. $\hat{\xi}$ is BLUE (Best Linear Unbiased Estimator) for $\xi$
 
 $$
 \begin{align*}
-    &\forall\beta\in\R^p, \exist \utilde{a}\in\R^n \text{ s.t. } E[\utilde{a}^t\utilde{Y}]=\xi\\
+    &\exist \utilde{a}\in\R^n \forall\beta\in\R^p, \text{ s.t. } E[\utilde{a}^t\utilde{Y}]=\xi\\
     \iff& \utilde{a}^tD\utilde{\beta}=\utilde{c}^t\utilde{\beta},\forall\utilde{\beta}\in\R^p\\
     \iff& \left(\utilde{a}^tD-\utilde{c}^t\right)\utilde{\beta}=0,\forall\utilde{\beta}\in\R^p\\
     \iff& \utilde{a}^tD-\utilde{c}^t=0\quad\because \forall\utilde{\beta}\in\R^p\\
