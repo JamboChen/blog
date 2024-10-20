@@ -132,7 +132,7 @@ $$
 
 Remark: $H_0:\mu_{ij}+\bar{\mu}-\bar{\mu}_i-\bar{\mu}_j=0 \forall i,j$ 如果被拒絕，則代表 $H_0: $ “A，B 之間不存在交互作用”被拒絕。
 
-:::tip[Definition]
+:::info[Definition]
 $$
 AB_{ij}=\mu_{ij}+\mu-\mu_i-\mu_j
 $$
@@ -150,7 +150,7 @@ $$
 \end{align*}
 $$
 
-:::tip[Definition]
+:::info[Definition]
 Main effect of A at level $i\triangleq \mu_i-\mu\quad i=1,\cdots,a$ donate $A_i$
 
 Main effect of B at level $j\triangleq \mu_j-\mu\quad j=1,\cdots,b$ donate $B_j$
@@ -162,7 +162,7 @@ $$
 \begin{align*}
     Y_{ijk}&=\mu_{ij}+\varepsilon_{(ij)k}\\
     &=\mu+(\mu_{ij}+\mu-\mu_i-\mu_j)+(\mu_i-\mu)+(\mu_j-\mu)+\varepsilon_{(ij)k}\\
-    &=\mu+A_i+B_j+AB_{ij}+\varepsilon_{(ij)k}\\
+    &=\mu+A_i+B_j+AB_{ij}+\varepsilon_{(ij)k}
 \end{align*}
 $$
 
@@ -178,7 +178,10 @@ Effect 有兩種類型：
    $\implies$ Added： 
 
    $$
-    \sum_{i=1}^aA_i=0,\quad \sum_{j=1}^bB_j=0\\ 
+    \sum_{i=1}^aA_i=0,\quad \sum_{j=1}^bB_j=0
+   $$
+
+   $$
     \sum_{i=1}^aAB_{ij}=0,\quad\forall j,\quad \sum_{j=1}^bAB_{ij}=0,\quad\forall i
    $$
 
@@ -188,7 +191,10 @@ Effect 有兩種類型：
     $\implies$ Added：
     
     $$
-     A_1,\cdots,A_a\overset{\text{iid}}{\sim}N(0,\sigma^2_A),\quad B_1,\cdots,B_b\overset{\text{iid}}{\sim}N(0,\sigma^2_B)\\
+     A_1,\cdots,A_a\overset{\text{iid}}{\sim}N(0,\sigma^2_A),\quad B_1,\cdots,B_b\overset{\text{iid}}{\sim}N(0,\sigma^2_B)
+   $$
+
+   $$
      AB_{ij}\overset{\text{iid}}{\sim}N(0,\sigma^2_{AB})\quad i=1,\cdots,a, j=1,\cdots,b
     $$
 
@@ -201,6 +207,171 @@ Effect 有兩種類型：
    $\implies$ Added:
 
    $$
-    \sum A_i=0,\quad B_1,\cdots,B_b\overset{\text{iid}}{\sim}N(0,\sigma^2_B), \quad AB_{ij}\overset{\text{iid}}{\sim}N(0,\sigma^2_{AB})\\
+    \sum A_i=0,\quad B_1,\cdots,B_b\overset{\text{iid}}{\sim}N(0,\sigma^2_B), \quad AB_{ij}\overset{\text{iid}}{\sim}N(0,\sigma^2_{AB})
+   $$
+
+   $$
     \text{with } \sum_{i=1}^a A_iB_j=0\quad\forall j,\quad \sum_{j=1}^b A_iB_j\neq 0\quad \forall i\quad \text{ usually}
    $$
+
+以上三種不同的模型有相同的 SS, e.g.
+
+$$
+\begin{align*}
+   SS_{\text{total}}&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(Y_{ijk}-\bar{Y}_{\cdot\cdot\cdot})^2\\
+   SS_A&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2\\
+   SS_B&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(\bar{Y}_{\cdot j\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2\\
+   SS_{AB}&=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^{n_{ij}}(\bar{Y}_{ij\cdot}-\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot j\cdot}+\bar{Y}_{\cdot\cdot\cdot})^2
+\end{align*}
+$$
+
+---
+
+$$
+(Y_{ijk}-\bar{Y}_{\cdot\cdot\cdot})^2=(Y_{ijk}-\bar{Y}_{ij\cdot}+\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2
+$$
+
+$$
+\sum_k^{n_{ij}}(Y_{ijk}\bar{Y}_{ij\cdot}-Y_{ijk}\bar{Y}_{\cdot\cdot\cdot}-\bar{Y}_{ij\cdot}^2+\bar{Y}_{ij\cdot}\bar{Y}_{\cdot\cdot\cdot})=n_{ij}\bar{Y}_{ij\cdot}^2-n_{ij}\bar{Y}_{ij\cdot}\bar{Y}_{\cdot\cdot\cdot}-n_{ij}\bar{Y}_{ij\cdot}^2+n_{ij}\bar{Y}_{ij\cdot}\bar{Y}_{\cdot\cdot\cdot}=0
+$$
+
+$$
+\begin{align*}
+   \implies SS_{\text{total}}=&\sum_i\sum_j\sum_k(Y_{ijk}-\bar{Y}_{ij\cdot})^2+\sum_i\sum_j\sum_k(\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2+2\sum_i\sum_j\underbrace{\sum_k(Y_{ijk}-\bar{Y}_{ij\cdot})(\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot})}_{=0}\\
+   =&\sum_i\sum_j\sum_k(\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2+\sum_i\sum_j\sum_k(Y_{ijk}-\bar{Y}_{ij\cdot})^2\\
+   =&SS_{\text{trt}}+SS_{\text{error}}
+\end{align*}
+$$
+
+---
+
+$$
+(\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2=[(\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot\cdot\cdot})+(\bar{Y}_{\cdot j\cdot}-\bar{Y}_{\cdot\cdot\cdot})+(\bar{Y}_{ij\cdot}-\bar{Y}_{\cdot\cdot\cdot}-\bar{Y}_{\cdot j\cdot} +\bar{Y}_{\cdot\cdot\cdot})]^2
+$$
+
+$$
+\implies SS_{\text{trt}}=SS_A+SS_B+SS_{AB}
+$$
+
+三種不同的模型都可以用相同的公式計算以上 SS ，但對於檢驗 $H_0:$ No (A/B/AB) effect/interaction 有不同的方法。（ EMS rule ）。
+
+## ANOVA
+
+### One-factor CRD
+
+Level's # = k = # of trt's
+
+$$
+\begin{align*}
+   Y_{ij}&=\mu_i+\varepsilon_{ij},\quad i=1\cdots,k, j=1,\cdots,n_i(=n\text{ if balanced})\\
+   &=\mu+\tau_i+\varepsilon_{ij},\quad \varepsilon_{ij}\overset{\text{iid}}{\sim}N(0,\sigma^2_{\varepsilon})
+\end{align*}
+$$
+
+- $\mu$: Grand mean
+- $\tau_i$: $i$-th trt effect
+- $\varepsilon_{ij}$: random error
+
+Recall:
+
+$$
+\tau_i\begin{cases}
+   \text{fixed}&\implies \sum\tau_i=0\\
+   \text{random}&\implies \tau_i\overset{\text{iid}}{\sim}N(0,\sigma^2_{\tau})
+\end{cases}
+$$
+
+$$
+\begin{align*}
+   \implies E(SS_E)&=E\left[\sum_{i=1}^k\sum_{j=1}^n(Y_{ij}-\bar{Y}_{i\cdot})^2 \right]\\
+   &=E\left[\sum_{i=1}^k\sum_{j=1}^n(\mu+\tau_i+\varepsilon_{ij}-\mu-\tau_i-\bar{\varepsilon}_{i\cdot})^2 \right]\\
+   &=E\left[\sum_{i=1}^k\sum_{j=1}^n(\varepsilon_{ij}-\bar{\varepsilon}_{i\cdot})^2 \right]\\
+\end{align*}
+$$
+
+fixed $i$, $\varepsilon_{i1},\varepsilon_{i2},\cdots,\varepsilon_{in}\overset{\text{iid}}{\sim}N(0,\sigma^2_{\varepsilon})$
+
+$$
+E\left[\sum_{j=1}^n\frac{(\varepsilon_{ij}-\bar{\varepsilon}_{i\cdot})^2}{\sigma_\varepsilon^2} \right]=E[\chi^2_{n-1}]=n-1
+$$
+
+$$
+\implies E(SS_E)=\sum_{i=1}^k(n-1)\sigma^2_{\varepsilon}=k(n-1)\sigma^2_{\varepsilon}
+$$
+
+:::info[Definition]
+$$
+MS_E=\frac{SS_E}{df}=\frac{SS_E}{k(n-1)}\implies E(MS_E)=\frac{E(SS_E)}{k(n-1)}=\sigma^2_{\varepsilon}
+$$
+
+$\implies MS_E$ is an unbiased estimator of $\sigma^2_{\varepsilon}$
+:::
+
+$$
+\begin{align*}
+   E(SS_{trt})&=E\left[\sum_{i=1}^k\sum_{j=1}^n(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2 \right]\\
+   &=E\left[\sum_i^k n(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2 \right]\\
+   &=E\left[\sum_{i=1}^k n(\mu-\tau_i+\bar{\varepsilon}_{i\cdot}-\mu-\bar{\tau}_{\cdot}-\bar{\varepsilon}_{\cdot\cdot})^2 \right]\\
+   &=E\left[\sum_{i=1}^k n[(\tau_i-\bar{\tau}_{\cdot})^2+(\bar{\varepsilon}_{i\cdot}-\bar{\tau}_{\cdot\cdot})^2+2(\tau_i-\bar{\tau}_{\cdot})(\bar{\varepsilon}_{i\cdot}-\bar{\varepsilon}_{\cdot\cdot})] \right]\\
+   &=nE\left[\sum_{i=1}^k(\tau_i-\bar{\tau}_{\cdot})^2 \right]+nE\left[\sum_{i=1}^k(\bar{\varepsilon}_{i\cdot}-\bar{\varepsilon}_{\cdot\cdot})^2 \right]+2n\underbrace{E\left[\sum_{i=1}^k(\tau_i-\bar{\tau}_{\cdot})(\bar{\varepsilon}_{i\cdot}-\bar{\varepsilon}_{\cdot\cdot}) \right]}_{=0,\quad \tau_i: \text{ fixed or random}}
+\end{align*}
+$$
+
+$$
+\bar{\varepsilon}_{1\cdot},\cdots,\bar{\varepsilon}_{k\cdot}\overset{\text{iid}}{\sim}N(0,\frac{\sigma^2_{\varepsilon}}{n})\implies\sum_{i=1}^k \frac{(\bar{\varepsilon}_{i\cdot}-\bar{\varepsilon}_{\cdot\cdot})^2}{\sigma^2_\varepsilon/n}\sim\chi^2_{k-1}\implies E\left[\sum_{i=1}^k(\bar{\varepsilon}_{i\cdot}-\bar{\varepsilon}_{\cdot\cdot})^2 \right]=(k-1)\sigma^2_{\varepsilon}
+$$
+
+$$
+nE\left[\sum_{i=1}^k(\tau_i-\bar{\tau}_{\cdot})^2 \right]=\begin{cases}
+   n\sum_{i=1}^k\tau_i^2 & \tau_i: \text{ fixed}\implies\sum\tau_i=0\implies\bar{\tau}_{\cdot}=0\\
+   n(k-1)\sigma^2_{\tau} & \tau_i: \text{ random}\implies \sum^k\frac{(\tau_i-\bar{\tau}_\cdot)^2}{\sigma^2_\tau}\sim\chi^2_{k-1}
+\end{cases}
+$$
+
+$$
+\begin{align*}
+   \implies E(SS_{trt})&=\begin{cases}
+      (k-1)\sigma_\varepsilon^2+n\sum_{i=1}^k\tau_i^2 & \tau_i: \text{ fixed}\\
+      (k-1)\sigma_\varepsilon^2+n(k-1)\sigma^2_{\tau} & \tau_i: \text{ random}
+   \end{cases}\\
+   &=\begin{cases}
+      (k-1)\sigma_\varepsilon^2+n(k-1)\frac{\sum_{i=1}^k\tau_i^2}{k-1} & \tau_i: \text{ fixed, } \frac{\sum_{i=1}^k\tau_i^2}{k-1}\text{ donated by }\phi_\tau\\
+      (k-1)\sigma_\varepsilon^2+n(k-1)\sigma^2_{\tau} & \tau_i: \text{ random}
+   \end{cases}
+\end{align*}
+$$
+
+- Fixed: $\phi_\tau=0\iff\forall\tau_i=0\iff$ No trt effect
+- Random: $\sigma_\tau^2=0\iff$ No trt effect
+
+:::info[Definition]
+df of trt = k-1
+
+$$
+MS_{trt}=\frac{SS_{trt}}{k-1}\implies E(MS_{trt})=\begin{cases}
+   \sigma^2_{\varepsilon}+n\phi_{\tau} & \tau_i: \text{ fixed}\\
+   \sigma^2_{\varepsilon}+n\sigma^2_{\tau} & \tau_i: \text{ random}
+\end{cases}
+$$
+:::
+
+我們對 trt 是否有效應感興趣，因此會檢驗：
+
+$$
+H_0: \text{ No trt effect v.s. } H_1: \text{ Sig. trt effect}
+$$
+
+$$
+\iff H_0:\begin{cases}
+   \phi_\tau=0 \\
+   \sigma^2_{\tau}=0
+\end{cases}\quad\text{v.s. }\quad H_1:\begin{cases}
+   \phi_\tau > 0 & \text{ fixed}\\
+   \sigma^2_{\tau}> 0 & \text{ random}
+\end{cases}
+$$
+
+- Under $H_0$: No trt effect $\implies E(MS_E)=\sigma_\varepsilon^2=E(MS_{trt})$, i.e. $MS_{trt}$ and $MS_E$ should be similar.
+- Under $H_1$: Sig. trt effect $\implies E(MS_{trt})=\sigma_\varepsilon^2+n\cdot[\phi_\tau|\sigma_\tau^2]>\sigma_\varepsilon^2=E(MS_E)$, i.e. $MS_{trt}$ tend to be larger than $MS_E$.
+
+$\implies$ Reject $H_0$ if $MS_{trt}>>MS_E\iff$ reject $H_0$ if $MS_{trt}/MS_E>>1$
