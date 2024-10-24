@@ -145,7 +145,7 @@ Main effect: A 因素從 level $i\to i'$ 的效應。
 $$
 \begin{align*}
     \frac{1}{b}\sum_{j=1}^b\mu_{ij}-\frac{1}{b}\sum_{j=1}^b\mu_{i'j}&=\bar{\mu}_{i\cdot}-\bar{\mu}_{i'\cdot}=\mu_i-\mu_{i'}\\
-    &=(\mu_i-\mu)-(mu_{i'}-\mu)\\
+    &=(\mu_i-\mu)-(\mu_{i'}-\mu)\\
     &=A_i-A_{i'}
 \end{align*}
 $$
@@ -375,3 +375,176 @@ $$
 - Under $H_1$: Sig. trt effect $\implies E(MS_{trt})=\sigma_\varepsilon^2+n\cdot[\phi_\tau|\sigma_\tau^2]>\sigma_\varepsilon^2=E(MS_E)$, i.e. $MS_{trt}$ tend to be larger than $MS_E$.
 
 $\implies$ Reject $H_0$ if $MS_{trt}>>MS_E\iff$ reject $H_0$ if $MS_{trt}/MS_E>>1$
+
+:::info[Definition]
+$$
+F^*\triangleq\frac{MS_{trt}}{MS_E}\overset{H_0}{\sim}F(df_{trt},df_E)=F_{k-1,N-k}
+$$
+:::
+
+**REmark**:
+
+$$
+N-1=(k-1)+df_E \implies df_E=N-k=nk-k=k(n-1)
+$$
+
+Hence, reject $H_0$ at level $\alpha \iff$
+
+$$
+\begin{align*}
+   \alpha&=P(\text{reject }H_0|H_0\text{ is true})\\
+   &=P_{H_0}(F^*>F_{k-1,N-k,\alpha})\\
+\end{align*}
+$$
+
+:::info[Definition]
+$$
+F_{l,m,\alpha} \text{ is s.t. }P(F_{l,m}\ge F_{l,m,\alpha})=\alpha
+$$
+:::
+
+$\implies$ Reject $H_0$ at level $\alpha\iff F^*>F_{k-1,N-k.\alpha}$ with $F^*=MS_{trt}/MS_E$
+
+$\implies$ ANOVA table:
+
+| Source | df  | SS           | MS=SS/df   | EMS=E(MS)                                              | F-value             | p-value              |
+| ------ | --- | ------------ | ---------- | ------------------------------------------------------ | ------------------- | -------------------- |
+| trt    | k-1 | $SS_{trt}$   | $MS_{trt}$ | $\sigma_\varepsilon^2+n[\phi_\tau \mid \sigma_\tau^2]$ | $MS_{trt}/MS_E=f^*$ | $P(F_{k-1,N-k}>f^*)$ |
+| Error  | N-k | $SS_E$       | $MS_E$     | $\sigma_\varepsilon^2$                                 |                     |                      |
+| Total  | N-1 | $SS_{total}$ |            |                                                        |                     |                      |
+
+**Note**: $k=2$
+
+$$
+\perp\bigg<\begin{align*}
+   Y_{11},Y_{12},\cdots,Y_{1n_1}\sim N(\mu_1,\sigma^2)\\
+   Y_{21},Y_{22},\cdots,Y_{2n_2}\sim N(\mu_2,\sigma^2)
+\end{align*}
+$$
+
+To test $H_0:\mu_1=\mu_2$ v.s. $H_1:\mu_1\neq\mu_2$ by two-sample t-test:
+
+$$
+\left|\frac{\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot}}{\sqrt{(\frac{1}{n_1}+\frac{1}{n_2})S_p^2}}\right|>t_{N-2,\alpha/2}\qquad\text{with }S_p^2=\frac{1}{n_1+n_2-2}\left(\sum_{j=1}^{n_1}(Y_{1j}-\bar{Y}_{1\cdot})^2+ \sum_{j=1}^{n_2}(Y_{2j}-\bar{Y}_{2\cdot})^2\right)
+$$
+
+**Note**:
+
+$$
+t^*\overset{H_0}{\sim}t_{n_1+n_2-2}\xlongequal[\text{balanced}]{\text{if}}t_{n-2}\triangleq\frac{N(0,1)}{\sqrt{\frac{\chi^2_{2n-2}}{2n-2}}}\bigg>\perp
+$$
+
+$$
+\implies (t^*)^2\overset{H_0}{\sim}(t_{n-2})^2\overset{H_0}{\sim}\frac{\chi^2_1/1}{\chi^2_{2n-2}/(2n-2)}\bigg>\perp\sim F_{1,2n-2}=F_{2-1,N-2}
+$$
+
+if $n_1=n_2=n$
+
+$$
+(t^*)^2=\left(\frac{\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot}}{\sqrt{(\frac{1}{n}+\frac{1}{n})S_p^2}} \right)=\frac{(\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot})^2}{\frac{2}{n}S_p^2}=\frac{n}{2}(\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot})\frac{1}{S_p^2}=\frac{MS_{trt}}{MS_E}=F^*
+$$
+
+$$
+\begin{align*}
+   MS_{trt}&=\frac{SS_{trt}}{2-1}=\sum_{i=1}^2\sum_{j=1}^n(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2\\
+   &=\sum_{i=1}^2n(\bar{Y}_{i\cdot}-\frac{1}{2}(\bar{Y}_{1\cdot}+\bar{Y}_{2\cdot}))^2\\
+   &=\frac{n}{2}(\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot})^2
+\end{align*}
+$$
+
+$$
+\begin{align*}
+   SS_E&=\sum_{i=1}^2\sum_{j=1}^n(Y_{ij}-\bar{Y}_{i\cdot})^2\\
+   &=\sum_{j=1}^n(Y_{1j}-\bar{Y}_{1\cdot})^2 + \sum_{j=1}^n(Y_{2j}-\bar{Y}_{2\cdot})^2\\
+   MSE&=\frac{SS_E}{N-k}=\frac{SS_E}{2n-2}=S_p^2
+\end{align*}
+$$
+
+---
+
+Paired data:
+
+$$
+\begin{pmatrix}
+   Y_{11}\\
+   Y_{21}
+\end{pmatrix},\begin{pmatrix}
+   Y_{12}\\
+   Y_{22}
+\end{pmatrix},\cdots,\begin{pmatrix}
+   Y_{1n}\\
+   Y_{2n}
+\end{pmatrix}\overset{\text{iid}}{\sim}N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)
+$$
+
+$\implies$ test $H_0:\mu_1=\mu_2$ v.s. $H_1:\mu_1\neq\mu_2$ by paired t-test:
+
+$$
+D_j\triangleq Y_{1j}-Y_{2j},\quad j=1,\cdots,n\quad\overset{\text{iid}}\sim{N(\mu_1-\mu_2,\sigma^2_\varepsilon)},\quad\sigma^2_\varepsilon=\text{ func of }\sigma_1^2,\sigma_2^2,\rho
+$$
+
+$$
+\left|\frac{\sqrt{n}\bar{D}}{S_D}\right|>t_{n-1,\alpha/2}\iff\frac{n\bar{D}^2}{S_D^2}>F_{1,n-1,\alpha}\iff \underbrace{\frac{n}{2}(\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot})}_{MS_{trt}}\frac{1}{S_D^2/2}>F_{1,n-1,\alpha}
+$$
+
+$$
+\begin{align*}
+   S_D^2&\triangleq\frac{1}{n-1}\sum_{j=1}^n(D_j-\bar{D})^2\\
+   &=\frac{1}{n-1}\sum_{j=1}^n[(Y_{1j}-Y_{2j})-(\bar{Y}_{1\cdot}-\bar{Y}_{2\cdot})]^2\\
+\end{align*}
+$$
+
+### Two-factor CRD with balanced 
+
+$$
+Y_{ijk}=\mu+A_i+B_j+AB_{ij}+\varepsilon_{(ij)k}\quad\begin{align*}
+   &i=1\cdots a\\
+   &j=1\cdots b\\
+   &k=1\cdots n
+\end{align*}
+$$
+
+Number of trt = $ab$
+
+**Note**: for fixed model, i.e. both A and B are fixed effect
+
+$\implies\sum_{i=1}^aA_i=0,\quad\sum_{j=1}^bB_j=0,\quad\forall j, \sum_{i=1}^aAB_{ij}=0=\sum_{j=1}^bAB_{ij},\forall i$
+
+$$
+\begin{align*}
+   \implies E(SSE)&=E\left[\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n(Y_{ijk-\bar{Y}_{ij\cdot}})^2 \right]\\
+   &=E\left[\sum_i\sum_j\sum_k (\mu+A_i+B_j+AB_{ij}+\varepsilon_{ijk}-\mu-A_i-B_j-AB_{ij}-\bar{\varepsilon}_{ij\cdot})^2 \right]\\
+   &=E\left[\sum_i\sum_j\sum_k(\varepsilon_{ijk}-\bar{\varepsilon}_{ij\cdot})^2 \right]\\
+   &=ab(n-1)\sigma^2_{\varepsilon}
+\end{align*}
+$$
+
+$\implies E(MSE)=E(SSE/[ab(n-1)])=\sigma_\varepsilon^2$
+
+$$
+\begin{align*}
+   E(SSA)&\triangleq E\left[\sum_i\sum_j\sum_k(\bar{Y}_{i\cdot\cdot}-\bar{Y}_{\cdot\cdot\cdot})^2 \right]\\
+   &=E\left[\sum_i\sum_j\sum_k(\mu+A_i+\bar{B}_\cdot+\bar{AB}_{i\cdot}+\bar{\varepsilon}_{i\cdot\cdot}-\mu-\bar{A}_\cdot-\bar{B}_\cdot-\bar{AB}_{\cdot\cdot}-\bar{\varepsilon}_{\cdot\cdot\cdot})^2\right]\\
+   &=\sum_i\sum_j\sum_k A_i^2-bn\cdot E(\sum_{i=1}^a(\bar{\varepsilon}_{i\cdot\cdot}-\bar{\varepsilon}_{\cdot\cdot\cdot})^2)+2\sum_i\sum_j\sum_k A_i\underbrace{E(\bar{\varepsilon}_{i\cdot\cdot}-\bar{\varepsilon}_{\cdot\cdot\cdot})}_{=0}\\
+   &=bn\cdot\sum_iA_i^2+bn\frac{\sigma_\varepsilon^2}{bn}(a-1)\\
+   &=bn(a-1)\frac{\sum_iA_i^2}{a-1}+(a-1)\sigma_\varepsilon^2,\quad \frac{\sum_iA_i^2}{a-1}+(a-1)\text{ donated by }\phi_A
+\end{align*}
+$$
+
+$\implies E(MS_A)=E(SS_A)/(a-1)=bn\phi_A+\sigma_\varepsilon^2$
+
+---
+
+| Source | df         | SS   | MS=SS/df | EMS=E(MS)                          | F-value        | p-value                         |
+| ------ | ---------- | ---- | -------- | ---------------------------------- | -------------- | ------------------------------- |
+| A      | a-1        | SSA  | $MS_A$   | $\sigma_\varepsilon^2+bn\phi_A$    | $MS_A/MS_E$    | $P(F_{a-1,ab(n-1)}>f^*)$        |
+| B      | b-1        | SSB  | $MS_B$   | $\sigma_\varepsilon^2+an\phi_B$    | $MS_B/MS_E$    | $P(F_{b-1,ab(n-1)}>f^*)$        |
+| AB     | (a-1)(b-1) | SSAB | $MS_{AB}$  | $\sigma_\varepsilon^2+n\phi_{AB}+$ | $MS_{AB}/MS_E$ | $P(F_{(a-1)(b-1),ab(n-1)}>f^*)$ |
+| Error  | ab(n-1)    | SSE  | $MS_E$   | $\sigma_\varepsilon^2$             |                |                                 |
+| Total  | abn-1      | SST  |          |                                    |                |                                 |
+
+- $P_A$: for $H_0$: No A effect $\iff\phi_A=0$ v.s. $H_1$: Sig. A effect $\iff\phi_A>0$
+- $P_B$: for $H_0$: No B effect $\iff\phi_B=0$ v.s. $H_1$: Sig. B effect $\iff\phi_B>0$
+- $P_{AB}$: for $H_0$: No AB interaction $\iff\phi_{AB}=0$ v.s. $H_1$: Sig. AB interaction $\iff\phi_{AB}>0$
+
+**Note**: $MS_A+MS_B+MS_{AB}=MS_{trt}$ and $(a-1)+(b-1)+(a-1)(b-1)=ab-1=$ df of trt
