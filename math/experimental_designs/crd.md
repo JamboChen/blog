@@ -535,13 +535,13 @@ $\implies E(MS_A)=E(SS_A)/(a-1)=bn\phi_A+\sigma_\varepsilon^2$
 
 ---
 
-| Source | df         | SS   | MS=SS/df | EMS=E(MS)                          | F-value        | p-value                         |
-| ------ | ---------- | ---- | -------- | ---------------------------------- | -------------- | ------------------------------- |
-| A      | a-1        | SSA  | $MS_A$   | $\sigma_\varepsilon^2+bn\phi_A$    | $MS_A/MS_E$    | $P(F_{a-1,ab(n-1)}>f^*)$        |
-| B      | b-1        | SSB  | $MS_B$   | $\sigma_\varepsilon^2+an\phi_B$    | $MS_B/MS_E$    | $P(F_{b-1,ab(n-1)}>f^*)$        |
-| AB     | (a-1)(b-1) | SSAB | $MS_{AB}$  | $\sigma_\varepsilon^2+n\phi_{AB}+$ | $MS_{AB}/MS_E$ | $P(F_{(a-1)(b-1),ab(n-1)}>f^*)$ |
-| Error  | ab(n-1)    | SSE  | $MS_E$   | $\sigma_\varepsilon^2$             |                |                                 |
-| Total  | abn-1      | SST  |          |                                    |                |                                 |
+| Source | df         | SS   | MS=SS/df  | EMS=E(MS)                          | F-value        | p-value                         |
+| ------ | ---------- | ---- | --------- | ---------------------------------- | -------------- | ------------------------------- |
+| A      | a-1        | SSA  | $MS_A$    | $\sigma_\varepsilon^2+bn\phi_A$    | $MS_A/MS_E$    | $P(F_{a-1,ab(n-1)}>f^*)$        |
+| B      | b-1        | SSB  | $MS_B$    | $\sigma_\varepsilon^2+an\phi_B$    | $MS_B/MS_E$    | $P(F_{b-1,ab(n-1)}>f^*)$        |
+| AB     | (a-1)(b-1) | SSAB | $MS_{AB}$ | $\sigma_\varepsilon^2+n\phi_{AB}+$ | $MS_{AB}/MS_E$ | $P(F_{(a-1)(b-1),ab(n-1)}>f^*)$ |
+| Error  | ab(n-1)    | SSE  | $MS_E$    | $\sigma_\varepsilon^2$             |                |                                 |
+| Total  | abn-1      | SST  |           |                                    |                |                                 |
 
 - $P_A$: for $H_0$: No A effect $\iff\phi_A=0$ v.s. $H_1$: Sig. A effect $\iff\phi_A>0$
 - $P_B$: for $H_0$: No B effect $\iff\phi_B=0$ v.s. $H_1$: Sig. B effect $\iff\phi_B>0$
