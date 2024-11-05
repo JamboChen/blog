@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # Introduction
 
 數據根據得到的方式不同，可以做的統計分析也不同。
