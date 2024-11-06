@@ -128,3 +128,51 @@ $$
     &=\sum_i^k\frac{Y_{i\cdot}^2}{n}-\frac{Y_{\cdot\cdot}^2}{N}
 \end{align*}
 $$
+
+**EX**: Fabric wear resistance data
+
+- factor: 4 levels (A,B,C,D) type of fabric
+
+$\implies$ CRD obtained:
+
+|                   | A       | B       | C        | D       | sum                             |
+| ----------------- | ------- | ------- | -------- | ------- | ------------------------------- |
+|                   | 1.93    | 2.55    | 2.68     | 2.33    |                                 |
+|                   | 2.38    | 2.72    | 2.31     | 2.40    |                                 |
+|                   | 2.20    | 2.75    | 2.28     | 2.28    |                                 |
+|                   | 2.25    | 2.70    | 2.40     | 2.25    |                                 |
+| $Y_{i\cdot}$      | 8.76    | 10.72   | 9.67     | 9.26    | 38.41=$Y_{\cdot\cdot}$          |
+| $n_i$             | 4       | 4       | 4        | 4       | 16=N                            |
+| $\sum_j Y_{ij}^2$ | 19.2918 | 28.7534 | 23.47169 | 21.4498 | 92.9719=$\sum_i\sum_j Y_{ij}^2$ |
+
+$$
+\begin{align*}
+   \implies SS_{total}&=\sum_i\sum_j(Y_{ij}-\bar{Y}_{\cdot\cdot})^2\\
+   &=\sum_i\sum_jY_{ij}^2-\frac{Y_{\cdot\cdot}^2}{16}\\
+   &=92.9719-\frac{38.41^2}{16}\\
+   &=0.7639
+\end{align*}\qquad
+
+
+\begin{align*}
+   SS_{fabriic}&=\sum_i\sum_j(Y_{i\cdot}-\bar{Y}_{\cdot\cdot})^2\\
+   &=\sum_i\frac{Y_{i\cdot}^2}{4}-\frac{38.41^2}{16}\\
+   &=0.5201
+\end{align*}
+$$
+
+$$
+\implies SS_E=SS_{total}-SS_{fabric}=0.2438
+$$
+
+$\implies$ AONVA table:
+
+| Source | SS     | DF  | MS     | F-value | P-value               |
+| ------ | ------ | --- | ------ | ------- | --------------------- |
+| Fabric | 0.5201 | 3   | 0.1734 | 8.53    | $P(F_{3,12}>)=0.0026$ |
+| Error  | 0.2438 | 12  | 0.0203 |         |                       |
+| Total  | 0.7639 | 15  |        |         |                       |
+
+$\implies$ reject $H_0$ at $\alpha=0.05$ level.
+
+但這個結論幾乎說明不了任何問題，這只是分析的開始。
