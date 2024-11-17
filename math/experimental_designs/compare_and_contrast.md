@@ -1,6 +1,6 @@
 # Compare and Contrast
 
-實驗中，我們會用AONVA 表來檢定因素對結果是否是有影響的，這是 Compare。而 Contrast 則是更進一步分析，不同因素之間的主要差異在哪裡。
+實驗中我們會用 AONVA 表來檢定因素對結果是否是有影響的，這是 Compare。而 Contrast 則是更進一步分析，不同因素之間的主要差異在哪裡。
 
 假設我們有 4 個因素 $A,B,C,D$，我們在獲得數據之前可能有下面幾個問題：
 1. Is $A$ different from $C$ ? $\implies H_0:\mu_A=\mu_C$ v.s. $H_1:\mu_A\neq\mu_C$
@@ -147,7 +147,7 @@ Compare all contrasts with overall probability of type I error $\le 1-\alpha$
 
 :::info[Definition]
 $$
-S_{\alpha;cm}=s_{cm}\sqrt{(k-1)F_{k-1,N-k,\alpha}}\quad\text{with }s_{cm}=\sqrt{\sum c_{im}^2n_iMS_E}
+S_{\alpha;cm}=s_{cm}\sqrt{(k-1)F_{k-1,N-k,\alpha}}\quad\text{with }s_{cm}=\sqrt{\sum \frac{c_{im}^2}{n_i}MS_E}
 $$
 :::
 
@@ -163,3 +163,136 @@ $$
 :::
 
 $\implies H_0: \Gamma_m=0 vs H_1:\Gamma_m\neq 0$, reject $H_0$ at level $\alpha\iff |C_m|>S_{\alpha,m}$
+
+## Comparing Pairs of Treatment Means
+
+### Tukey's Method
+
+用於比較兩個 trt 的平均值是否有顯著差異，並且保證所有的成對比較的總類型 I 錯誤率不超過 $\alpha$
+
+設有 $k$ 個 trt ，它們的平均分別為 $\mu_1,\cdots,\mu_k$
+
+$\forall i\neq i'$ 用 $\bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}$ 來估計 $\mu_i-\mu_{i'}$
+
+$$
+\implies \bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}\sim N\left(\mu_i-\mu_{i'},\frac{\sigma_\varepsilon^2}{n_i}+\frac{\sigma_\varepsilon^2}{n_i'}\right)
+
+\implies \frac{\bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}}{\sqrt{MS_E\left(\frac{1}{n_i}+\frac{1}{n_i'}\right)}}\sim t_{N-k}
+$$
+
+$$
+\implies 1-\alpha=P\left(\mu_i-\mu_{i'}\in\underbrace{\left[\bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}\pm t_{N-k,\alpha/2}\sqrt{MS_E\left(\frac{1}{n_i}+\frac{1}{n_i'}\right)}\right]}_{CI(\mu_i-\mu_{i'};\alpha)}\right)
+$$
+
+但所有信賴區間都成功的幾率會小於 $1-\alpha$ ，因此我們希望能找到一個區間 $CI^*$ s.t. $P(\mu_i-\mu_{i'}\in CI^*,\forall i\neq i')\ge 1-\alpha$
+
+:::info[Definition]
+$$
+T_\alpha=\frac{q_\alpha(k,f)}{\sqrt{2}}\sqrt{(\frac{1}{n_i}+\frac{1}{n_i'})MS_E}\xlongequal{\text{bal}}q_\alpha(k,f)\sqrt{\frac{MS_E}{n}}
+$$
+
+- $k=$ number of trt
+- $f=$ df of error
+:::
+
+:::tip[Theorem]
+Tukey's Result:
+
+$$
+P\left(\mu_i-\mu_{i'}\in\left[\bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}\pm T_\alpha\right],\forall i\neq i'\right)\ge 1-\alpha
+$$
+:::
+
+i.e. $\forall i\neq i'$ with $H_0:\mu=\mu'$ vs $H_1:\mu\neq\mu'$, reject $H_0$ $\iff |\bar{Y}_{i\cdot}-\bar{Y}_{i'\cdot}|>T_\alpha$ with overall sig. level $\le \alpha$
+
+### Fisher Least Significant Difference (LSD) Method
+
+The Fisher Least Significant Difference (LSD) Method. P99-101
+
+### Student-Newman-Keuls (SNK) Method
+
+檢驗一對 trt 的平均值中，數值較大的 trt 是否顯著大於數值較小的 trt。
+
+$$
+H_0:\mu_i=\mu_j\quad\text{v.s.}\quad H_1:\mu_i>\mu_j\quad\text{with }\bar{Y}_{i\cdot}>\bar{Y}_{j\cdot}
+$$
+
+使用 fabric 的數據在 $\alpha=0.05$ 下進行 SNK 檢定：
+
+1. 將所有的 trt 平均從小到大排序
+   | fabric      | A    | D    | C    | B    |
+   | ----------- | ---- | ---- | ---- | ---- |
+   | sample mean | 2.19 | 2.32 | 2.42 | 2.68 |
+
+   將所有的 trt 進行兩兩比較，並且計算它們的差值
+   |     | A    | D    | C    | B   |
+   | --- | ---- | ---- | ---- | --- |
+   | A   |      |      |      |     |
+   | D   | 0.13 |      |      |     |
+   | C   | 0.23 | 0.10 |      |     |
+   | B   | 0.49 | 0.36 | 0.26 |     |
+
+
+2. 從 ANVOA 表中得到數據 $MS_E=0.0203$ 和 $df=12$，並計算要比較的兩個 trt 的方差：
+   
+   $$
+   S_{AB}=\sqrt{\frac{MS_E}{2}(\frac{1}{n_i}+\frac{1}{n_j})}\xlongequal{\text{bal}}\sqrt{\frac{MS_E}{n}}
+   $$
+
+   在這組數據下 $S_{\bar{Y}_{i\cdot}}=\sqrt{\frac{0.0203}{4}}=0.0712$
+
+3. 通過查表得到 $q_\alpha(p, df)$ ，其中 $p=2,\cdots,k$ 代表要比較的兩個 trt 在排序中的差距。
+   
+   | $q_{0.05}(2,12)$ | $q_{0.05}(3,12)$ | $q_{0.05}(4,12)$ |
+   | ---------------- | ---------------- | ---------------- |
+   | 3.05             | 3.77             | 4.20             |
+
+   將 $q_\alpha(p, df)$ 與 $S_{AB}$ 相乘得到 $SNK(p,0.05)$
+   |     | A    | D    | C    | B   |
+   | --- | ---- | ---- | ---- | --- |
+   | A   |      |      |      |     |
+   | D   | 0.22 |      |      |     |
+   | C   | 0.27 | 0.22 |      |     |
+   | B   | 0.30 | 0.27 | 0.22 |     |
+4. 將所有的差值與 $SNK(p,0.05)$ 進行比較，如果差值大於 $SNK(p,0.05)$ 則拒絕 $H_0:\mu_i=\mu_j$。
+   
+   |     | A               | D               | C           | B   |
+   | --- | --------------- | --------------- | ----------- | --- |
+   | A   |                 |                 |             |     |
+   | D   | $0.13\not>0.22$ |                 |             |     |
+   | C   | $0.23\not>0.27$ | $0.10\not>0.22$ |             |     |
+   | B   | $0.49>0.30$     | $0.36>0.27$     | $0.26>0.22$ |     |
+    
+得到結論：$A,D,C$ 的平均值沒有顯著差異，但 $B$ 的平均值顯著大於其他三個。
+
+使用 Tukey's Method 和 Scheffe's Method 則會得到不同的結論：$A,D,C$ 之間沒有顯著差異，$C,B$ 之間有顯著差異，但 $B$ 顯著大於 $A,D,C$。
+
+並且 $T_\alpha=0.30, S_{\alpha,cm}=\sqrt{\frac{MS_E*2}{4}}\sqrt{3\cdot F_{3,12,0.05}}=0.326$ 都是偏保守的檢定。
+
+---
+
+$$
+Y_{ij}=\mu+\tau_i+\varepsilon_{ij}\implies \tau_i\begin{cases}
+    \text{fixed}\\
+    \text{random}
+\end{cases}
+$$
+
+$\implies$ ANOVA for testing $H_0:$ No trt effect v.s. $H_1:$ At least one trt effect $\to H_0$ usually rejected.
+
+- $\tau_i$: fixed $\to$ contrast for detailed analysis
+- $\tau_i$: random $\to$ Variance components estimation problem. Basic way to do this is by ANOVA method.
+  
+  $\implies$ solve for each variance component and the solution is an est for that variance component.
+
+  e.g. One-fator CRD (random model)
+
+  $$
+  \begin{gather*}
+    E(MS_E)=\sigma_\varepsilon^2\xlongequal{\text{set}}MS_E\quad E(MS_{trt})=\sigma_\varepsilon^2+n\sigma_\tau^2\xlongequal{\text{set}}MS_{trt}\\
+    \implies \hat{\sigma}_\varepsilon^2=MS_E\quad\hat{\sigma}_\tau^2=\frac{MS_{trt}-MS_E}{n}
+  \end{gather*}
+  $$
+
+  與 MOME 類似。估計量可能為負，在這種情況下，我們應該將估計量設為 0 (P510-511)。
+  
