@@ -124,7 +124,7 @@ $$
 \begin{align*}
     \implies SS_E&=\sum_i^k\sum_j^n(Y_{ij}-\bar{Y}_{i\cdot})^2\\
     &=\sum_i^k\sum_j^nY_{ij}^2-\frac{1}{n}\sum_i^kY_{i\cdot}^2\\
-    SS_{trt}&=\sum_i^k\sum_j^n(Y_{i\cdot}-\bar{Y}_{\cdot\cdot})^2\\
+    SS_{trt}&=\sum_i^k\sum_j^n(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot})^2\\
     &=\sum_i^k\frac{Y_{i\cdot}^2}{n}-\frac{Y_{\cdot\cdot}^2}{N}
 \end{align*}
 $$

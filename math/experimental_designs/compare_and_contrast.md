@@ -123,7 +123,7 @@ $$
 $$
 
 $$
-C_m\sim N\left(\Gamma_m,\sum d_{im}^2n_i\sigma_\varepsilon^2\right)\implies \frac{C_m-\Gamma_m}{\sqrt{\sum d_{im}^2n_iMS_E}}\sim t_{N-k}
+C_m\sim N\left(\Gamma_m,\sum C_{im}^2n_i\sigma_\varepsilon^2\right)\implies \frac{C_m-\Gamma_m}{\sqrt{\sum C_{im}^2n_iMS_E}}\sim t_{N-k}
 $$
 
 $$
@@ -135,7 +135,7 @@ reject $H_0$ at level $\alpha\iff0\notin 1-\alpha$ confidence interval for $\Gam
 $$
 \begin{align*}
     1-\alpha&=P\left(\left|\frac{C_m-\Gamma_m}{\sqrt{\sum d_{im}^2n_iMS_E}}\right|>t_{\alpha/2,N-k}\right)\\
-    &=P\left(\Gamma_m\in \underbrace{\left[C_m\pm t_{N-k,\alpha/2}\sqrt{\sum d_{im}^2n_iMS_E}\right]}_{CI(\Gamma_m;\alpha)}\right)
+    &=P\left(\Gamma_m\in \underbrace{\left[C_m\pm t_{N-k,\alpha/2}\sqrt{\sum C_{im}^2n_iMS_E}\right]}_{CI(\Gamma_m;\alpha)}\right)
 \end{align*}
 $$
 
@@ -147,7 +147,7 @@ Compare all contrasts with overall probability of type I error $\le 1-\alpha$
 
 :::info[Definition]
 $$
-S_{\alpha;cm}=s_{cm}\sqrt{(k-1)F_{k-1,N-k,\alpha}}\quad\text{with }s_{cm}=\sqrt{\sum \frac{c_{im}^2}{n_i}MS_E}
+S_{\alpha;cm}=s_{cm}\sqrt{(k-1)F_{k-1,N-k,\alpha}}\quad\text{with }s_{cm}=\sqrt{\sum c_{im}^2n_iMS_E}
 $$
 :::
 
