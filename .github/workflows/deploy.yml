@@ -32,12 +32,12 @@ jobs:
         run: npx quartz plugin install
 
       - name: Build website
-        run: npx quartz build -d docs
+        run: npx quartz build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./public
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
