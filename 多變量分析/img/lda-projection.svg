@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 400" width="620" height="400" font-family="sans-serif">
+<rect width="620" height="400" fill="#ffffff" rx="6"/>
+<text x="145" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">原始空間</text>
+<line x1="40" y1="320" x2="268" y2="320" stroke="#333" stroke-width="2"/>
+<line x1="40" y1="320" x2="40"  y2="55"  stroke="#333" stroke-width="2"/>
+<polygon points="268,316 268,324 276,320" fill="#333"/>
+<polygon points="36,55 44,55 40,47" fill="#333"/>
+<text x="280" y="324" font-size="12" fill="#333">X₁</text>
+<text x="28"  y="46"  font-size="12" fill="#333">X₂</text>
+<line x1="39" y1="286" x2="226" y2="54" stroke="#555" stroke-width="2.5" stroke-dasharray="7,4"/>
+<text x="232" y="58" font-size="13" fill="#555" font-weight="bold">b (LDA)</text>
+<line x1="42" y1="170" x2="258" y2="170" stroke="#e08030" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="262" y="174" font-size="12" fill="#e08030">X₁</text>
+<circle cx="197" cy="91" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="169" cy="113" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="205" cy="111" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="176" cy="85" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="201" cy="125" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="165" cy="99" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="192" cy="120" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="180" cy="97" r="7" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<circle cx="185" cy="105" r="9" fill="none" stroke="#2166ac" stroke-width="2.5"/>
+<text x="199" y="89" font-size="12" fill="#2166ac" font-weight="bold">群 1</text>
+<circle cx="94" cy="223" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="64" cy="244" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="92" cy="251" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="68" cy="218" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="98" cy="241" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="60" cy="238" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="85" cy="215" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="76" cy="247" r="7" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<circle cx="80" cy="235" r="9" fill="none" stroke="#d6604d" stroke-width="2.5"/>
+<text x="94" y="225" font-size="12" fill="#d6604d" font-weight="bold">群 2</text>
+<line x1="185" y1="105" x2="185.0" y2="105.0" stroke="#2166ac" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+<line x1="80" y1="235" x2="80.0" y2="235.0" stroke="#d6604d" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+<circle cx="185.0" cy="105.0" r="6" fill="#2166ac" stroke="#fff" stroke-width="2"/>
+<circle cx="80.0" cy="235.0" r="6" fill="#d6604d" stroke="#fff" stroke-width="2"/>
+<line x1="185" y1="105" x2="185" y2="170.0" stroke="#2166ac" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+<line x1="80" y1="235" x2="80" y2="170.0" stroke="#d6604d" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.4"/>
+<circle cx="185" cy="170.0" r="6" fill="#2166ac" stroke="#fff" stroke-width="2" opacity="0.6"/>
+<circle cx="80" cy="170.0" r="6" fill="#d6604d" stroke="#fff" stroke-width="2" opacity="0.6"/>
+<line x1="300" y1="35" x2="300" y2="370" stroke="#ddd" stroke-width="1.5"/>
+<text x="460" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">投影結果對比</text>
+<text x="460" y="55" text-anchor="middle" font-size="12" fill="#e08030" font-weight="bold">次佳方向 X₁（重疊多）</text>
+<line x1="315" y1="110" x2="610" y2="110" stroke="#bbb" stroke-width="2"/>
+<path d="M 278.0,109.9 L 280.8,109.8 L 283.6,109.8 L 286.4,109.7 L 289.2,109.6 L 292.0,109.5 L 294.8,109.4 L 297.6,109.2 L 300.4,109.0 L 303.2,108.7 L 306.0,108.3 L 308.8,107.9 L 311.6,107.4 L 314.4,106.8 L 317.2,106.1 L 320.0,105.2 L 322.8,104.3 L 325.6,103.1 L 328.4,101.8 L 331.2,100.4 L 334.0,98.8 L 336.8,96.9 L 339.6,95.0 L 342.4,92.8 L 345.2,90.5 L 348.0,88.0 L 350.8,85.4 L 353.6,82.8 L 356.4,80.0 L 359.2,77.3 L 362.0,74.5 L 364.8,71.9 L 367.6,69.3 L 370.4,66.9 L 373.2,64.7 L 376.0,62.7 L 378.8,61.1 L 381.6,59.8 L 384.4,58.8 L 387.2,58.2 L 390.0,58.0 L 392.8,58.2 L 395.6,58.8 L 398.4,59.8 L 401.2,61.1 L 404.0,62.7 L 406.8,64.7 L 409.6,66.9 L 412.4,69.3 L 415.2,71.9 L 418.0,74.5 L 420.8,77.3 L 423.6,80.0 L 426.4,82.8 L 429.2,85.4 L 432.0,88.0 L 434.8,90.5 L 437.6,92.8 L 440.4,95.0 L 443.2,96.9 L 446.0,98.8 L 448.8,100.4 L 451.6,101.8 L 454.4,103.1 L 457.2,104.3 L 460.0,105.2 L 462.8,106.1 L 465.6,106.8 L 468.4,107.4 L 471.2,107.9 L 474.0,108.3 L 476.8,108.7 L 479.6,109.0 L 482.4,109.2 L 485.2,109.4 L 488.0,109.5 L 490.8,109.6 L 493.6,109.7 L 496.4,109.8 L 499.2,109.8 L 502.0,109.9" fill="#2166ac" fill-opacity="0.2" stroke="#2166ac" stroke-width="2.5"/>
+<path d="M 318.0,109.9 L 320.8,109.8 L 323.6,109.8 L 326.4,109.7 L 329.2,109.6 L 332.0,109.5 L 334.8,109.4 L 337.6,109.2 L 340.4,109.0 L 343.2,108.7 L 346.0,108.3 L 348.8,107.9 L 351.6,107.4 L 354.4,106.8 L 357.2,106.1 L 360.0,105.2 L 362.8,104.3 L 365.6,103.1 L 368.4,101.8 L 371.2,100.4 L 374.0,98.8 L 376.8,96.9 L 379.6,95.0 L 382.4,92.8 L 385.2,90.5 L 388.0,88.0 L 390.8,85.4 L 393.6,82.8 L 396.4,80.0 L 399.2,77.3 L 402.0,74.5 L 404.8,71.9 L 407.6,69.3 L 410.4,66.9 L 413.2,64.7 L 416.0,62.7 L 418.8,61.1 L 421.6,59.8 L 424.4,58.8 L 427.2,58.2 L 430.0,58.0 L 432.8,58.2 L 435.6,58.8 L 438.4,59.8 L 441.2,61.1 L 444.0,62.7 L 446.8,64.7 L 449.6,66.9 L 452.4,69.3 L 455.2,71.9 L 458.0,74.5 L 460.8,77.3 L 463.6,80.0 L 466.4,82.8 L 469.2,85.4 L 472.0,88.0 L 474.8,90.5 L 477.6,92.8 L 480.4,95.0 L 483.2,96.9 L 486.0,98.8 L 488.8,100.4 L 491.6,101.8 L 494.4,103.1 L 497.2,104.3 L 500.0,105.2 L 502.8,106.1 L 505.6,106.8 L 508.4,107.4 L 511.2,107.9 L 514.0,108.3 L 516.8,108.7 L 519.6,109.0 L 522.4,109.2 L 525.2,109.4 L 528.0,109.5 L 530.8,109.6 L 533.6,109.7 L 536.4,109.8 L 539.2,109.8 L 542.0,109.9" fill="#d6604d" fill-opacity="0.2" stroke="#d6604d" stroke-width="2.5"/>
+<line x1="390" y1="106" x2="390" y2="120" stroke="#2166ac" stroke-width="2.5"/>
+<line x1="430" y1="106" x2="430" y2="120" stroke="#d6604d" stroke-width="2.5"/>
+<text x="410" y="136" text-anchor="middle" font-size="11" fill="#999">大量重疊</text>
+<text x="460" y="168" text-anchor="middle" font-size="12" fill="#555" font-weight="bold">LDA 最佳方向 b（分離最大）</text>
+<line x1="315" y1="255" x2="610" y2="255" stroke="#333" stroke-width="2"/>
+<path d="M 293.0,254.9 L 294.9,254.8 L 296.9,254.7 L 298.8,254.7 L 300.7,254.5 L 302.6,254.4 L 304.6,254.2 L 306.5,254.0 L 308.4,253.7 L 310.3,253.4 L 312.2,252.9 L 314.2,252.4 L 316.1,251.8 L 318.0,251.0 L 319.9,250.1 L 321.9,249.1 L 323.8,247.8 L 325.7,246.4 L 327.6,244.8 L 329.6,243.0 L 331.5,240.9 L 333.4,238.7 L 335.4,236.2 L 337.3,233.5 L 339.2,230.6 L 341.1,227.5 L 343.1,224.3 L 345.0,221.0 L 346.9,217.5 L 348.8,214.1 L 350.8,210.7 L 352.7,207.3 L 354.6,204.1 L 356.5,201.1 L 358.4,198.4 L 360.4,195.9 L 362.3,193.9 L 364.2,192.2 L 366.1,191.0 L 368.1,190.2 L 370.0,190.0 L 371.9,190.2 L 373.9,191.0 L 375.8,192.2 L 377.7,193.9 L 379.6,195.9 L 381.6,198.4 L 383.5,201.1 L 385.4,204.1 L 387.3,207.3 L 389.2,210.7 L 391.2,214.1 L 393.1,217.5 L 395.0,221.0 L 396.9,224.3 L 398.9,227.5 L 400.8,230.6 L 402.7,233.5 L 404.6,236.2 L 406.6,238.7 L 408.5,240.9 L 410.4,243.0 L 412.4,244.8 L 414.3,246.4 L 416.2,247.8 L 418.1,249.1 L 420.1,250.1 L 422.0,251.0 L 423.9,251.8 L 425.8,252.4 L 427.8,252.9 L 429.7,253.4 L 431.6,253.7 L 433.5,254.0 L 435.4,254.2 L 437.4,254.4 L 439.3,254.5 L 441.2,254.7 L 443.1,254.7 L 445.1,254.8 L 447.0,254.9" fill="#2166ac" fill-opacity="0.25" stroke="#2166ac" stroke-width="2.5"/>
+<path d="M 433.0,254.9 L 434.9,254.8 L 436.9,254.7 L 438.8,254.7 L 440.7,254.5 L 442.6,254.4 L 444.6,254.2 L 446.5,254.0 L 448.4,253.7 L 450.3,253.4 L 452.2,252.9 L 454.2,252.4 L 456.1,251.8 L 458.0,251.0 L 459.9,250.1 L 461.9,249.1 L 463.8,247.8 L 465.7,246.4 L 467.6,244.8 L 469.6,243.0 L 471.5,240.9 L 473.4,238.7 L 475.4,236.2 L 477.3,233.5 L 479.2,230.6 L 481.1,227.5 L 483.1,224.3 L 485.0,221.0 L 486.9,217.5 L 488.8,214.1 L 490.8,210.7 L 492.7,207.3 L 494.6,204.1 L 496.5,201.1 L 498.4,198.4 L 500.4,195.9 L 502.3,193.9 L 504.2,192.2 L 506.1,191.0 L 508.1,190.2 L 510.0,190.0 L 511.9,190.2 L 513.9,191.0 L 515.8,192.2 L 517.7,193.9 L 519.6,195.9 L 521.5,198.4 L 523.5,201.1 L 525.4,204.1 L 527.3,207.3 L 529.2,210.7 L 531.2,214.1 L 533.1,217.5 L 535.0,221.0 L 537.0,224.3 L 538.9,227.5 L 540.8,230.6 L 542.7,233.5 L 544.6,236.2 L 546.6,238.7 L 548.5,240.9 L 550.4,243.0 L 552.4,244.8 L 554.3,246.4 L 556.2,247.8 L 558.1,249.1 L 560.0,250.1 L 562.0,251.0 L 563.9,251.8 L 565.8,252.4 L 567.8,252.9 L 569.7,253.4 L 571.6,253.7 L 573.5,254.0 L 575.5,254.2 L 577.4,254.4 L 579.3,254.5 L 581.2,254.7 L 583.1,254.7 L 585.1,254.8 L 587.0,254.9" fill="#d6604d" fill-opacity="0.25" stroke="#d6604d" stroke-width="2.5"/>
+<line x1="370" y1="251" x2="370" y2="267" stroke="#2166ac" stroke-width="3"/>
+<text x="370" y="283" text-anchor="middle" font-size="12" fill="#2166ac" font-weight="bold">v̄₁</text>
+<line x1="510" y1="251" x2="510" y2="267" stroke="#d6604d" stroke-width="3"/>
+<text x="510" y="283" text-anchor="middle" font-size="12" fill="#d6604d" font-weight="bold">v̄₂</text>
+<line x1="440" y1="187" x2="440" y2="267" stroke="#333" stroke-width="2.5" stroke-dasharray="5,3"/>
+<text x="440" y="182" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">m</text>
+<line x1="370" y1="297" x2="370" y2="304" stroke="#333" stroke-width="1.5"/>
+<line x1="370" y1="304" x2="510" y2="304" stroke="#333" stroke-width="1.5"/>
+<line x1="510" y1="297" x2="510" y2="304" stroke="#333" stroke-width="1.5"/>
+<text x="440" y="319" text-anchor="middle" font-size="12" fill="#333">Δ 最大  →  誤分類率最小</text>
+<circle cx="320" cy="380" r="6" fill="#2166ac" stroke="#fff" stroke-width="1.5"/>
+<text x="332" y="384" font-size="12" fill="#2166ac">群 1</text>
+<circle cx="375" cy="380" r="6" fill="#d6604d" stroke="#fff" stroke-width="1.5"/>
+<text x="387" y="384" font-size="12" fill="#d6604d">群 2</text>
+<line x1="430" y1="380" x2="455" y2="380" stroke="#555" stroke-width="2.5" stroke-dasharray="7,4"/>
+<text x="460" y="384" font-size="12" fill="#555">LDA 方向 b</text>
+<line x1="540" y1="380" x2="565" y2="380" stroke="#e08030" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="570" y="384" font-size="12" fill="#e08030">次佳方向</text>
+</svg>
